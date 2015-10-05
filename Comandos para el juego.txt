@@ -1,0 +1,8 @@
+Página: http://julian.togelius.com/mariocompetition2009/gettingstarted.php
+
+1. Jugar con el nivel generado: 
+
+java ch.idsia.scenarios.Play
+
+
+2.  

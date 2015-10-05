@@ -1,0 +1,18 @@
+#
+# xwpe - project-file: k-medias.prj
+# created by xwpe version 1.5.12a
+#
+ 
+
+CMP=	gcc
+CMPFLAGS=	-g
+LDFLAGS=	-lm
+EXENAME=	k-medias
+CMPSWTCH=	gnu
+CMPMESSAGE=	'${?*:warning:}\"${FILE}\", line ${LINE}:* at or near * \"${COLUMN=AFTER}\"'
+
+FILES=	/home/ocordon/clases/algoritmica/practicas/99-00/k-medias/input.c  \
+	/home/ocordon/clases/algoritmica/practicas/99-00/k-medias/k-medias.c /home/ocordon/clases/algoritmica/practicas/99-00/k-medias/util-km.c   
+
+install:
+	 

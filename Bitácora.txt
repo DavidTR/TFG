@@ -1,0 +1,160 @@
+** Agosto **
+	- Consultados los siguientes papers:
+
+		1. Procedural Level Design for Platform Games (2006).
+		2. Modeling Player Experience in Super Mario Bros (2009).
+		3. Towards Automatic Personalized Content Generation for Platform Games (2010).
+		4. What is Procedural Content Generation? Mario on the borderline (2011).
+
+	- Después de estudiarlos sabemos que hay aspectos del juego que intervienen en las emociones del jugador (diversión, desafío, frustración...).
+	- El camino a seguir será codificar un algoritmo que modifique los aspectos del juego para hacer niveles atractivos al jugador.
+	- Tenemos a nuestra disposición el código de Infinite Mario Bros y Mario AI, que usaremos para no tener que codificar el juego.
+	- Usaremos un algoritmo genético multiobjetivo que se encargará de optimizar las distintas emociones del jugador.
+
+** 9/9/15 **
+
+	- Investigo la representación de niveles que se hace en Infinite Mario Bros y cómo podemos hacerlo para llevarla al algoritmo genético.
+
+** 11/9/15 **
+
+	- Parece ser que la clase LevelEditor es la encargada de crear el mapa. Lo hace de forma aleatoria.
+	- P: ¿Cómo podemos cambiar este método para que en vez de que lo haga de forma aleatoria actuar con un genético?
+	- R: Deberíamos cambiar la clase, pero primero quiero compilar el código y ver si puedo ejecutarlo.
+	- Al compilarlo y colocar la clase Play como la principal obtengo el siguiente error:
+
+java.lang.IllegalArgumentException: input == null!
+	at javax.imageio.ImageIO.read(ImageIO.java:1348)
+	at ch.idsia.mario.engine.Art.getImage(Art.java:70)
+	at ch.idsia.mario.engine.Art.cutImage(Art.java:108)
+	at ch.idsia.mario.engine.Art.init(Art.java:43)
+	at ch.idsia.mario.engine.MarioComponent.init(MarioComponent.java:91)
+	at ch.idsia.tools.ToolsConfigurator.CreateMarioComponentFrame(ToolsConfigurator.java:102)
+	at ch.idsia.tools.Evaluator.init(Evaluator.java:221)
+	at ch.idsia.tools.Evaluator.<init>(Evaluator.java:205)
+	at ch.idsia.ai.tasks.ProgressTask.evaluate(ProgressTask.java:29)
+	at ch.idsia.scenarios.Play.main(Play.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
+javax.imageio.IIOException: Can't read input file!
+	at javax.imageio.ImageIO.read(ImageIO.java:1301)
+	at ch.idsia.mario.engine.Art.getImage(Art.java:82)
+	at ch.idsia.mario.engine.Art.cutImage(Art.java:108)
+	at ch.idsia.mario.engine.Art.init(Art.java:43)
+	at ch.idsia.mario.engine.MarioComponent.init(MarioComponent.java:91)
+	at ch.idsia.tools.ToolsConfigurator.CreateMarioComponentFrame(ToolsConfigurator.java:102)
+	at ch.idsia.tools.Evaluator.init(Evaluator.java:221)
+	at ch.idsia.tools.Evaluator.<init>(Evaluator.java:205)
+	at ch.idsia.ai.tasks.ProgressTask.evaluate(ProgressTask.java:29)
+	at ch.idsia.scenarios.Play.main(Play.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
+Exception in thread "main" java.lang.NullPointerException
+	at java.io.DataInputStream.readFully(DataInputStream.java:195)
+	at java.io.DataInputStream.readFully(DataInputStream.java:169)
+	at ch.idsia.mario.engine.level.Level.loadBehaviors(Level.java:117)
+	at ch.idsia.mario.engine.LevelScene.init(LevelScene.java:596)
+	at ch.idsia.mario.engine.MarioComponent.startLevel(MarioComponent.java:276)
+	at ch.idsia.mario.simulation.BasicSimulator.simulateOneLevel(BasicSimulator.java:48)
+	at ch.idsia.tools.Evaluator.evaluate(Evaluator.java:121)
+	at ch.idsia.ai.tasks.ProgressTask.evaluate(ProgressTask.java:30)
+	at ch.idsia.scenarios.Play.main(Play.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140)
+
+Process finished with exit code 0
+
+	- El error proviene de la lectura de imágenes y sprites para el juego. 
+	- Parece haber un problema con cómo Java calcula la ruta de un archivo, he probado con / y \ pero sigue dando error.
+	- He probado a colocar los archivos en el mismo directorio desde donde se ejecuta el programa para no tener que usar ruta absoluta y parece que algunos errores se solucionan, pero sigue habiendo.
+	- Me encuentro con el siguiente error:
+
+Exception in thread "main" java.lang.NullPointerException
+        at ch.idsia.mario.engine.LevelScene.init(LevelScene.java:596)
+        at ch.idsia.mario.engine.MarioComponent.startLevel(MarioComponent.java:276)
+        at ch.idsia.mario.simulation.BasicSimulator.simulateOneLevel(BasicSimulator.java:48)
+        at ch.idsia.tools.Evaluator.evaluate(Evaluator.java:121)
+        at ch.idsia.ai.tasks.ProgressTask.evaluate(ProgressTask.java:30)
+        at ch.idsia.scenarios.Play.main(Play.java:36)
+
+** 15/09/15 **
+	
+	- Se ha arreglado el error anterior localizado en LevelScene.java:596, moviendo el archivo tiles.dat al directorio classes, donde se encuentra LevelScene.java y cambiando en esa
+	línea  Level.loadBehaviors(new DataInputStream(LevelScene.class.getResourceAsStream("resources/tiles.dat"))); por  Level.loadBehaviors(new DataInputStream(LevelScene.class.getResourceAsStream("tiles.dat")));
+
+** 16/09/15 **
+
+	- Hay que tocar en LevelGenerator.java, en el método createLevel para cambiar la distribución del nivel. Se hace en el bloque comentado en la línea 80 aproximadamente (empieza con un while).
+
+** 23/09/15 **
+
+	- Nuevas tareas:
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Elementos de un nivel: Elementos de estructura, enemigos
+
+* Geometría y apariencia => SPRITES
+* Atributos para el juego: Estados, damage (binario),... Ejemplo estados: TORTUGA={andando, escondida en caparazón, corriendo en caparazón}
+
+* Un level se genera con bloques constitutivos que permiten ir construyendo el "scrolling" izquierda derecha.
+
+* El proyecto debería considerar en todo su desarrollo la EXTENSIBILIDAD => MODULARIDAD
+
+? Tarea1
+
+Aclarar, mirando el código, como se construye el nivel teniendo en cuenta "elementos de estructura" y "enemigos" -> ¿Los enemigos están siempre encima de una estructura que se crea junto con ellos?
+
+-- Respuesta: Se generan en el método addEnemyLine, que es llamado sólo cuando se necesita una línea de enemigos. Se especfica la x inicial y la final además de el valor de y.
+Los sprites se crean con el método setSpriteTemplate, de la clase Level. Este último método comprueba que los valores x e y sean correctos y luego coloca el sprite en las coordenadas proporcionadas.
+Se generan líneas de enemigos en la función de generación de colinas, por ejemplo: buildHillStraight llama varias veces a addEnemyLine.
+
+La forma en la que se distribuyen los templates por el nivel obedece a una matriz en la que en la posición x, y la ocupa el sprite que se decida colocar. Por supuesto esta matriz forma parte
+del nivel explícitamente, siendo de una importancia crucial.
+
+
+? Tarea2
+Partiendo de la función "createLevel()" especificar donde se encuentra la información que sustenta las entidades: "elementos de estructura" y "enemigos"; son miembros dato, son variables globales, están mezcladas y repartidas entre distintos objetos de memoria...
+
+-- Respuesta: Los bloques se crean en una función  de la clase Level, al igual que los sprites necesarios (de enemigos, flores, etc...). En la clase LevelGenerator no tenemos nada sobre estas 
+entidades, toda la información se guarda en la clase Level.
+
+Investigar dónde se especifica que se va a usar el template del cañón por ejemplo o el de los tubos.
+
+
+Tarea3
+Generar un nivel de prueba utilizando un genético básico.
+
+Establecer la CORRESPONDENCIA entre la gramática de generación de niveles y la información que representa el espacio de solución del genético, así como de los algoritmos estocásticos.
+
+Estas tres tareas proporcionan el primer HITO del proyecto. Un prototipo que se puede EVALUAR.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+** 28/09/15 **
+
+	- He empezado a trabajar en la codificación del algoritmo genético, apoyándome en el paper Shaker2012Evolving y en los apuntes de Metaheurísticas.
+	- Hay que decidir cuál será la representación de la solución, los algoritmos de cruce, mutación y selección y el tipo de genético.
+
+** 3/09/15 **
+
+	- Decidida primera aproximación para la representación de la solución: Vector dinámico (mirar documento en papel).
+	
+** 4/09/15 **
+
+	- Explorada la implementación de varios tipos de dato en Java para codificar el fenotipo o conjunto de soluciones del algoritmo. 
+	- Se elige la implementación basada en vector estático de toda la vida, pues es la que más facilidad de acceso y manipulación da, aunque sacrificamos un poco de memoria (no demasiada).
+
+** 5/09/15 **
+
+	- Se empieza a codificar el genético basado en gramática. 
+	- Investigar: Tipos de inicialización, elegir el más apropiado para el problema. Inicialmente se elige el más sencillo: Aleatorio.

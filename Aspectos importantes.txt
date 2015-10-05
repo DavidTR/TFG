@@ -1,0 +1,25 @@
+1/9/15
+
+Considerar los siguientes papers:
+
+1. Generación de niveles en Mario Bros AI competition:
+	http://www.researchgate.net/profile/Julian_Togelius/publication/224255795_The_2010_Mario_AI_Championship_Level_Generation_Track/links/00b49514ae800a7fd8000000.pdf
+
+2. Generación de mapas usando técnicas evolutivas en StarCraft:
+	http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.173.6909&rep=rep1&type=pdf
+
+
+Se propone también no aceptar o rechazar un mapa generado según un test, sino darle una puntuación multidimensional
+y lanzar un algoritmo de búsqueda para encontrar mapas que sean interesantes en varias medidas: Search based procedural
+content generation.
+
+La evolución multiobjetivo puede ser una buena solución al problema, ya que se consideran varias métricas en vez de una
+sola, haciendo más flexible y adaptable la búsqueda en el espacio.
+
+Estas dos últimas técnicas van ligadas, pues ambas son multiobjetivo.
+
+2/9/15
+
+Creo que la clase que hay que tocar para crear mis propios niveles es LevelGenerator, en su método CreateLevel.
+
+Investigar cómo lo hace este método para generar un nivel aleatorio.

@@ -1,0 +1,3 @@
+﻿Para compilar los programas ejecutar lanzador(AGG/AGE).sh <(Aggregation/yeast/wdbc).txt> <semilla>, de este modo los fuentes se compilan e inmediatamente se lanza el programa que leerá el fichero de datos y la semilla que se le proporcionan como entrada.
+
+Es necesario que random_ppio.cpp y random_ppio.h estén en el mismo directorio que los fuentes del algoritmo, así como los archivos de conjuntos de datos.
