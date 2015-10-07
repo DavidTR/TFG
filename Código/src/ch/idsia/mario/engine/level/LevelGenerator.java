@@ -2,10 +2,7 @@ package ch.idsia.mario.engine.level;
 
 import ch.idsia.mario.engine.sprites.Enemy;
 
-import java.lang.reflect.Array;
 import java.util.Random;
-import java.util.Vector;
-import java.util.Iterator;
 
 
 public class LevelGenerator
@@ -44,7 +41,8 @@ public class LevelGenerator
     // Población: 50 individuos.
     private int maxPopulation = 50;                                 // Población o número de individuos.
     private int maxElementsPerLevel = 30;                           // Cromosomas.
-    private int maxArgsPerElement = 5;                              // Genes.
+    private int maxArgsPerElement = 6;                              // Genes.
+    private int maxIterations = 10000;                              // Número máximo de iteraciones del proceso evolutivo.
 
     // Esto estaba antes en la clase como private, pero quiero probar a hacer vectores estáticos, mucho más eficiente (creo). Reservamos espacio suficiente.
     // Fenotipo: Será una colección de arrays (cromosomas) de arrays de flotantes (genes).
@@ -150,8 +148,116 @@ public class LevelGenerator
         return level;
     }
 */
+    // Inicialización de la población: Aleatorio.         >> Investigar métodos <<
+    // Debemos incluir las restricciones aquí -> ¡¡¡¡¡¡¡ El nivel debe poder finalizarse y los elementos no sobrepasarán el ancho y alto del mismo !!!!!!
+    private void initializePopulation () {
+
+        int x, y, wg, h, w, wc, wbefore, wafter, levelElement;
+        for (int i=0; i<maxPopulation; i++) {
+            for (int j = 0; j < maxElementsPerLevel/*COMPROBACION ANCHO*/; j++) {
+
+                // Para cada posible elemento
+                levelElement = levelSeedRandom.nextInt(15) + 1;                       // levelElement -> Generamos un aleatorio entre 1 y 14.
+                x = levelSeedRandom.nextInt(91) + 5;                                  // x -> Generamos un aleatorio entre 5 y 95.
+                y = levelSeedRandom.nextInt(3) + 3;                                   // y -> Generamos un aleatorio entre 3 y 5.
+
+                // Rellenamos los cromosomas de cada individuo de la población de forma aleatoria.
+                // Diferenciamos casos según el tipo de elemento generado.
+                switch (levelElement) {
+                    case 1:
+                        // gap.
+                        wg = levelSeedRandom.nextInt(3) + 1;                           // wg -> Generamos un aleatorio entre 1 y 3.
+                        wbefore = levelSeedRandom.nextInt(4) + 1;                      // wbefore -> Generamos un aleatorio entre 1 y 4.
+                        wafter = levelSeedRandom.nextInt(4) + 1;                       // wafter -> Generamos un aleatorio entre 1 y 4.
+
+                        // Rellenamos el cromosoma con los genes obtenidos.
+                        phenotype[i][j][0] = levelElement;
+                        phenotype[i][j][1] = x;
+                        phenotype[i][j][2] = y;
+                        phenotype[i][j][3] = wg;
+                        phenotype[i][j][4] = wbefore;
+                        phenotype[i][j][5] = wafter;
+
+                        break;
+                    case 4:
+                    case 5:
+                    case 7:
+                    case 8:
+                        // cannon_hill, tube_hill, cannon y tube.
+                        // Todos estos elementos (ver gramática en el folio) tienen 5 parámetros (x, y, h ó wg, wbefore, wafter).
+                        // La gramática no especifica los valores que toman h, w, wg y demás, deberemos ir probando.
+                        h = levelSeedRandom.nextInt(5) + 1;                            // h -> Generamos un aleatorio entre 1 y 5.
+
+                        wbefore = levelSeedRandom.nextInt(4) + 1;                      // wbefore -> Generamos un aleatorio entre 1 y 4.
+                        wafter = levelSeedRandom.nextInt(4) + 1;                       // wafter -> Generamos un aleatorio entre 1 y 4.
+
+                        // Rellenamos el cromosoma con los genes obtenidos.
+                        phenotype[i][j][0] = levelElement;
+                        phenotype[i][j][1] = x;
+                        phenotype[i][j][2] = y;
+                        phenotype[i][j][3] = h;
+                        phenotype[i][j][4] = wbefore;
+                        phenotype[i][j][5] = wafter;
+
+                        break;
+                    case 2:
+                    case 3:
+                        // platform y hill.
+                        w = levelSeedRandom.nextInt(8) + 1;                           // w -> Generamos un aleatorio entre 1 y 8.
+
+                        phenotype[i][j][0] = levelElement;
+                        phenotype[i][j][1] = x;
+                        phenotype[i][j][2] = y;
+                        phenotype[i][j][3] = w;
+
+                        break;
+                    case 6:
+                        // coin.
+
+                        wc = levelSeedRandom.nextInt(4) + 1;                           // wc -> Generamos un aleatorio entre 1 y 4.
+
+                        phenotype[i][j][0] = levelElement;
+                        phenotype[i][j][1] = x;
+                        phenotype[i][j][2] = y;
+                        phenotype[i][j][3] = wc;
+
+                        break;
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                        // Cajas: block_coin, block_powerup, rock_coin, rock_empty.
+                        phenotype[i][j][0] = levelElement;
+                        phenotype[i][j][1] = x;
+                        phenotype[i][j][2] = y;
+                }
+            }
+        }
+
+        // Lo de los goompas y koopas creo que hay que añadirlos en las plataformas directamente. En la gramática aparece como un proceso separado.
+    }
+
+
+    // Evaluación: Tomará la población en el momento en que se llama y devolverá el valor fitness de cada individuo.
+    private float[] evaluate(float[] fitnessValues) {
+
+        /* TODO */
+
+        return fitnessValues;
+    }
     // Función de generación de nivel GENÉTICO.
     private Level createLevel(long seed, int difficulty, int type) {
+
+        // Array de valores fitness. Al declararlo así, fitness values tendrá una dirección de memoria, haciendo que el paso de parámetros sea por referencia.
+        float [] fitnessValues = new float [maxPopulation];
+
+        // Número de iteraciones del proceso evolutivo. Debe ser menor que maxIterations.
+        int numIterations = 0;
+        int tournamentIterations = 0;
+        int [] selectedParents = new int[2];
+
+        // Inicializamos el generador con la semilla.
+        levelSeedRandom.setSeed(seed);
 
         // 0. Por defecto todos los valores de todos los genes de todos los cromosomas se inicializan a -1.
         // Servirá para decidir hasta cuándo tomar los argumentos de los elementos del nivel cuando sea necesario.
@@ -162,21 +268,50 @@ public class LevelGenerator
                 phenotype[i][j][2] = -1;
                 phenotype[i][j][3] = -1;
                 phenotype[i][j][4] = -1;
+                phenotype[i][j][5] = -1;
             }
 
         // 0.1. Plataforma inicial: Cada cromosoma se inicializa con un primer gen que se corresponde con la plataforma inicial del juego.
         for (int i=0; i<maxPopulation; i++) {
-            phenotype[i][0][0] = 0;                             // Coordenada x en el nivel.
-            phenotype[i][0][1] = 5;                             // Coordenada y en el nivel.
-            phenotype[i][0][2] = 10;                            // Anchura de la plataforma.
+            phenotype[i][0][0] = 0;                             // Tipo de elemento 0 (plataforma inicial).
+            phenotype[i][0][1] = 0;                             // Coordenada x en el nivel.
+            phenotype[i][0][2] = 5;                             // Coordenada y en el nivel.
+            phenotype[i][0][3] = 10;                            // Anchura de la plataforma.
         }
 
-        // 1. Inicialización de la población: Aleatorio.         >> Investigar métodos <<
-        // Debemos incluir las restricciones aquí -> El nivel debe poder finalizarse y los elementos no sobrepasarán el ancho y alto del mismo.
-        for (int i=0; i<maxPopulation; i++){
+        // 1. Inicialización de la población: Aleatoriamente.
+        initializePopulation();
+
+        // 2. Evaluación inicial de la población.
+        evaluate(fitnessValues);
+
+        // 3. Bucle principal, donde se realiza el proceso evolutivo.
+        do {
+
+            // 3.1. Selección de padres: Torneo binario. Se elige el mejor de dos padres, se hace dos veces (binario).
+            do {
+                int firstParent = levelSeedRandom.nextInt(50);
+                int secondParent = levelSeedRandom.nextInt(50);
+
+                if (firstParent != secondParent) {
+                    selectedParents[tournamentIterations] = fitnessValues[firstParent] < fitnessValues[secondParent] ? firstParent : secondParent;
+                    tournamentIterations++;
+                }
+
+            } while (tournamentIterations < 2);
+
+            // 3.2. Cruce de los dos padres ¡¡¡¡¡¡ Hacer las comprobaciones necesarias para que el hijo resultante sea válido !!!!!!!
+
+            // 3.3 Mutación.
+
+            // 3.4. Reemplazamiento. Decidir.
+
+            // 3.5. Evaluación de la población.
 
 
-        }
+            numIterations++;
+            tournamentIterations = 0;
+        } while (numIterations < maxIterations);
 
         return level;
     }

@@ -158,3 +158,10 @@ Estas tres tareas proporcionan el primer HITO del proyecto. Un prototipo que se 
 
 	- Se empieza a codificar el genético basado en gramática. 
 	- Investigar: Tipos de inicialización, elegir el más apropiado para el problema. Inicialmente se elige el más sencillo: Aleatorio.
+
+** 6/09/15 **
+
+	- Inicialización de la población codificada. Dejo pendiente la comprobación de restricciones: El nivel debe poder finalizarse y los elementos no sobrepasarán el ancho y alto del mismo.
+	- Como cada elemento del juego tiene distintos parámetros, tenemos que diferenciar cuál de ellos es para generar números aleatorios extra -> switch.
+	- La gramática no especifica los valores que toman h, w, wg y demás, deberemos ir probando.
+	- Codificada parte del bucle principal del genético. Creado el documento TODO que contiene los cambios que han de ir realizándose.
