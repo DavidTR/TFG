@@ -165,3 +165,8 @@ Estas tres tareas proporcionan el primer HITO del proyecto. Un prototipo que se 
 	- Como cada elemento del juego tiene distintos parámetros, tenemos que diferenciar cuál de ellos es para generar números aleatorios extra -> switch.
 	- La gramática no especifica los valores que toman h, w, wg y demás, deberemos ir probando.
 	- Codificada parte del bucle principal del genético. Creado el documento TODO que contiene los cambios que han de ir realizándose.
+
+** 7/09/15 **
+
+	- Completado el esqueleto del genético básico.
+	- A partir de ahora lo que resta por hacer es terminar de codificar los métodos que faltan, pero hay que tomar decisiones para construir el algoritmo.

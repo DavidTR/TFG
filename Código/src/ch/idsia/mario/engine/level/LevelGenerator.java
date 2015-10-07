@@ -233,7 +233,7 @@ public class LevelGenerator
                 }
             }
         }
-
+        // --> ¿Incluir aquí la plataforma del final de nivel? <--
         // Lo de los goompas y koopas creo que hay que añadirlos en las plataformas directamente. En la gramática aparece como un proceso separado.
     }
 
@@ -245,6 +245,31 @@ public class LevelGenerator
 
         return fitnessValues;
     }
+
+    // Cruce: Se reciben los dos padres (provisional) y a partir de ellos se obtiene un hijo.
+    private int[][] crossOperator (int [][] firsParent, int [][] secondParent) {
+
+        int [][] child = null;
+
+        /* TODO */
+
+        return child;
+    }
+
+    // Mutación: Tomará aleatoriamente miembros de la población y realizará pequeñas modificaciones en ellos.
+    private void mutation () {
+
+        /* TODO */
+
+    }
+
+    // Reemplazamiento: Del hijo o hijos obtenidos se reemplazan los elementos de la población actual según un esquema que debemos decidir.
+    private void populationReplacement (int [][] child, float [] fitnessValues) {
+
+        /* TODO */
+
+    }
+
     // Función de generación de nivel GENÉTICO.
     private Level createLevel(long seed, int difficulty, int type) {
 
@@ -255,6 +280,7 @@ public class LevelGenerator
         int numIterations = 0;
         int tournamentIterations = 0;
         int [] selectedParents = new int[2];
+        int [][] child;
 
         // Inicializamos el generador con la semilla.
         levelSeedRandom.setSeed(seed);
@@ -282,6 +308,8 @@ public class LevelGenerator
         // 1. Inicialización de la población: Aleatoriamente.
         initializePopulation();
 
+
+
         // 2. Evaluación inicial de la población.
         evaluate(fitnessValues);
 
@@ -301,17 +329,23 @@ public class LevelGenerator
             } while (tournamentIterations < 2);
 
             // 3.2. Cruce de los dos padres ¡¡¡¡¡¡ Hacer las comprobaciones necesarias para que el hijo resultante sea válido !!!!!!!
+            child = crossOperator (phenotype[selectedParents[0]], phenotype[selectedParents[1]]);
 
             // 3.3 Mutación.
+            mutation();
 
             // 3.4. Reemplazamiento. Decidir.
+            populationReplacement(child, fitnessValues);
 
             // 3.5. Evaluación de la población.
-
+            evaluate (fitnessValues);
 
             numIterations++;
             tournamentIterations = 0;
         } while (numIterations < maxIterations);
+
+
+        // Mostrar el mejor hijo (opcional)
 
         return level;
     }

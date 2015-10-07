@@ -8,7 +8,7 @@
 
 4. Dar valores a los parámetros h, w, wg, wbefore y wafter: Puede que sea necesario obtenerlos explícitamente.
 
-5. Ver si el tipo de elemento 0 (plataforma inicial) es equivalente a una plataforma normal.
+5. Ver si el tipo de elemento 0 (plataforma inicial) es equivalente a una plataforma normal (tipo 1).
 
 6. Al inicializar la población, comprobar que o bien se introduzcan como máximo maxElementsPerLevel o bien que se pase del ancho del nivel (3).
 
@@ -18,3 +18,12 @@
 
 9. Estudiar distintos métodos de cruce y selección.
 
+** 7/09/15 **
+
+10. Codificar el método de cruce (crossOperator).
+
+11. Codificar el método de mutación (mutation).
+
+12. Codificar el método de reemplazamiento (populationReplacement) -> Estacionario vs. Generacional.
+
+13. En initializePopulation, incluir la plataforma del final del nivel.
