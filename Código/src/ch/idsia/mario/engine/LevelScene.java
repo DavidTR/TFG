@@ -15,6 +15,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.nio.file.Paths;
+
 
 public class LevelScene extends Scene implements SpriteContext
 {
@@ -593,7 +595,7 @@ public class LevelScene extends Scene implements SpriteContext
     {
         try
         {
-            // Se ha colocado tiles.dat en el raíz del directorio classes para que funcione correctamente. Se ha cambiado "resources/tiles.dat" por "tiles.dat".
+            // Se ha colocado tiles.dat en el raï¿½z del directorio classes para que funcione correctamente. Se ha cambiado "resources/tiles.dat" por "tiles.dat".
             Level.loadBehaviors(new DataInputStream(LevelScene.class.getResourceAsStream("tiles.dat")));
         }
         catch (IOException e)
