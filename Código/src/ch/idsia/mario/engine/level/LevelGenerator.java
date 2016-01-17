@@ -255,7 +255,7 @@ public class LevelGenerator
         return length;
     }
 
-    private int buildHillStraight(int xo, int maxLength, int geneticType, int numberOfElements)
+    private int buildHillStraight(int xo, int maxLength, int geneticType, int numberOfEnemies)
     {
         int length = random.nextInt(10) + 10;
         if (length > maxLength) length = maxLength;
@@ -272,7 +272,7 @@ public class LevelGenerator
             }
         }
 
-        addEnemyLine(xo + 1, xo + length - 1, floor - 1, geneticType, numberOfElements);
+        addEnemyLine(xo + 1, xo + length - 1, floor - 1, geneticType, numberOfEnemies);
 
         int h = floor;
 
@@ -300,7 +300,7 @@ public class LevelGenerator
                 {
                     occupied[xxo - xo] = true;
                     occupied[xxo - xo + l] = true;
-                    addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfElements);
+                    addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfEnemies);
                     if (random.nextInt(4) == 0)
                     {
                         decorate(xxo - 1, xxo + l + 1, h);
@@ -334,7 +334,7 @@ public class LevelGenerator
         return length;
     }
 
-    /*private void addEnemyLine(int x0, int x1, int y)
+    private void addEnemyLine(int x0, int x1, int y)
     {
         for (int x = x0; x < x1; x++)
         {
@@ -352,17 +352,15 @@ public class LevelGenerator
                 level.setSpriteTemplate(x, y, new SpriteTemplate(type, random.nextInt(35) < difficulty));
             }
         }
-    }*/
+    }
 
+    // Implementación genética de addEnemyLine: Admite el tipo y el número de enemigos.
     private void addEnemyLine(int x0, int x1, int y, int geneticType, int numberOfEnemies)
     {
-        for (int x = 0; x < numberOfEnemies; x++)
-        {
-            int type = geneticType;
-            int position = new Random(System.nanoTime()).nextInt(x1 + x0);                                               // Obtenemos un número aleatorio entre x0 y x1.
+        int positionOffset = (int) Math.floor((x1 - x0)/numberOfEnemies);
 
-            level.setSpriteTemplate(position, y, new SpriteTemplate(type, random.nextInt(35) < difficulty));
-
+        for (int x = 0; x < numberOfEnemies; x++) {
+            level.setSpriteTemplate(x0 + positionOffset, y, new SpriteTemplate(geneticType, random.nextInt(35) < difficulty));
         }
     }
 

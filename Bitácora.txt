@@ -174,3 +174,12 @@ Estas tres tareas proporcionan el primer HITO del proyecto. Un prototipo que se 
 ** 04/01/16 **
 
 	- Métodos implementados, se empieza la fase de pruebas del algoritmo básico.
+	- El método addEnemyLine se ha sobrecargado para aceptar tipo y número de enemigos, pero la posición se calcula aleatoriamente -> Debería cambiarse a como estaba antes: Colocar un enemigo cada cierto número de píxeles.
+	- Mejorar o repensar el algoritmo de cruce para que intente mejorar siempre.
+	- Depurar la estructura del genético y mejorar aspectos de su implementación usando el código de apoyo.
+
+** 07/01/16 **
+
+	- Arreglado método addEnemyLine, ahora los enemigos se colocan en intervalos regulares.
+	- Estructura del algoritmo revisada, es correcta.
+	- El algoritmo de cruce hace que siempre se mejore, pero la población parece estancarse según el número de iteraciones y la dificultad deseada -> ¿Se debe a que la población es muy pequeña? Probar.

@@ -188,7 +188,11 @@ public class ParameterContainer
             defaultOptionsHashMap.put("-i","off"); // Invulnerability
             defaultOptionsHashMap.put("-ld","0"); //defaultOptionsHashMap.put("-levelDifficulty","0");
             defaultOptionsHashMap.put("-ll","320"); //defaultOptionsHashMap.put("-levelLength","320");
-            defaultOptionsHashMap.put("-ls","0"); //defaultOptionsHashMap.put("-levelRandSeed","1");
+            //defaultOptionsHashMap.put("-ls","0");
+
+                // PROBAR CON UNA SEMILLA ALEATORIA.
+                defaultOptionsHashMap.put("-levelRandSeed", Long.toString(System.nanoTime()));
+
             defaultOptionsHashMap.put("-lt","0"); //defaultOptionsHashMap.put("-levelType","1");
             defaultOptionsHashMap.put("-maxFPS","off"); //defaultOptionsHashMap.put("-maxFPS","off");
             defaultOptionsHashMap.put("-m",""); //defaultOptionsHashMap.put("-matLabFile","DefaultMatlabFile");

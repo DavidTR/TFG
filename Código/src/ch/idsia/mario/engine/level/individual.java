@@ -59,11 +59,19 @@ public class Individual {
         switch (param) {
             case 1:
                 elem.setParam1(value);
+                elem.setParam2(values.getParam2());
+                elem.setParam3(values.getParam3());
                 break;
+
             case 2:
+                elem.setParam1(values.getParam1());
                 elem.setParam2(value);
+                elem.setParam3(values.getParam3());
                 break;
+
             case 3:
+                elem.setParam1(values.getParam1());
+                elem.setParam2(values.getParam2());
                 elem.setParam3(value);
                 break;
         }

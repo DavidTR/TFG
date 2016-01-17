@@ -14,7 +14,7 @@ public class GeneticLevelGenerator {
     // Implementaci?n GEN?TICA.
     // Poblaci?n: 50 individuos.
     private static int maxPopulation = 50;                                 // Poblaci?n o n?mero de individuos.
-    private static int maxIterations = 10000;                              // N?mero m?ximo de iteraciones del proceso evolutivo.
+    private static int maxIterations = 500;                              // N?mero m?ximo de iteraciones del proceso evolutivo.
     public static final int GAP=1;
     public static final int PLATFORM=2;
     public static final int HILL=3;
@@ -87,8 +87,8 @@ public class GeneticLevelGenerator {
 
                 if (levelElement == HILL)
                     individual.addGeneticElement(individualIndex);
-                    element.setParam2(levelSeedRandom.nextInt(5));          // Añadimos el tipo del enemigo, entre 0 y 4 segun Enemy.java.
-                    element.setParam3(levelSeedRandom.nextInt(4));          // Añadimos el numero de enemigos, entre 0 y 3.
+                    element.setParam2(levelSeedRandom.nextInt(5));          // Aï¿½adimos el tipo del enemigo, entre 0 y 4 segun Enemy.java.
+                    element.setParam3(levelSeedRandom.nextInt(3)+1);          // Aï¿½adimos el numero de enemigos, entre 1 y 3.
 
                 individualIndex++;
 
@@ -104,7 +104,7 @@ public class GeneticLevelGenerator {
     // Evaluaci?n: Tomar? la poblaci?n en el momento en que se llama y devolver? el valor fitness de cada individuo.
     private void evaluate(float[] fitnessValues) {
 
-        // Valoramos la dificultad de cada enemigo y la cantidad de éstos en el nivel.
+        // Valoramos la dificultad de cada enemigo y la cantidad de ï¿½stos en el nivel.
         for (Individual level: phenotype) {
 
             float accumulate = 0;
@@ -112,17 +112,17 @@ public class GeneticLevelGenerator {
             for (Integer geneticElem: level.getGeneticElements()) {
 
                 LevelElement elem = level.getElement(geneticElem);
-                accumulate += (elem.getParam2() + 1)*elem.getParam3();                                                  // Producto del tipo de enemigo por el número de enemigos de este tipo en cada elemento genético (por ahora Hills).
+                accumulate += (elem.getParam2() + 1)*elem.getParam3();                                                  // Producto del tipo de enemigo por el nï¿½mero de enemigos de este tipo en cada elemento genï¿½tico (por ahora Hills).
             }
 
-            fitnessValues[phenotype.indexOf(level)] = Math.abs(accumulate - desiredDifficulty);                         // ¿Cuanto se acerca la dificultad del nivel a lo que buscamos?
+            fitnessValues[phenotype.indexOf(level)] = Math.abs(accumulate - desiredDifficulty);                         // ï¿½Cuanto se acerca la dificultad del nivel a lo que buscamos?
         }
     }
 
     // Cruce: Se reciben los dos padres y a partir de ellos se obtiene un hijo.
     private Individual crossOperator (Individual parent1, Individual parent2) {
 
-        // Se crea un hijo igual que el primer padre. ¡¡¡¡¡OJO: SOLO PARA PRUEBAS, ESTO NO SE PUEDE HACER!!!!!
+        // Se crea un hijo igual que el primer padre. ï¿½ï¿½ï¿½ï¿½ï¿½OJO: SOLO PARA PRUEBAS, ESTO NO SE PUEDE HACER!!!!!
         Individual child = new Individual(parent1);
 
         long seed = System.nanoTime();
@@ -135,24 +135,24 @@ public class GeneticLevelGenerator {
         Collections.shuffle(geneticElements2, new Random(seed));
 
         if (DEBUG) {
-            System.out.println(" >> Valores fitness de los padres <<");
+            System.out.println("\n >> Valores fitness de los padres <<");
             System.out.println("    - Nivel (padre 1): " + phenotype.indexOf(parent1) + ", valor FITNESS = " + fitnessValues[phenotype.indexOf(parent1)]);
             System.out.println("    - Nivel (padre 2): " + phenotype.indexOf(parent2) + ", valor FITNESS = " + fitnessValues[phenotype.indexOf(parent2)]);
             System.out.println(" ** Fin valores fitness de los padres **");
         }
 
         int minGeneticElements = Math.min(geneticElements1.size(), geneticElements2.size());
+        int elementsToCross = levelSeedRandom.nextInt(minGeneticElements);
 
-        for (int i=0; i<minGeneticElements; i++) {
+        for (int i=0; i<elementsToCross; i++) {
 
             int randomLevelElement = levelSeedRandom.nextInt(minGeneticElements);
-            int crossProb = levelSeedRandom.nextInt(100);
 
-            // Como el hijo es igual al padre 1, entrar por aquí significa cambiar los datos del elemento seleccionado por los del padre 2.
-            if ((crossProb < crossProbability) && (randomLevelElement != -1)) {
+            // Como el hijo es igual al padre 1, entrar por aquï¿½ significa cambiar los datos del elemento seleccionado por los del padre 2.
+            if ((randomLevelElement != -1)) {
                 LevelElement parent2Values = parent2.getElement(geneticElements2.get(randomLevelElement));
                 child.setElementParam(geneticElements1.get(randomLevelElement), 2, parent2Values.getParam2());          // Cambiamos el tipo de enemigo (param2).
-                child.setElementParam(geneticElements1.get(randomLevelElement), 3, parent2Values.getParam3());          // Cambiamos el número de enemigos (param3).
+                child.setElementParam(geneticElements1.get(randomLevelElement), 3, parent2Values.getParam3());          // Cambiamos el nï¿½mero de enemigos (param3).
             }
         }
 
@@ -170,10 +170,11 @@ public class GeneticLevelGenerator {
                 int random = levelSeedRandom.nextInt(100);
 
                 if (random < mutationProbability) {
-                    level.setElementParam(geneticElem, 2, levelSeedRandom.nextInt(5));                                  // Hacemos las mutaciones como en la inicialización de la población (5 y 4).
-                    level.setElementParam(geneticElem, 3, levelSeedRandom.nextInt(4));
+                    level.setElementParam(geneticElem, 2, levelSeedRandom.nextInt(5));                                  // Hacemos las mutaciones como en la inicializaciï¿½n de la poblaciï¿½n (5 y 4).
+                    level.setElementParam(geneticElem, 3, levelSeedRandom.nextInt(3)+1);
                 }
             }
+
         }
     }
 
@@ -181,10 +182,14 @@ public class GeneticLevelGenerator {
     private void populationReplacement (Individual child, float [] fitnessValues) {
 
         // Obtenemos el indice del peor nivel de la poblacion.
-        int worstLevel = 0, max = -1;
+        int worstLevel = 0;
+        float max = -1;
+
         for (int i=0; i<maxPopulation; i++) {
-            if (fitnessValues[i] > max)
+            if (fitnessValues[i] > max) {
                 worstLevel = i;
+                max = fitnessValues[i];
+            }
         }
 
         // Calculamos el valor fitness del hijo.
@@ -199,18 +204,20 @@ public class GeneticLevelGenerator {
         childFitness = Math.abs(accumulate - desiredDifficulty);
 
         if (DEBUG) {
-            System.out.println(" >> Valor fitness del peor nivel <<");
+            System.out.println("\n >> Valor fitness del peor nivel <<");
             System.out.println("    - Nivel: " + worstLevel + ", valor FITNESS = " + fitnessValues[worstLevel]);
             System.out.println(" ** Fin valor fitness del peor nivel **");
 
-            System.out.println(" >> Valor fitness del hijo <<");
+            System.out.println("\n >> Valor fitness del hijo <<");
             System.out.println("    - Valor FITNESS = " + childFitness);
             System.out.println(" ** Fin valor fitness del hijo **");
         }
 
-        if (childFitness < fitnessValues[worstLevel])                                                                   // Reemplazamos el hijo por el peor nivel si lo mejora en fitness (su valor es menor).
+        if (childFitness < fitnessValues[worstLevel]) {                                                                  // Reemplazamos el hijo por el peor nivel si lo mejora en fitness (su valor es menor).
             phenotype.set(worstLevel, child);
             fitnessValues[worstLevel] = childFitness;
+        }
+
     }
 
     // Funci?n de generaci?n de nivel GEN?TICO.
@@ -224,7 +231,12 @@ public class GeneticLevelGenerator {
         int tournamentIterations = 0;
         int [] selectedParents = new int[2];
         Individual child = null;
-        ArrayList<LevelElement> bestSolution;
+        Object [] bestSolution = new Object[2];
+
+        bestSolution[0] = new Float(9999);
+        bestSolution[1] = new Integer(0);
+
+        System.out.println("SOL = " + (float) bestSolution[0]);
 
         // Inicializamos el generador con la semilla.
         levelSeedRandom.setSeed(seed);
@@ -235,7 +247,8 @@ public class GeneticLevelGenerator {
         // 2. Evaluaci?n inicial de la poblaci?n.
         evaluate(fitnessValues);
 
-        printFitnessValues();
+        if (DEBUG)
+            printFitnessValues();
 
         // 3. Bucle principal, donde se realiza el proceso evolutivo.
         do {
@@ -245,15 +258,19 @@ public class GeneticLevelGenerator {
                 int firstParent = levelSeedRandom.nextInt(50);
                 int secondParent = levelSeedRandom.nextInt(50);
 
-                if (firstParent != secondParent) {
+                if (firstParent != secondParent && (firstParent != selectedParents[0] && secondParent != selectedParents[0])) {
                     selectedParents[tournamentIterations] = fitnessValues[firstParent] < fitnessValues[secondParent] ? firstParent : secondParent;
                     tournamentIterations++;
                 }
 
             } while (tournamentIterations < 2);
 
-            // 3.2. Cruce de los dos padres ?????? Hacer las comprobaciones necesarias para que el hijo resultante sea v?lido !!!!!!!
-            child = crossOperator (phenotype.get(selectedParents[0]), phenotype.get(selectedParents[1]));
+            // 3.2. Cruce de los dos padres El hijo debe ser un nivel vÃ¡lido. Probabilidad de cruce: 100%.
+            //int crossProb = levelSeedRandom.nextInt(100);
+            int crossProb = -1;
+
+            if (crossProb < crossProbability)
+                child = crossOperator (phenotype.get(selectedParents[0]), phenotype.get(selectedParents[1]));
 
             // 3.3 Mutaci?n.
             mutation();
@@ -264,26 +281,55 @@ public class GeneticLevelGenerator {
             // 3.5. Evaluaci?n de la poblaci?n.
             evaluate (fitnessValues);
 
+            // 3.6. Actualizar la mejor solucion.
+            for (int i=0; i<maxPopulation; i++) {
+                if (fitnessValues[i] < (float) bestSolution[0]) {
+                    bestSolution[1] = i;
+                    bestSolution[0] = fitnessValues[i];
+
+                    if (DEBUG) {
+                        System.out.println("\n >> Mejor soluciÃ³n actualizada <<");
+                        System.out.println("    - Nivel " + bestSolution[1] + " FITNESS = " + bestSolution[0]);
+                        System.out.println(" ** Fin mejor solucion actualizada **");
+                    }
+                }
+            }
+
+            System.out.println((float) bestSolution[0]);
+
+            if (DEBUG) {
+                System.out.println("\n --> Valores fitness en la iteraciÃ³n " + numIterations + " <--");
+                printFitnessValues();
+
+            }
+
             numIterations++;
             tournamentIterations = 0;
         } while (numIterations < maxIterations);
 
 
         // Mostrar el mejor hijo (opcional)
+        int pos = phenotype.indexOf(phenotype.get((int) bestSolution[1]));
 
-        //return bestSolution;
+        if (DEBUG) {
+            System.out.println("\n >> Valor fitness de la mejor solucion <<");
+            System.out.println("    - Nivel " + bestSolution[1] + " FITNESS = " + bestSolution[0]);
+            System.out.println(" ** Fin valor fitness de la mejor solucion **");
+        }
 
-        return phenotype.get(0);
+        return phenotype.get((int) bestSolution[1]);
+
+        //return phenotype.get(0);
     }
 
     private void printFitnessValues() {
 
-        System.out.println(" >> Valores fitness de la población <<");
+        System.out.println("\n >> Valores fitness de la poblaciï¿½n <<");
 
         for (int i=0; i<maxPopulation; i++) {
             System.out.println("    - Nivel: " + i + ", valor FITNESS = " + fitnessValues[i]);
         }
 
-        System.out.println(" ** Fin valores fitness de la población **");
+        System.out.println(" ** Fin valores fitness de la poblaciï¿½n **");
     }
 }
