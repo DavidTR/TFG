@@ -140,6 +140,7 @@ public class GeneticLevelGenerator {
             System.out.println("    - Nivel (padre 2): " + phenotype.indexOf(parent2) + ", valor FITNESS = " + fitnessValues[phenotype.indexOf(parent2)]);
             System.out.println(" ** Fin valores fitness de los padres **");
         }
+        
 
         int minGeneticElements = Math.min(geneticElements1.size(), geneticElements2.size());
         int elementsToCross = levelSeedRandom.nextInt(minGeneticElements);

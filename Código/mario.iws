@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="18c7a3a9-1b9b-4beb-b827-f1b57693b9d1" name="Default" comment="CompetitionScore">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/GeneticLevelGenerator.class" afterPath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/GeneticLevelGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/Individual.class" afterPath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/Individual.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/LevelGenerator.class" afterPath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/LevelGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/ch/idsia/utils/ParameterContainer.class" afterPath="$PROJECT_DIR$/classes/ch/idsia/utils/ParameterContainer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Bitácora.txt" afterPath="$PROJECT_DIR$/../Bitácora.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mario.ipr" afterPath="$PROJECT_DIR$/mario.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mario.iws" afterPath="$PROJECT_DIR$/mario.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/individual.java" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/individual.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/utils/ParameterContainer.java" afterPath="$PROJECT_DIR$/src/ch/idsia/utils/ParameterContainer.java" />
     </list>
     <ignored path="mario.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -99,14 +89,13 @@
       <file leaf-file-name="GeneticLevelGenerator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.1796503">
-              <caret line="286" column="40" selection-start-line="286" selection-start-column="40" selection-end-line="286" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.6115607">
+              <caret line="142" column="8" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#GeneticLevelGenerator#0;class#GeneticLevelGenerator#0" expanded="false" />
                 <element signature="method#initializePopulation#0;class#GeneticLevelGenerator#0" expanded="false" />
                 <element signature="method#evaluate#0;class#GeneticLevelGenerator#0" expanded="false" />
-                <element signature="method#crossOperator#0;class#GeneticLevelGenerator#0" expanded="false" />
                 <element signature="method#mutation#0;class#GeneticLevelGenerator#0" expanded="false" />
                 <element signature="method#printFitnessValues#0;class#GeneticLevelGenerator#0" expanded="false" />
               </folding>
@@ -1139,12 +1128,10 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922733" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32362822" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5036675" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3232662" sideWeight="0.49755502" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27323627" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3210291" sideWeight="0.49633253" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41561714" sideWeight="0.66854566" order="0" side_tool="false" content_ui="combo" />
@@ -1152,16 +1139,18 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19987775" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26427773" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26427773" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32362822" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27323627" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288948" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1201,7 +1190,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java</url>
-          <line>319</line>
+          <line>320</line>
           <properties />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
@@ -1519,7 +1508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7106518">
           <caret line="64" column="15" selection-start-line="64" selection-start-column="15" selection-end-line="64" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1543,7 +1531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0273752">
           <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1579,14 +1566,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.1796503">
-          <caret line="286" column="40" selection-start-line="286" selection-start-column="40" selection-end-line="286" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.6115607">
+          <caret line="142" column="8" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#GeneticLevelGenerator#0;class#GeneticLevelGenerator#0" expanded="false" />
             <element signature="method#initializePopulation#0;class#GeneticLevelGenerator#0" expanded="false" />
             <element signature="method#evaluate#0;class#GeneticLevelGenerator#0" expanded="false" />
-            <element signature="method#crossOperator#0;class#GeneticLevelGenerator#0" expanded="false" />
             <element signature="method#mutation#0;class#GeneticLevelGenerator#0" expanded="false" />
             <element signature="method#printFitnessValues#0;class#GeneticLevelGenerator#0" expanded="false" />
           </folding>
