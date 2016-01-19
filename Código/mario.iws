@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="18c7a3a9-1b9b-4beb-b827-f1b57693b9d1" name="Default" comment="CompetitionScore">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Bitácora.txt" afterPath="$PROJECT_DIR$/../Bitácora.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mario.iws" afterPath="$PROJECT_DIR$/mario.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java" />
     </list>
     <ignored path="mario.iws" />
@@ -66,6 +68,7 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="359" column="0" selection-start-line="359" selection-start-column="0" selection-end-line="359" selection-end-column="0" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="method#buildJump#0;class#LevelGenerator#0" expanded="false" />
                 <element signature="method#buildCannons#0;class#LevelGenerator#0" expanded="false" />
                 <element signature="method#buildHillStraight#0;class#LevelGenerator#0" expanded="false" />
@@ -81,7 +84,17 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="192" column="52" selection-start-line="192" selection-start-column="52" selection-end-line="192" selection-end-column="52" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#4043#4044#0" expanded="false" />
+                <element signature="e#4085#4086#0" expanded="false" />
+                <element signature="e#4122#4123#0" expanded="false" />
+                <element signature="e#4162#4163#0" expanded="false" />
+                <element signature="e#4538#4539#0" expanded="false" />
+                <element signature="e#4589#4590#0" expanded="false" />
+                <element signature="e#4627#4628#0" expanded="false" />
+                <element signature="e#4686#4687#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,12 +102,11 @@
       <file leaf-file-name="GeneticLevelGenerator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6115607">
-              <caret line="142" column="8" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.80617493">
+              <caret line="95" column="125" selection-start-line="95" selection-start-column="125" selection-end-line="95" selection-end-column="125" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#GeneticLevelGenerator#0;class#GeneticLevelGenerator#0" expanded="false" />
-                <element signature="method#initializePopulation#0;class#GeneticLevelGenerator#0" expanded="false" />
                 <element signature="method#evaluate#0;class#GeneticLevelGenerator#0" expanded="false" />
                 <element signature="method#mutation#0;class#GeneticLevelGenerator#0" expanded="false" />
                 <element signature="method#printFitnessValues#0;class#GeneticLevelGenerator#0" expanded="false" />
@@ -118,7 +130,34 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="e#240#241#0" expanded="false" />
+                <element signature="e#307#308#0" expanded="false" />
+                <element signature="e#343#344#0" expanded="false" />
+                <element signature="e#377#378#0" expanded="false" />
+                <element signature="e#403#404#0" expanded="false" />
+                <element signature="e#427#428#0" expanded="false" />
+                <element signature="e#453#454#0" expanded="false" />
+                <element signature="e#477#478#0" expanded="false" />
+                <element signature="e#508#509#0" expanded="false" />
+                <element signature="e#537#538#0" expanded="false" />
+                <element signature="e#568#569#0" expanded="false" />
+                <element signature="e#597#598#0" expanded="false" />
+                <element signature="e#628#629#0" expanded="false" />
+                <element signature="e#657#658#0" expanded="false" />
+                <element signature="e#698#699#0" expanded="false" />
+                <element signature="e#735#736#0" expanded="false" />
+                <element signature="e#763#764#0" expanded="false" />
+                <element signature="e#787#788#0" expanded="false" />
+                <element signature="e#815#816#0" expanded="false" />
+                <element signature="e#839#840#0" expanded="false" />
+                <element signature="e#870#871#0" expanded="false" />
+                <element signature="e#897#898#0" expanded="false" />
+                <element signature="e#928#929#0" expanded="false" />
+                <element signature="e#955#956#0" expanded="false" />
+                <element signature="e#986#987#0" expanded="false" />
+                <element signature="e#1013#1014#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -457,8 +496,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1123,7 +1162,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1190,7 +1229,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java</url>
-          <line>320</line>
+          <line>342</line>
           <properties />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
@@ -1511,19 +1550,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Individual.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelElement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#240#241#0" expanded="false" />
+            <element signature="e#307#308#0" expanded="false" />
+            <element signature="e#343#344#0" expanded="false" />
+            <element signature="e#377#378#0" expanded="false" />
+            <element signature="e#403#404#0" expanded="false" />
+            <element signature="e#427#428#0" expanded="false" />
+            <element signature="e#453#454#0" expanded="false" />
+            <element signature="e#477#478#0" expanded="false" />
+            <element signature="e#508#509#0" expanded="false" />
+            <element signature="e#537#538#0" expanded="false" />
+            <element signature="e#568#569#0" expanded="false" />
+            <element signature="e#597#598#0" expanded="false" />
+            <element signature="e#628#629#0" expanded="false" />
+            <element signature="e#657#658#0" expanded="false" />
+            <element signature="e#698#699#0" expanded="false" />
+            <element signature="e#735#736#0" expanded="false" />
+            <element signature="e#763#764#0" expanded="false" />
+            <element signature="e#787#788#0" expanded="false" />
+            <element signature="e#815#816#0" expanded="false" />
+            <element signature="e#839#840#0" expanded="false" />
+            <element signature="e#870#871#0" expanded="false" />
+            <element signature="e#897#898#0" expanded="false" />
+            <element signature="e#928#929#0" expanded="false" />
+            <element signature="e#955#956#0" expanded="false" />
+            <element signature="e#986#987#0" expanded="false" />
+            <element signature="e#1013#1014#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1538,7 +1596,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="192" column="52" selection-start-line="192" selection-start-column="52" selection-end-line="192" selection-end-column="52" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#4043#4044#0" expanded="false" />
+            <element signature="e#4085#4086#0" expanded="false" />
+            <element signature="e#4122#4123#0" expanded="false" />
+            <element signature="e#4162#4163#0" expanded="false" />
+            <element signature="e#4538#4539#0" expanded="false" />
+            <element signature="e#4589#4590#0" expanded="false" />
+            <element signature="e#4627#4628#0" expanded="false" />
+            <element signature="e#4686#4687#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1547,6 +1615,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="359" column="0" selection-start-line="359" selection-start-column="0" selection-end-line="359" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#buildJump#0;class#LevelGenerator#0" expanded="false" />
             <element signature="method#buildCannons#0;class#LevelGenerator#0" expanded="false" />
             <element signature="method#buildHillStraight#0;class#LevelGenerator#0" expanded="false" />
@@ -1564,14 +1633,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Individual.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6115607">
-          <caret line="142" column="8" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.80617493">
+          <caret line="95" column="125" selection-start-line="95" selection-start-column="125" selection-end-line="95" selection-end-column="125" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#GeneticLevelGenerator#0;class#GeneticLevelGenerator#0" expanded="false" />
-            <element signature="method#initializePopulation#0;class#GeneticLevelGenerator#0" expanded="false" />
             <element signature="method#evaluate#0;class#GeneticLevelGenerator#0" expanded="false" />
             <element signature="method#mutation#0;class#GeneticLevelGenerator#0" expanded="false" />
             <element signature="method#printFitnessValues#0;class#GeneticLevelGenerator#0" expanded="false" />

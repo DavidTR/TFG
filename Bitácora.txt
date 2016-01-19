@@ -183,3 +183,29 @@ Estas tres tareas proporcionan el primer HITO del proyecto. Un prototipo que se 
 	- Arreglado método addEnemyLine, ahora los enemigos se colocan en intervalos regulares.
 	- Estructura del algoritmo revisada, es correcta.
 	- El algoritmo de cruce hace que siempre se mejore, pero la población parece estancarse según el número de iteraciones y la dificultad deseada -> ¿Se debe a que la población es muy pequeña? Probar.
+
+** 16/01/16 **
+
+	- Mejorar el operador de cruce para que considere elementos clave para la bondad de un nivel:
+
+		1. Dificultad/desafío: Hay que elegir elementos que pueden hacer que el nivel sea difícil, pero no llevarlo a su más alto exponente.
+
+			· Número y tipo de enemigos.
+			· Número de "gaps" y anchura de los mismos. 
+			· Frecuencia con la que Mario debe saltar (esto hace más complicado el nivel).
+
+
+		2. Frustración: Si llevamos los elementos de (1) al extremo, podremos hacer que el jugador sienta frustración, no es recomendable. Además:
+		
+			· Número de muertes.
+			· El jugador debe poder acabar el nivel en un número razonable de intentos -> Seleccionar cuidadosamente el resto de características para que esto ocurra).
+			
+		3. Diversión: 
+
+			· Número y tipo de enemigos, agregar variedad -> Patear tortugas es divertido (aumentar el número de estos enemigos).
+			· Monedas y mejoras que recoger. ¿Cambios de dirección?. 
+			· Alternar entre andar y correr -> Crear zonas por las que el jugador pueda correr un poco.
+			· Desatar una gran variedad de eventos con una acción simple.
+** 19/01/16 **
+
+	- Mayor posibilidad para generar tortugas verdes (30%) -> Influye en la DIVERSIÓN.

@@ -1,5 +1,7 @@
 package ch.idsia.mario.engine.level;
 
+import ch.idsia.mario.engine.sprites.Enemy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -30,7 +32,7 @@ public class GeneticLevelGenerator {
     public static final int KOOPA=13;
     public static final int GOOMPA=14;
 
-    private static final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50;
+    private static final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50, turtleProbability = 30;
     private static final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
@@ -87,8 +89,11 @@ public class GeneticLevelGenerator {
 
                 if (levelElement == HILL)
                     individual.addGeneticElement(individualIndex);
-                    element.setParam2(levelSeedRandom.nextInt(5));          // A�adimos el tipo del enemigo, entre 0 y 4 segun Enemy.java.
-                    element.setParam3(levelSeedRandom.nextInt(3)+1);          // A�adimos el numero de enemigos, entre 1 y 3.
+
+                    int enemyType = levelSeedRandom.nextInt(100) < turtleProbability ? Enemy.ENEMY_GREEN_KOOPA : levelSeedRandom.nextInt(5);
+
+                    element.setParam2(enemyType);                                                                       // Anadimos el tipo del enemigo, entre 0 y 4 segun Enemy.java. MEJORASGENETICO: Damos mas probabilidad a las tortugas verdes (Diversion).
+                    element.setParam3(levelSeedRandom.nextInt(3)+1);                                                    // Anadimos el numero de enemigos, entre 1 y 3.
 
                 individualIndex++;
 
@@ -120,7 +125,24 @@ public class GeneticLevelGenerator {
     }
 
     // Cruce: Se reciben los dos padres y a partir de ellos se obtiene un hijo.
-    private Individual crossOperator (Individual parent1, Individual parent2) {
+    private Individual crossover(Individual parent1, Individual parent2) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Se crea un hijo igual que el primer padre. �����OJO: SOLO PARA PRUEBAS, ESTO NO SE PUEDE HACER!!!!!
         Individual child = new Individual(parent1);
@@ -271,7 +293,7 @@ public class GeneticLevelGenerator {
             int crossProb = -1;
 
             if (crossProb < crossProbability)
-                child = crossOperator (phenotype.get(selectedParents[0]), phenotype.get(selectedParents[1]));
+                child = crossover(phenotype.get(selectedParents[0]), phenotype.get(selectedParents[1]));
 
             // 3.3 Mutaci?n.
             mutation();
