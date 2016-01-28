@@ -236,8 +236,6 @@ public class GeneticLevelGenerator {
         bestSolution[0] = new Float(9999);
         bestSolution[1] = new Integer(0);
 
-        System.out.println("SOL = " + (float) bestSolution[0]);
-
         // Inicializamos el generador con la semilla.
         levelSeedRandom.setSeed(seed);
 
@@ -308,9 +306,6 @@ public class GeneticLevelGenerator {
         } while (numIterations < maxIterations);
 
 
-        // Mostrar el mejor hijo (opcional)
-        int pos = phenotype.indexOf(phenotype.get((int) bestSolution[1]));
-
         if (DEBUG) {
             System.out.println("\n >> Valor fitness de la mejor solucion <<");
             System.out.println("    - Nivel " + bestSolution[1] + " FITNESS = " + bestSolution[0]);
@@ -319,7 +314,6 @@ public class GeneticLevelGenerator {
 
         return phenotype.get((int) bestSolution[1]);
 
-        //return phenotype.get(0);
     }
 
     private void printFitnessValues() {
