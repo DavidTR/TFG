@@ -1,0 +1,10 @@
+Nivel básico -> Implementado.
+
+Nivel mejorado -> 
+
+	- Actuar sobre la probabilidad de crear mejoras.
+	- Añadir más tortugas. 
+	- Arreglar incoherencias estructurales añadiendo más restricciones.
+	- Incluir las mejoras y monedas en la métrica de dificultad (fitness).
+
+Nivel final -> Buscar paper interesante.

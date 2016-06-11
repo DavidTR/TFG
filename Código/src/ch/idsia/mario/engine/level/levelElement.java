@@ -4,36 +4,36 @@ package ch.idsia.mario.engine.level;
  * Created by roka9 on 18/10/2015.
  */
 public class LevelElement {
-    int elementType = -1;
-    int x = -1;
-    int y = -1;
-    int param1 = -1, param2 = -1, param3 = 1;
+    private int elementType = -1;
+    private int x = -1;
+    private int y = -1;
+    private int param1 = -1, param2 = -1, param3 = 1;
 
     public LevelElement() {
         elementType = x = y = param1 = param2 = param3 = -1;
     }
 
-    public int getElementType () {
+    int getElementType () {
         return elementType;
     }
 
-    public int getX () {
+    int getX () {
         return x;
     }
 
-    public int getY () {
+    int getY () {
         return y;
     }
 
-    public int getParam1 () {
+    int getParam1 () {
         return param1;
     }
 
-    public int getParam2 () {
+    int getParam2 () {
         return param2;
     }
 
-    public int getParam3 () {
+    int getParam3 () {
         return param3;
     }
 

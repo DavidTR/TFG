@@ -9,34 +9,36 @@ import java.util.Random;
  */
 public class GeneticLevelGenerator {
 
-    public boolean DEBUG = true;
+    // Variable que define si se estan haciendo pruebas o no. Se hace public para que sea lo mas parecido a una variable global.
+    public static final boolean DEBUG = true;
 
-    // Implementaci?n GEN?TICA.
+    // Implementaci?n GEN?TICA.s
+
     // Poblaci?n: 50 individuos.
-    private static int maxPopulation = 50;                                 // Poblaci?n o n?mero de individuos.
-    private static int maxIterations = 500;                              // N?mero m?ximo de iteraciones del proceso evolutivo.
-    public static final int GAP=1;
+    private int maxPopulation = 50;                                  // Poblaci?n o n?mero de individuos.
+    private int maxIterations = 500;                                 // N?mero m?ximo de iteraciones del proceso evolutivo.
+    public static final int GAP=1;                                          // Se usa en initializePopulation.
     public static final int PLATFORM=2;
     public static final int HILL=3;
     public static final int CANNON=4;
     public static final int TUBE=5;
-    public static final int CANNON_HILL=6;
-    public static final int TUBE_HILL=7;
-    public static final int COIN=8;
-    public static final int BLOCK_COIN=9;
-    public static final int BLOCK_POWERUP=10;
-    public static final int ROCK_COIN=11;
-    public static final int ROCK_EMPTY=12;
-    public static final int KOOPA=13;
-    public static final int GOOMPA=14;
+    private static final int CANNON_HILL=6;
+    private static final int TUBE_HILL=7;
+    private static final int COIN=8;
+    private static final int BLOCK_COIN=9;
+    private static final int BLOCK_POWERUP=10;
+    private static final int ROCK_COIN=11;
+    private static final int ROCK_EMPTY=12;
+    private static final int KOOPA=13;
+    private static final int GOOMPA=14;
 
-    private static final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50;
-    private static final int mutationNumLevels = (int) (0.1 * maxPopulation);
+    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50;
+    private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
     private static Random levelSeedRandom = new Random();
 
-    int height, width;
+    private int height, width;
 
     // Esto estaba antes en la clase como private, pero quiero probar a hacer vectores est?ticos, mucho m?s eficiente (creo). Reservamos espacio suficiente.
     // Fenotipo: Sera una coleccian de arrays (cromosomas) de arrays de flotantes (genes).
@@ -48,7 +50,7 @@ public class GeneticLevelGenerator {
     }
 
     // Inicializacion de la poblacion: Aleatorio.
-    protected void initializePopulation () {
+    void initializePopulation () {
 
         // Rellenamos el fenotipo.
         for (int i=0; i<maxPopulation; i++)
@@ -221,7 +223,7 @@ public class GeneticLevelGenerator {
     }
 
     // Funci?n de generaci?n de nivel GEN?TICO.
-    protected Individual createLevelGen (long seed, int difficulty, int type) {
+    Individual createLevelGen (long seed) {
 
         // Array de valores fitness. Al declararlo as?, fitness values tendr? una direcci?n de memoria, haciendo que el paso de par?metros sea por referencia.
         fitnessValues = new float [maxPopulation];
@@ -292,8 +294,6 @@ public class GeneticLevelGenerator {
                     }
                 }
             }
-
-            System.out.println((float) bestSolution[0]);
 
             if (DEBUG) {
                 System.out.println("\n --> Valores fitness en la iteración " + numIterations + " <--");
