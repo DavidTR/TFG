@@ -61,9 +61,15 @@ public class LevelGenerator
         length += buildStraight(0, level.width, true);
 
         // Nivel genético.
-        GeneticLevelGenerator geneticLevel = new GeneticLevelGenerator(height, width);
+//        GeneticLevelGenerator geneticLevel = new GeneticLevelGenerator(height, width);
+//
+//        Individual generatedLevel = geneticLevel.createLevelGen(seed);
 
-        Individual generatedLevel = geneticLevel.createLevelGen(seed);
+        // Nivel genético.
+        GeneticLevelGeneratorImproved geneticLevel = new GeneticLevelGeneratorImproved(height, width);
+
+        Individual generatedLevel = geneticLevel.createLevelGenImproved(seed);
+
 
         // Generación de elementos del nivel.
         for (LevelElement element : generatedLevel.getIndividual()) {
