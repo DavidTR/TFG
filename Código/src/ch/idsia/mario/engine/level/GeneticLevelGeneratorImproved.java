@@ -1,8 +1,9 @@
 package ch.idsia.mario.engine.level;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
+
+import ch.idsia.mario.engine.sprites.Enemy;
+import org.json.*;
 
 /**
  * Created by roka9 on 14/06/2016.
@@ -15,7 +16,7 @@ public class GeneticLevelGeneratorImproved {
     // Implementaci?n GEN?TICA.s
 
     // Poblaci?n: 50 individuos.
-    private int maxPopulation = 50;                                  // Poblaci?n o n?mero de individuos.
+    private int maxPopulation = 1;                                  // Poblaci?n o n?mero de individuos.
     private int maxIterations = 500;                                 // N?mero m?ximo de iteraciones del proceso evolutivo.
     public static final int GAP=1;                                          // Se usa en initializePopulation.
     public static final int PLATFORM=2;
@@ -49,6 +50,10 @@ public class GeneticLevelGeneratorImproved {
         width = w;
     }
 
+
+    private JSONObject initializationValues;
+
+
     /*
     TODO: NUEVO MÉTODO DE INICIALIZACIÓN
         - Añadir algo más de variedad, elementos deseables en el nivel final a nivel estructural.
@@ -56,6 +61,25 @@ public class GeneticLevelGeneratorImproved {
 
     // Inicializacion de la poblacion: Aleatorio.
     void initializePopulation () {
+
+        ArrayList<Map<Integer, Integer>> widths = new ArrayList<>();
+
+        // Parámetros de dificultad.
+        switch (desiredDifficulty) {
+            case 1:
+
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            default:
+                break;
+
+        }
 
         // Rellenamos el fenotipo.
         for (int i=0; i<maxPopulation; i++)
@@ -71,6 +95,10 @@ public class GeneticLevelGeneratorImproved {
             // Para cada elemento del nivel.
             for (LevelElement element : individual.getIndividual()) {
 
+
+
+
+                /*
                 int levelElement = levelSeedRandom.nextInt(4) + 1;
 
                 if (legalElement) {
@@ -104,6 +132,7 @@ public class GeneticLevelGeneratorImproved {
                     break;
 
                 legalElement = (element.getElementType() != GAP);
+                */
             }
         }
     }
@@ -248,7 +277,7 @@ public class GeneticLevelGeneratorImproved {
 
     // Funci?n de generaci?n de nivel GEN?TICO.
     Individual createLevelGenImproved (long seed) {
-
+        /*
         // Array de valores fitness. Al declararlo as?, fitness values tendr? una direcci?n de memoria, haciendo que el paso de par?metros sea por referencia.
         fitnessValues = new float [maxPopulation];
 
@@ -336,8 +365,197 @@ public class GeneticLevelGeneratorImproved {
             System.out.println(" ** Fin valor fitness de la mejor solucion **");
         }
 
-        return phenotype.get((int) bestSolution[1]);
 
+        return phenotype.get((int) bestSolution[1]);
+        */
+
+        initializePopulation();
+        return phenotype.get(0);
+    }
+
+
+    //******************** ARREGLAR PROBABILIDADES **************************//
+
+    /* Nivel de dificultad fácil:
+        - Longitudes de elementos aumentadas (PARAM1).
+        - Los elementos estructurales más complicados para el jugador tienen menos probabilidad (GAP, CANNON y HILL).
+        - Después de un salto SIEMPRE se genera una plataforma.
+        - No se incluye SPINY como enemigo, es demasiado difícil.
+        - Las tortugas tienen una mayor probabilidad de aparecer (35%).
+        - Menor variación vertical del nivel.
+    */
+    private void generateIndividualEasy(Individual individual) {
+
+        int accumulativeWidth = 0, individualIndex = 0;
+        boolean gapGenerated = false;
+
+        for (LevelElement element : individual.getIndividual()) {
+
+            //float levelElement = levelSeedRandom.nextFloat();
+            float levelElement = (float) 0.5;
+
+            element.setParam1(levelSeedRandom.nextInt(2) + 10);             // Ancho del elemento.
+
+            // Después de un hueco SIEMPRE va una plataforma.
+            if (levelElement <= 0.15 && !gapGenerated) {                    // Hueco: Menor probabilidad de aparecer.
+                element.setElementType(GAP);
+                element.setParam1(levelSeedRandom.nextInt(2) + 1);          // Tienen una menor anchura.
+            }
+            else if (levelElement <= 0.2 && !gapGenerated) {                // Cañón
+                element.setElementType(CANNON);
+            }
+            else if (levelElement <= 0.25 && !gapGenerated) {               // Colina
+                element.setElementType(HILL);
+                individual.addGeneticElement(individualIndex);              // Se añade un registro de qué
+
+                float turtleEnemyProb = levelSeedRandom.nextFloat();
+                int enemyType = levelSeedRandom.nextInt(4);
+
+                if (turtleEnemyProb <= 0.35)                                // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
+                    enemyType = Enemy.ENEMY_GREEN_KOOPA;
+
+                element.setParam2(enemyType);                               // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
+                element.setParam3(levelSeedRandom.nextInt(2) + 1);          // A?adimos el numero de enemigos, entre 1 y 2.
+            }
+            else {                                                          // Plataforma
+                element.setElementType(PLATFORM);
+            }
+
+            element.setX(accumulativeWidth);                                // Posición horizontal inicial del bloque estructural
+            element.setY(levelSeedRandom.nextInt(3) + 2);                   // Posición vertical inicial del bloque estructural
+            accumulativeWidth += element.getParam1();
+
+            individualIndex++;
+
+            gapGenerated = (element.getElementType() == GAP);
+
+            // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
+            if (accumulativeWidth >= width-64)
+                break;
+        }
+    }
+
+    /* Nivel de dificultad medio:
+    - Longitudes de elementos aumentadas (PARAM1).
+    - Los elementos estructurales más complicados para el jugador tienen menos probabilidad (GAP, CANNON y HILL).
+    - Después de un salto SIEMPRE se genera una plataforma.
+    - No se incluye SPINY como enemigo, es demasiado difícil.
+    - Las tortugas tienen una mayor probabilidad de aparecer (35%).
+    - Menor variación vertical del nivel.
+    */
+    private void generateIndividualMedium(Individual individual) {
+
+        int accumulativeWidth = 0, individualIndex = 0;
+        boolean gapGenerated = false;
+
+        for (LevelElement element : individual.getIndividual()) {
+
+            //float levelElement = levelSeedRandom.nextFloat();
+            float levelElement = (float) 0.5;
+
+            element.setParam1(levelSeedRandom.nextInt(2) + 8);             // Ancho del elemento, un poco más corto.
+
+            // Después de un hueco SIEMPRE va una plataforma.
+            if (levelElement <= 0.2 && !gapGenerated) {                    // Hueco: Menor probabilidad de aparecer. No se puede generar después de un hueco.
+                element.setElementType(GAP);
+                element.setParam1(levelSeedRandom.nextInt(2) + 1);          // Tienen una menor anchura.
+            }
+            else if (levelElement <= 0.25 && !gapGenerated) {               // Cañón. No se puede generar después de un hueco.
+                element.setElementType(CANNON);
+            }
+            else if (levelElement <= 0.25) {                                // Colina, ahora puede generarse después de un hueco.
+                element.setElementType(HILL);
+                individual.addGeneticElement(individualIndex);              // Se añade un registro de qué
+
+                float enemyProb = levelSeedRandom.nextFloat();
+                int enemyType = levelSeedRandom.nextInt(4);
+
+                if (enemyProb <= 0.1)
+                    enemyType = Enemy.ENEMY_SPIKY;                          // Se incluye el spiky con muy baja probabilidad
+                else if (enemyProb <= 0.35)                                 // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
+                    enemyType = Enemy.ENEMY_GREEN_KOOPA;
+
+                element.setParam2(enemyType);                               // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
+                element.setParam3(levelSeedRandom.nextInt(2) + 2);          // A?adimos el numero de enemigos, entre 1 y 3. Habrá más enemigos.
+            }
+            else {                                                          // Plataforma
+                element.setElementType(PLATFORM);
+            }
+
+            element.setX(accumulativeWidth);                                // Posición horizontal inicial del bloque estructural
+            element.setY(levelSeedRandom.nextInt(3) + 3);                   // Posición vertical inicial del bloque estructural. Varía un poco más.
+            accumulativeWidth += element.getParam1();
+
+            individualIndex++;
+
+            gapGenerated = (element.getElementType() == GAP);
+
+            // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
+            if (accumulativeWidth >= width-64)
+                break;
+        }
+    }
+
+
+    /* Nivel de dificultad difícil:
+    - Longitudes de elementos aumentadas (PARAM1).
+    - Los elementos estructurales más complicados para el jugador tienen menos probabilidad (GAP, CANNON y HILL).
+    - Después de un salto SIEMPRE se genera una plataforma.
+    - No se incluye SPINY como enemigo, es demasiado difícil.
+    - Las tortugas tienen una mayor probabilidad de aparecer (35%).
+    - Menor variación vertical del nivel.
+    */
+    private void generateIndividualHard(Individual individual) {
+
+        int accumulativeWidth = 0, individualIndex = 0;
+        boolean gapGenerated = false;
+
+        for (LevelElement element : individual.getIndividual()) {
+
+            //float levelElement = levelSeedRandom.nextFloat();
+            float levelElement = (float) 0.5;
+
+            element.setParam1(levelSeedRandom.nextInt(2) + 5);             // Ancho del elemento, un poco más corto.
+
+            // Después de un hueco SIEMPRE va un cannon.
+            if (levelElement <= 0.35 && !gapGenerated) {                    // Hueco: Menor probabilidad de aparecer.
+                element.setElementType(GAP);
+                element.setParam1(levelSeedRandom.nextInt(2) + 1);          // Tienen una menor anchura.
+            }
+            else if (gapGenerated || levelElement <= 0.15) {                // Cañón
+                element.setElementType(CANNON);
+            }
+            else if (levelElement <= 0.3 && !gapGenerated) {                // Colina, ahora puede generarse después de un hueco.
+                element.setElementType(HILL);
+                individual.addGeneticElement(individualIndex);              // Se añade un registro de qué
+
+                float enemyProb = levelSeedRandom.nextFloat();
+                int enemyType = levelSeedRandom.nextInt(4);
+
+                if (enemyProb <= 0.25)
+                    enemyType = Enemy.ENEMY_SPIKY;                          // Se incluye el spiky con muy baja probabilidad
+                else if (enemyProb <= 0.35)                           // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
+                    enemyType = Enemy.ENEMY_GREEN_KOOPA;
+
+                element.setParam2(enemyType);                               // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
+                element.setParam3(levelSeedRandom.nextInt(2) + 4);          // A?adimos el numero de enemigos, entre 1 y 3. Habrá más enemigos.
+            }
+            else {                                                          // Plataforma
+                element.setElementType(PLATFORM);
+            }
+
+            element.setX(accumulativeWidth);                                // Posición horizontal inicial del bloque estructural
+            element.setY(levelSeedRandom.nextInt(3) + 4);                   // Posición vertical inicial del bloque estructural. Varía un poco más.
+            accumulativeWidth += element.getParam1();
+
+            individualIndex++;
+
+            gapGenerated = (element.getElementType() == GAP);
+
+            // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
+            if (accumulativeWidth >= width-64)
+                break;
+        }
     }
 
     private void printFitnessValues() {

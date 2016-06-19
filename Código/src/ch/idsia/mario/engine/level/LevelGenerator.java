@@ -421,11 +421,11 @@ public class LevelGenerator
 
     private int buildStraight(int xo, int maxLength, boolean safe)
     {
-        int length = random.nextInt(10) + 2;
-        if (safe) length = 10 + random.nextInt(5);
+        int length = 30;//random.nextInt(10) + 2;
+        if (safe) length = 10;// + random.nextInt(5);
         if (length > maxLength) length = maxLength;
 
-        int floor = height - 1 - random.nextInt(4);
+        int floor = height-6; //- 1 - random.nextInt(4);
         for (int x = xo; x < xo + length; x++)
         {
             for (int y = 0; y < height; y++)

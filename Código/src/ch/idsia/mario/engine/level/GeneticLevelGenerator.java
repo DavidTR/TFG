@@ -87,10 +87,11 @@ public class GeneticLevelGenerator {
 
                 accumulativeWidth += element.getParam1();
 
-                if (levelElement == HILL)
+                if (levelElement == HILL) {
                     individual.addGeneticElement(individualIndex);
                     element.setParam2(levelSeedRandom.nextInt(5));          // A�adimos el tipo del enemigo, entre 0 y 4 segun Enemy.java.
-                    element.setParam3(levelSeedRandom.nextInt(3)+1);          // A�adimos el numero de enemigos, entre 1 y 3.
+                    element.setParam3(levelSeedRandom.nextInt(3) + 1);          // A�adimos el numero de enemigos, entre 1 y 3.
+                }
 
                 individualIndex++;
 

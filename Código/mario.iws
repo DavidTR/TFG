@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="18c7a3a9-1b9b-4beb-b827-f1b57693b9d1" name="Default" comment="CompetitionScore">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.~lock.Memoria.odt#" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/GeneticLevelGenerator.class" afterPath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/GeneticLevelGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Memoria.odt" afterPath="$PROJECT_DIR$/../Memoria.odt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/LevelGenerator.class" afterPath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/LevelGenerator.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/wox/serial/EncodeBase64.class" afterPath="$PROJECT_DIR$/classes/wox/serial/EncodeBase64.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mario.iml" afterPath="$PROJECT_DIR$/Mario.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mario.ipr" afterPath="$PROJECT_DIR$/mario.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mario.iws" afterPath="$PROJECT_DIR$/mario.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/mario/engine/sprites/Enemy.java" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/sprites/Enemy.java" />
     </list>
     <ignored path="mario.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,9 +72,15 @@
         <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="173" column="54" selection-start-line="173" selection-start-column="54" selection-end-line="173" selection-end-column="54" />
+              <caret line="73" column="45" selection-start-line="73" selection-start-column="45" selection-end-line="73" selection-end-column="45" />
               <folding>
                 <element signature="method#buildJump#0;class#LevelGenerator#0" expanded="false" />
+                <element signature="method#buildCannons#0;class#LevelGenerator#0" expanded="false" />
+                <element signature="method#buildHillStraight#0;class#LevelGenerator#0" expanded="false" />
+                <element signature="method#addEnemyLine#0;class#LevelGenerator#0" expanded="false" />
+                <element signature="method#addEnemyLine#1;class#LevelGenerator#0" expanded="false" />
+                <element signature="method#buildTubes#0;class#LevelGenerator#0" expanded="false" />
+                <element signature="method#decorate#0;class#LevelGenerator#0" expanded="false" />
                 <element signature="method#fixWalls#0;class#LevelGenerator#0" expanded="false" />
                 <element signature="method#blockify#0;class#LevelGenerator#0" expanded="false" />
               </folding>
@@ -83,7 +91,7 @@
       <file leaf-file-name="Level.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.3448277">
+            <state vertical-scroll-proportion="0.0">
               <caret line="132" column="21" selection-start-line="132" selection-start-column="14" selection-end-line="132" selection-end-column="21" />
               <folding />
             </state>
@@ -94,13 +102,21 @@
         <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="157" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
+              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#evaluate#0;class#GeneticLevelGenerator#0" expanded="false" />
-                <element signature="method#mutation#0;class#GeneticLevelGenerator#0" expanded="false" />
                 <element signature="method#printFitnessValues#0;class#GeneticLevelGenerator#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Enemy.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/sprites/Enemy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="40" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,8 +124,8 @@
       <file leaf-file-name="GeneticLevelGeneratorImproved.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.55497384">
-              <caret line="138" column="51" selection-start-line="138" selection-start-column="51" selection-end-line="138" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.31213874">
+              <caret line="376" column="79" selection-start-line="376" selection-start-column="79" selection-end-line="376" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#initializePopulation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
@@ -118,18 +134,10 @@
                 <element signature="method#mutation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
                 <element signature="method#populationReplacement#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
                 <element signature="method#createLevelGenImproved#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
-                <element signature="method#printFitnessValues#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
+                <element signature="method#generateIndividualEasy#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
+                <element signature="method#generateIndividualMedium#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
+                <element signature="method#generateIndividualHard#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InitializePopulationPaper.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/InitializePopulationPaper.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="101" column="41" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -151,32 +159,17 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="9" selection-end-column="53" />
-              <folding>
-                <element signature="e#272#273#0" expanded="false" />
-                <element signature="e#339#340#0" expanded="false" />
-                <element signature="e#368#369#0" expanded="false" />
-                <element signature="e#402#403#0" expanded="false" />
-                <element signature="e#421#422#0" expanded="false" />
-                <element signature="e#445#446#0" expanded="false" />
-                <element signature="e#464#465#0" expanded="false" />
-                <element signature="e#488#489#0" expanded="false" />
-                <element signature="e#512#513#0" expanded="false" />
-                <element signature="e#541#542#0" expanded="false" />
-                <element signature="e#565#566#0" expanded="false" />
-                <element signature="e#594#595#0" expanded="false" />
-                <element signature="e#618#619#0" expanded="false" />
-                <element signature="e#647#648#0" expanded="false" />
-                <element signature="e#688#689#0" expanded="false" />
-                <element signature="e#725#726#0" expanded="false" />
-                <element signature="e#805#806#0" expanded="false" />
-                <element signature="e#829#830#0" expanded="false" />
-                <element signature="e#860#861#0" expanded="false" />
-                <element signature="e#887#888#0" expanded="false" />
-                <element signature="e#918#919#0" expanded="false" />
-                <element signature="e#945#946#0" expanded="false" />
-                <element signature="e#976#977#0" expanded="false" />
-                <element signature="e#1003#1004#0" expanded="false" />
-              </folding>
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitializePopulationPaper.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InitializePopulationPaper.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="101" column="41" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -217,8 +210,9 @@
         <option value="$PROJECT_DIR$/src/ch/idsia/utils/ParameterContainer.java" />
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelElement.java" />
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Individual.java" />
-        <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java" />
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java" />
+        <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java" />
+        <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/sprites/Enemy.java" />
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java" />
       </list>
     </option>
@@ -506,8 +500,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1692" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -559,6 +553,76 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.idsia" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.idsia" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ch.idsia" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -683,82 +747,42 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="sprites" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Código" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="idsia" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mario" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="level" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ch.idsia" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ch.idsia" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ch.idsia" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mario" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="engine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -788,7 +812,7 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="117" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="options.searchVisible" value="true" />
@@ -805,8 +829,11 @@
     <property name="SearchEverywhereHistoryKey" value="cannon&#9;PSI&#9;JAVA://ch.idsia.mario.engine.level.LevelGenerator#buildCannons&#10;enemysheet&#9;FILE&#9;file://C:/Users/roka9/OneDrive/TFG/Código/src/ch/idsia/mario/engine/resources/enemysheet.png&#10;img/&#9;FILE&#9;file://C:/Users/roka9/OneDrive/TFG/Código/img&#10;play&#9;FILE&#9;file://C:/Users/roka9/Downloads/marioai/src/ch/idsia/scenarios/Play.java&#10;init&#9;PSI&#9;JAVA://ch.idsia.tools.Evaluator#init&#10;createLevel&#9;PSI&#9;JAVA://ch.idsia.mario.engine.level.BgLevelGenerator#createLevel&#10;task&#9;FILE&#9;file://C:/Users/roka9/Downloads/marioai/src/ch/idsia/ai/tasks/ProgressTask.java&#10;setOptions&#9;PSI&#9;JAVA://ch.idsia.ai.tasks.Task#setOptions&#10;level&#9;FILE&#9;file://C:/Users/roka9/Downloads/marioai/src/ch/idsia/mario/engine/level/LevelGenerator.java&#10;evaluation&#9;PSI&#9;JAVA://ch.idsia.tools.EvaluationOptions&#10;cmdl&#9;PSI&#9;JAVA://ch.idsia.tools.CmdLineOptions&#10;main&#9;PSI&#9;JAVA://ch.idsia.scenarios.Play#main" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Ayuda genético/TellezRodriguezDavid/software/FUENTES/AGG.cpp" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.ignored.files" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -1167,38 +1194,38 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1692" height="1026" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.49754903" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.49754903" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26174498" sideWeight="0.50488997" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3225084" sideWeight="0.49509802" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26350245" sideWeight="0.49511003" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32026875" sideWeight="0.49387255" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27609682" sideWeight="0.66854566" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33597285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.56423175" sideWeight="0.66854566" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19969743" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26350245" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36497545" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32352942" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32138857" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2631579" sideWeight="0.49511003" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288948" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33597285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1234,27 +1261,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java</url>
-          <line>228</line>
+          <line>229</line>
           <properties />
           <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="88" />
+      <option name="time" value="94" />
     </breakpoint-manager>
     <watches-manager />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="mario" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="Código" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ch/idsia/scenarios/CompetitionScore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/idsia/tools/CmdLineOptions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1534,13 +1566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/sprites/Enemy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02733119">
-          <caret line="104" column="28" selection-start-line="104" selection-start-column="24" selection-end-line="104" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/idsia/utils/ParameterContainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5192926">
@@ -1552,6 +1577,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="113" column="22" selection-start-line="113" selection-start-column="18" selection-end-line="113" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="132" column="21" selection-start-line="132" selection-start-column="14" selection-end-line="132" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="45" selection-start-line="73" selection-start-column="45" selection-end-line="73" selection-end-column="45" />
+          <folding>
+            <element signature="method#buildJump#0;class#LevelGenerator#0" expanded="false" />
+            <element signature="method#buildCannons#0;class#LevelGenerator#0" expanded="false" />
+            <element signature="method#buildHillStraight#0;class#LevelGenerator#0" expanded="false" />
+            <element signature="method#addEnemyLine#0;class#LevelGenerator#0" expanded="false" />
+            <element signature="method#addEnemyLine#1;class#LevelGenerator#0" expanded="false" />
+            <element signature="method#buildTubes#0;class#LevelGenerator#0" expanded="false" />
+            <element signature="method#decorate#0;class#LevelGenerator#0" expanded="false" />
+            <element signature="method#fixWalls#0;class#LevelGenerator#0" expanded="false" />
+            <element signature="method#blockify#0;class#LevelGenerator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20140107/json-20140107.jar!/org/json/JSONObject.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.9800363">
+          <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1569,52 +1627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="9" selection-end-column="53" />
-          <folding>
-            <element signature="e#272#273#0" expanded="false" />
-            <element signature="e#339#340#0" expanded="false" />
-            <element signature="e#368#369#0" expanded="false" />
-            <element signature="e#402#403#0" expanded="false" />
-            <element signature="e#421#422#0" expanded="false" />
-            <element signature="e#445#446#0" expanded="false" />
-            <element signature="e#464#465#0" expanded="false" />
-            <element signature="e#488#489#0" expanded="false" />
-            <element signature="e#512#513#0" expanded="false" />
-            <element signature="e#541#542#0" expanded="false" />
-            <element signature="e#565#566#0" expanded="false" />
-            <element signature="e#594#595#0" expanded="false" />
-            <element signature="e#618#619#0" expanded="false" />
-            <element signature="e#647#648#0" expanded="false" />
-            <element signature="e#688#689#0" expanded="false" />
-            <element signature="e#725#726#0" expanded="false" />
-            <element signature="e#805#806#0" expanded="false" />
-            <element signature="e#829#830#0" expanded="false" />
-            <element signature="e#860#861#0" expanded="false" />
-            <element signature="e#887#888#0" expanded="false" />
-            <element signature="e#918#919#0" expanded="false" />
-            <element signature="e#945#946#0" expanded="false" />
-            <element signature="e#976#977#0" expanded="false" />
-            <element signature="e#1003#1004#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="157" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="330" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#evaluate#0;class#GeneticLevelGenerator#0" expanded="false" />
-            <element signature="method#mutation#0;class#GeneticLevelGenerator#0" expanded="false" />
-            <element signature="method#printFitnessValues#0;class#GeneticLevelGenerator#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Level.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.3448277">
-          <caret line="132" column="21" selection-start-line="132" selection-start-column="14" selection-end-line="132" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -1627,22 +1639,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/sprites/Enemy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="173" column="54" selection-start-line="173" selection-start-column="54" selection-end-line="173" selection-end-column="54" />
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
-            <element signature="method#buildJump#0;class#LevelGenerator#0" expanded="false" />
-            <element signature="method#fixWalls#0;class#LevelGenerator#0" expanded="false" />
-            <element signature="method#blockify#0;class#LevelGenerator#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#printFitnessValues#0;class#GeneticLevelGenerator#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55497384">
-          <caret line="138" column="51" selection-start-line="138" selection-start-column="51" selection-end-line="138" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.31213874">
+          <caret line="376" column="79" selection-start-line="376" selection-start-column="79" selection-end-line="376" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#initializePopulation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
@@ -1651,7 +1670,9 @@
             <element signature="method#mutation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
             <element signature="method#populationReplacement#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
             <element signature="method#createLevelGenImproved#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
-            <element signature="method#printFitnessValues#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
+            <element signature="method#generateIndividualEasy#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
+            <element signature="method#generateIndividualMedium#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
+            <element signature="method#generateIndividualHard#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1721,6 +1742,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>org.json:json:20140107</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
