@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by roka9 on 18/10/2015.
  */
 public class Individual {
-    static private int maxElementsPerLevel = 30;                           // Cromosomas.
+    static private int maxElementsPerLevel = 30;                                                                        // Cromosomas.
 
     private ArrayList<LevelElement> individual = new ArrayList<LevelElement>(maxElementsPerLevel);
 
@@ -69,6 +69,23 @@ public class Individual {
         }
 
         individual.set(position, elem);
+    }
+
+    int getStructuralDifficulty() {
+
+        int accumulate = 0, totalElements = 0;
+
+        for (LevelElement element : this.getIndividual()){
+
+            if (element.getElementType() != -1) {
+                accumulate += element.getElementType();
+                totalElements++;
+            }
+            else
+                break;
+        }
+
+        return accumulate/totalElements;
     }
 }
 

@@ -18,10 +18,10 @@ public class GeneticLevelGeneratorImproved {
     // Poblaci?n: 50 individuos.
     private int maxPopulation = 1;                                  // Poblaci?n o n?mero de individuos.
     private int maxIterations = 500;                                 // N?mero m?ximo de iteraciones del proceso evolutivo.
-    public static final int GAP=1;                                          // Se usa en initializePopulation.
-    public static final int PLATFORM=2;
+    public static final int PLATFORM=1;                                          // Se usa en initializePopulation.
+    public static final int CANNON=2;
     public static final int HILL=3;
-    public static final int CANNON=4;
+    public static final int GAP=4;
     public static final int TUBE=5;
     private static final int CANNON_HILL=6;
     private static final int TUBE_HILL=7;
@@ -33,7 +33,7 @@ public class GeneticLevelGeneratorImproved {
     private static final int KOOPA=13;
     private static final int GOOMPA=14;
 
-    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50;
+    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50, initialDifficulty = 1;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
@@ -50,106 +50,53 @@ public class GeneticLevelGeneratorImproved {
         width = w;
     }
 
-
-    private JSONObject initializationValues;
-
-
     /*
-    TODO: NUEVO MÉTODO DE INICIALIZACIÓN
+    TEST:NUEVO MÉTODO DE INICIALIZACIÓN
         - Añadir algo más de variedad, elementos deseables en el nivel final a nivel estructural.
      */
 
     // Inicializacion de la poblacion: Aleatorio.
     void initializePopulation () {
 
-        ArrayList<Map<Integer, Integer>> widths = new ArrayList<>();
-
-        // Parámetros de dificultad.
-        switch (desiredDifficulty) {
-            case 1:
-
-                break;
-
-            case 2:
-                break;
-
-            case 3:
-                break;
-
-            default:
-                break;
-
-        }
-
         // Rellenamos el fenotipo.
         for (int i=0; i<maxPopulation; i++)
             phenotype.add(new Individual());
 
-        // Para cada elemento del fenotipo (nivel).
-        for (Individual individual : phenotype) {
+        // Parámetros de dificultad.
+        switch (initialDifficulty) {
+            case 1:
+                initializePopulationEasy();
+                break;
 
-            int accumulativeWidth = 0, individualIndex = 0;
+            case 2:
+                initializePopulationMedium();
+                break;
 
-            boolean legalElement = true;
+            case 3:
+                initializePopulationHard();
+                break;
 
-            // Para cada elemento del nivel.
-            for (LevelElement element : individual.getIndividual()) {
-
-
-
-
-                /*
-                int levelElement = levelSeedRandom.nextInt(4) + 1;
-
-                if (legalElement) {
-                    element.setElementType(levelElement);
-                    //element.setX(levelSeedRandom.nextInt(91) + 5);
-                    element.setX(accumulativeWidth);
-                    element.setY(levelSeedRandom.nextInt(3) + 3);
-                }
-                else {
-                    element.setElementType(PLATFORM);
-                    element.setX(accumulativeWidth);
-                    element.setY(1);
-                }
-
-                if (element.getElementType() == GAP)
-                    element.setParam1(levelSeedRandom.nextInt(2) + 3);
-                else
-                    element.setParam1(levelSeedRandom.nextInt(2) + 7);
-
-                accumulativeWidth += element.getParam1();
-
-                if (levelElement == HILL)
-                    individual.addGeneticElement(individualIndex);
-                element.setParam2(levelSeedRandom.nextInt(5));          // A?adimos el tipo del enemigo, entre 0 y 4 segun Enemy.java.
-                element.setParam3(levelSeedRandom.nextInt(3)+1);          // A?adimos el numero de enemigos, entre 1 y 3.
-
-                individualIndex++;
-
-                // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width-64)
-                    break;
-
-                legalElement = (element.getElementType() != GAP);
-                */
-            }
+            default:
+                initializePopulationMedium();
+                break;
         }
+
     }
 
     /*
-    TODO: NUEVA FUNCIÓN DE EVALUACIÓN.
-        - Considerar los powerups.
+    TEST:NUEVA FUNCIÓN DE EVALUACIÓN.
+        - Considerar los enemigos.
         - Considerar obstáculos estructurales (huecos, colinas...)
      */
 
     // Evaluaci?n: Tomar? la poblaci?n en el momento en que se llama y devolver? el valor fitness de cada individuo.
-    private void evaluate(float[] fitnessValues) {
+    private void evaluate (float[] fitnessValues) {
 
-        // Valoramos la dificultad de cada enemigo y la cantidad de ?stos en el nivel.
+        // Valoramos la dificultad de cada enemigo y la cantidad de estos en el nivel. Se tienen en cuenta
+        // los elementos estructurales como la dificultad estructural media del nivel.
         for (Individual level: phenotype) {
 
-            float accumulate = 0;
+            float accumulate = level.getStructuralDifficulty();
 
             for (Integer geneticElem: level.getGeneticElements()) {
 
@@ -384,54 +331,55 @@ public class GeneticLevelGeneratorImproved {
         - Las tortugas tienen una mayor probabilidad de aparecer (35%).
         - Menor variación vertical del nivel.
     */
-    private void generateIndividualEasy(Individual individual) {
+    private void initializePopulationEasy() {
 
-        int accumulativeWidth = 0, individualIndex = 0;
-        boolean gapGenerated = false;
+        // Para cada elemento del fenotipo (nivel).
+        for (Individual individual : phenotype) {
 
-        for (LevelElement element : individual.getIndividual()) {
+            int accumulativeWidth = 0, individualIndex = 0;
+            boolean gapGenerated = false;
 
-            //float levelElement = levelSeedRandom.nextFloat();
-            float levelElement = (float) 0.5;
+            for (LevelElement element : individual.getIndividual()) {
 
-            element.setParam1(levelSeedRandom.nextInt(2) + 10);             // Ancho del elemento.
+                //float levelElement = levelSeedRandom.nextFloat();
+                float levelElement = (float) 0.5;
 
-            // Después de un hueco SIEMPRE va una plataforma.
-            if (levelElement <= 0.15 && !gapGenerated) {                    // Hueco: Menor probabilidad de aparecer.
-                element.setElementType(GAP);
-                element.setParam1(levelSeedRandom.nextInt(2) + 1);          // Tienen una menor anchura.
+                element.setParam1(levelSeedRandom.nextInt(2) + 10);                                                         // Ancho del elemento.
+
+                // Después de un hueco SIEMPRE va una plataforma.
+                if (levelElement < 0.15 && !gapGenerated) {                                                                 // Hueco: Menor probabilidad de aparecer.
+                    element.setElementType(GAP);
+                    element.setParam1(levelSeedRandom.nextInt(2) + 1);                                                      // Tienen una menor anchura.
+                } else if (levelElement >= 0.15 && levelElement < 0.35 && !gapGenerated) {                                    // Cañón
+                    element.setElementType(CANNON);
+                } else if (levelElement >= 0.35 && levelElement < 0.65 && !gapGenerated) {                                    // Colina
+                    element.setElementType(HILL);
+                    individual.addGeneticElement(individualIndex);                                                          // Se añade un registro de qué
+
+                    float turtleEnemyProb = levelSeedRandom.nextFloat();
+                    int enemyType = levelSeedRandom.nextInt(4);
+
+                    if (turtleEnemyProb <= 0.35)                                                                            // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
+                        enemyType = Enemy.ENEMY_GREEN_KOOPA;
+
+                    element.setParam2(enemyType);                                                                           // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
+                    element.setParam3(levelSeedRandom.nextInt(2) + 1);                                                      // A?adimos el numero de enemigos, entre 1 y 2.
+                } else {                                                                                                      // Plataforma
+                    element.setElementType(PLATFORM);
+                }
+
+                element.setX(accumulativeWidth);                                                                            // Posición horizontal inicial del bloque estructural
+                element.setY(levelSeedRandom.nextInt(3) + 2);                                                               // Posición vertical inicial del bloque estructural
+                accumulativeWidth += element.getParam1();
+
+                individualIndex++;
+
+                gapGenerated = (element.getElementType() == GAP);
+
+                // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
+                if (accumulativeWidth >= width - 64)
+                    break;
             }
-            else if (levelElement <= 0.2 && !gapGenerated) {                // Cañón
-                element.setElementType(CANNON);
-            }
-            else if (levelElement <= 0.25 && !gapGenerated) {               // Colina
-                element.setElementType(HILL);
-                individual.addGeneticElement(individualIndex);              // Se añade un registro de qué
-
-                float turtleEnemyProb = levelSeedRandom.nextFloat();
-                int enemyType = levelSeedRandom.nextInt(4);
-
-                if (turtleEnemyProb <= 0.35)                                // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
-                    enemyType = Enemy.ENEMY_GREEN_KOOPA;
-
-                element.setParam2(enemyType);                               // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
-                element.setParam3(levelSeedRandom.nextInt(2) + 1);          // A?adimos el numero de enemigos, entre 1 y 2.
-            }
-            else {                                                          // Plataforma
-                element.setElementType(PLATFORM);
-            }
-
-            element.setX(accumulativeWidth);                                // Posición horizontal inicial del bloque estructural
-            element.setY(levelSeedRandom.nextInt(3) + 2);                   // Posición vertical inicial del bloque estructural
-            accumulativeWidth += element.getParam1();
-
-            individualIndex++;
-
-            gapGenerated = (element.getElementType() == GAP);
-
-            // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-            if (accumulativeWidth >= width-64)
-                break;
         }
     }
 
@@ -443,56 +391,57 @@ public class GeneticLevelGeneratorImproved {
     - Las tortugas tienen una mayor probabilidad de aparecer (35%).
     - Menor variación vertical del nivel.
     */
-    private void generateIndividualMedium(Individual individual) {
+    private void initializePopulationMedium() {
 
-        int accumulativeWidth = 0, individualIndex = 0;
-        boolean gapGenerated = false;
+        // Para cada elemento del fenotipo (nivel).
+        for (Individual individual : phenotype) {
 
-        for (LevelElement element : individual.getIndividual()) {
+            int accumulativeWidth = 0, individualIndex = 0;
+            boolean gapGenerated = false;
 
-            //float levelElement = levelSeedRandom.nextFloat();
-            float levelElement = (float) 0.5;
+            for (LevelElement element : individual.getIndividual()) {
 
-            element.setParam1(levelSeedRandom.nextInt(2) + 8);             // Ancho del elemento, un poco más corto.
+                //float levelElement = levelSeedRandom.nextFloat();
+                float levelElement = (float) 0.5;
 
-            // Después de un hueco SIEMPRE va una plataforma.
-            if (levelElement <= 0.2 && !gapGenerated) {                    // Hueco: Menor probabilidad de aparecer. No se puede generar después de un hueco.
-                element.setElementType(GAP);
-                element.setParam1(levelSeedRandom.nextInt(2) + 1);          // Tienen una menor anchura.
+                element.setParam1(levelSeedRandom.nextInt(2) + 8);                                                          // Ancho del elemento, un poco más corto.
+
+                // Después de un hueco SIEMPRE va una plataforma.
+                if (levelElement < 0.2 && !gapGenerated) {                                                                  // Hueco: Menor probabilidad de aparecer. No se puede generar después de un hueco.
+                    element.setElementType(GAP);
+                    element.setParam1(levelSeedRandom.nextInt(2) + 1);                                                      // Tienen una menor anchura.
+                } else if (levelElement >= 0.2 && levelElement < 0.45 && !gapGenerated) {                                     // Cañón. No se puede generar después de un hueco.
+                    element.setElementType(CANNON);
+                } else if (levelElement >= 0.45 && levelElement < 0.70) {                                                     // Colina, ahora puede generarse después de un hueco.
+                    element.setElementType(HILL);
+                    individual.addGeneticElement(individualIndex);                                                          // Se añade un registro de qué
+
+                    float enemyProb = levelSeedRandom.nextFloat();
+                    int enemyType = levelSeedRandom.nextInt(4);
+
+                    if (enemyProb <= 0.1)
+                        enemyType = Enemy.ENEMY_SPIKY;                                                                      // Se incluye el spiky con muy baja probabilidad
+                    else if (enemyProb <= 0.35)                                                                             // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
+                        enemyType = Enemy.ENEMY_GREEN_KOOPA;
+
+                    element.setParam2(enemyType);                                                                           // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
+                    element.setParam3(levelSeedRandom.nextInt(2) + 2);                                                      // A?adimos el numero de enemigos, entre 1 y 3. Habrá más enemigos.
+                } else {                                                                                                      // Plataforma
+                    element.setElementType(PLATFORM);
+                }
+
+                element.setX(accumulativeWidth);                                                                            // Posición horizontal inicial del bloque estructural
+                element.setY(levelSeedRandom.nextInt(3) + 3);                                                               // Posición vertical inicial del bloque estructural. Varía un poco más.
+                accumulativeWidth += element.getParam1();
+
+                individualIndex++;
+
+                gapGenerated = (element.getElementType() == GAP);
+
+                // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
+                if (accumulativeWidth >= width - 64)
+                    break;
             }
-            else if (levelElement <= 0.25 && !gapGenerated) {               // Cañón. No se puede generar después de un hueco.
-                element.setElementType(CANNON);
-            }
-            else if (levelElement <= 0.25) {                                // Colina, ahora puede generarse después de un hueco.
-                element.setElementType(HILL);
-                individual.addGeneticElement(individualIndex);              // Se añade un registro de qué
-
-                float enemyProb = levelSeedRandom.nextFloat();
-                int enemyType = levelSeedRandom.nextInt(4);
-
-                if (enemyProb <= 0.1)
-                    enemyType = Enemy.ENEMY_SPIKY;                          // Se incluye el spiky con muy baja probabilidad
-                else if (enemyProb <= 0.35)                                 // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
-                    enemyType = Enemy.ENEMY_GREEN_KOOPA;
-
-                element.setParam2(enemyType);                               // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
-                element.setParam3(levelSeedRandom.nextInt(2) + 2);          // A?adimos el numero de enemigos, entre 1 y 3. Habrá más enemigos.
-            }
-            else {                                                          // Plataforma
-                element.setElementType(PLATFORM);
-            }
-
-            element.setX(accumulativeWidth);                                // Posición horizontal inicial del bloque estructural
-            element.setY(levelSeedRandom.nextInt(3) + 3);                   // Posición vertical inicial del bloque estructural. Varía un poco más.
-            accumulativeWidth += element.getParam1();
-
-            individualIndex++;
-
-            gapGenerated = (element.getElementType() == GAP);
-
-            // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-            if (accumulativeWidth >= width-64)
-                break;
         }
     }
 
@@ -505,56 +454,55 @@ public class GeneticLevelGeneratorImproved {
     - Las tortugas tienen una mayor probabilidad de aparecer (35%).
     - Menor variación vertical del nivel.
     */
-    private void generateIndividualHard(Individual individual) {
+    private void initializePopulationHard() {
 
-        int accumulativeWidth = 0, individualIndex = 0;
-        boolean gapGenerated = false;
+        // Para cada elemento del fenotipo (nivel).
+        for (Individual individual : phenotype) {
 
-        for (LevelElement element : individual.getIndividual()) {
+            int accumulativeWidth = 0, individualIndex = 0;
+            boolean gapGenerated = false;
 
-            //float levelElement = levelSeedRandom.nextFloat();
-            float levelElement = (float) 0.5;
+            for (LevelElement element : individual.getIndividual()) {
 
-            element.setParam1(levelSeedRandom.nextInt(2) + 5);             // Ancho del elemento, un poco más corto.
+                //float levelElement = levelSeedRandom.nextFloat();
+                float levelElement = (float) 0.5;
 
-            // Después de un hueco SIEMPRE va un cannon.
-            if (levelElement <= 0.35 && !gapGenerated) {                    // Hueco: Menor probabilidad de aparecer.
-                element.setElementType(GAP);
-                element.setParam1(levelSeedRandom.nextInt(2) + 1);          // Tienen una menor anchura.
+                element.setParam1(levelSeedRandom.nextInt(2) + 5);                                                      // Ancho del elemento, un poco más corto.
+
+                // Después de un hueco SIEMPRE va un cannon.
+                if (levelElement < 0.35 && !gapGenerated) {                                                             // Hueco: Menor probabilidad de aparecer.
+                    element.setElementType(GAP);
+                    element.setParam1(levelSeedRandom.nextInt(2) + 1);                                                  // Tienen una menor anchura.
+                } else if (gapGenerated || levelElement >= 0.35 && levelElement < 0.5) {                                // Cañón
+                    element.setElementType(CANNON);
+                } else if (levelElement >= 0.5 && levelElement < 0.8 && !gapGenerated) {                                // Colina, ahora puede generarse después de un hueco.
+                    element.setElementType(HILL);
+                    individual.addGeneticElement(individualIndex);
+
+                    float enemyProb = levelSeedRandom.nextFloat();
+                    int enemyType = levelSeedRandom.nextInt(4);
+
+                    if (enemyProb <= 0.30)
+                        enemyType = Enemy.ENEMY_SPIKY;                                                                  // Se incluye el spiky con probabilidad más alta.
+
+                    element.setParam2(enemyType);                                                                       // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
+                    element.setParam3(levelSeedRandom.nextInt(2) + 4);                                                  // A?adimos el numero de enemigos, entre 1 y 3. Habrá más enemigos.
+                } else {                                                                                                // Plataforma
+                    element.setElementType(PLATFORM);
+                }
+
+                element.setX(accumulativeWidth);                                                                        // Posición horizontal inicial del bloque estructural
+                element.setY(levelSeedRandom.nextInt(3) + 4);                                                           // Posición vertical inicial del bloque estructural. Varía un poco más.
+                accumulativeWidth += element.getParam1();
+
+                individualIndex++;
+
+                gapGenerated = (element.getElementType() == GAP);
+
+                // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
+                if (accumulativeWidth >= width - 64)
+                    break;
             }
-            else if (gapGenerated || levelElement <= 0.15) {                // Cañón
-                element.setElementType(CANNON);
-            }
-            else if (levelElement <= 0.3 && !gapGenerated) {                // Colina, ahora puede generarse después de un hueco.
-                element.setElementType(HILL);
-                individual.addGeneticElement(individualIndex);              // Se añade un registro de qué
-
-                float enemyProb = levelSeedRandom.nextFloat();
-                int enemyType = levelSeedRandom.nextInt(4);
-
-                if (enemyProb <= 0.25)
-                    enemyType = Enemy.ENEMY_SPIKY;                          // Se incluye el spiky con muy baja probabilidad
-                else if (enemyProb <= 0.35)                           // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
-                    enemyType = Enemy.ENEMY_GREEN_KOOPA;
-
-                element.setParam2(enemyType);                               // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
-                element.setParam3(levelSeedRandom.nextInt(2) + 4);          // A?adimos el numero de enemigos, entre 1 y 3. Habrá más enemigos.
-            }
-            else {                                                          // Plataforma
-                element.setElementType(PLATFORM);
-            }
-
-            element.setX(accumulativeWidth);                                // Posición horizontal inicial del bloque estructural
-            element.setY(levelSeedRandom.nextInt(3) + 4);                   // Posición vertical inicial del bloque estructural. Varía un poco más.
-            accumulativeWidth += element.getParam1();
-
-            individualIndex++;
-
-            gapGenerated = (element.getElementType() == GAP);
-
-            // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-            if (accumulativeWidth >= width-64)
-                break;
         }
     }
 
