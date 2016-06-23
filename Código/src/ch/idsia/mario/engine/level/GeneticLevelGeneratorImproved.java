@@ -1,5 +1,6 @@
 package ch.idsia.mario.engine.level;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import ch.idsia.mario.engine.sprites.Enemy;
@@ -51,7 +52,7 @@ public class GeneticLevelGeneratorImproved {
     }
 
     /*
-    TEST:NUEVO MÉTODO DE INICIALIZACIÓN
+    TEST:  MÉTODO DE INICIALIZACIÓN
         - Añadir algo más de variedad, elementos deseables en el nivel final a nivel estructural.
      */
 
@@ -84,7 +85,7 @@ public class GeneticLevelGeneratorImproved {
     }
 
     /*
-    TEST:NUEVA FUNCIÓN DE EVALUACIÓN.
+    TEST: NUEVA FUNCIÓN DE EVALUACIÓN.
         - Considerar los enemigos.
         - Considerar obstáculos estructurales (huecos, colinas...)
      */
@@ -108,7 +109,7 @@ public class GeneticLevelGeneratorImproved {
         }
     }
     /*
-    TODO: NUEVO MÉTODO DE CRUCE:
+    TEST: NUEVO MÉTODO DE CRUCE:
         - Juego entre exploración y explotación.
         - Otros métodos, BLX-alfa, CHC...
         - ¿Operador que vaya cambiando durante la ejecución?.
@@ -118,17 +119,7 @@ public class GeneticLevelGeneratorImproved {
     // Cruce: Se reciben los dos padres y a partir de ellos se obtiene un hijo.
     private Individual crossOperator (Individual parent1, Individual parent2) {
 
-        // Se crea un hijo igual que el primer padre. ?????OJO: SOLO PARA PRUEBAS, ESTO NO SE PUEDE HACER!!!!!
         Individual child = new Individual(parent1);
-
-        long seed = System.nanoTime();
-
-        ArrayList<Integer> geneticElements1 = parent1.getGeneticElements();
-        ArrayList<Integer> geneticElements2 = parent2.getGeneticElements();
-
-        // Aleatorizamos los valores.
-        Collections.shuffle(geneticElements1, new Random(seed));
-        Collections.shuffle(geneticElements2, new Random(seed));
 
         if (DEBUG) {
             System.out.println("\n >> Valores fitness de los padres <<");
@@ -137,26 +128,101 @@ public class GeneticLevelGeneratorImproved {
             System.out.println(" ** Fin valores fitness de los padres **");
         }
 
-        int minGeneticElements = Math.min(geneticElements1.size(), geneticElements2.size());
-        int elementsToCross = levelSeedRandom.nextInt(minGeneticElements) + 1;
+        // Se busca el primer elemento del segundo padre a partir del índice que puede colocarse en
+        // el hijo (copia del primer padre). La condición es el índice de dificultad, pues el hijo
+        // debe ser coherente con éste. El elemento a tener en cuenta en esta situación es GAP.
 
-        for (int i=0; i<elementsToCross; i++) {
+         // El índice por donde empezar a buscar se selecciona como la mitad exacta del hijo, más/menos 1/6 de su longitud
+        // máxima (5 en este caso).
+        int childIndex = getCrossIndex(child, 5, 5);
+        int childElement = child.getElement(childIndex).getElementType();
 
-            int randomLevelElement = levelSeedRandom.nextInt(minGeneticElements);
+        // Se selecciona un índice aleatorio en el padre 2, lo más centrado posible en la mitad del individuo.
+        int p2Index = getCrossIndex(parent2, 5, 5);
 
-            // Como el hijo es igual al padre 1, entrar por aqu? significa cambiar los datos del elemento seleccionado por los del padre 2.
-            if ((randomLevelElement != 0)) {
-                LevelElement parent2Values = parent2.getElement(geneticElements2.get(randomLevelElement));
-                child.setElementParam(geneticElements1.get(randomLevelElement), 2, parent2Values.getParam2());          // Cambiamos el tipo de enemigo (param2).
-                child.setElementParam(geneticElements1.get(randomLevelElement), 3, parent2Values.getParam3());          // Cambiamos el n?mero de enemigos (param3).
+        // Sólo tenemos problemas estructurales si el tipo del elemento en el hijo es Hueco.
+        if (childElement == GAP) {
+
+            boolean elementSelected = false;
+
+            // Debemos asegurar que se elige un elemento del padre2, de lo contrario no haremos nada.
+            while (!elementSelected) {
+
+                do {
+                    switch (initialDifficulty) {
+
+                        // Dificultad FÁCIL.
+                        case 1:
+                            if (parent2.getElement(p2Index).getElementType() == PLATFORM)
+                                elementSelected = true;
+
+                            break;
+
+                        // Dificultad MEDIA.
+                        case 2:
+                            if (parent2.getElement(p2Index).getElementType() == PLATFORM || parent2.getElement(p2Index).getElementType() == HILL)
+                                elementSelected = true;
+
+                            break;
+
+                        // Dificultad DIFÍCIL.
+                        case 3:
+                            if (parent2.getElement(p2Index).getElementType() == CANNON)
+                                elementSelected = true;
+
+                            break;
+                    }
+
+                    p2Index++;
+                } while (p2Index < parent2.getIndividual().size() && !elementSelected);
+            }
+        }
+
+        // Se eliminan los elementos genéticos que ya no son necesarios en el hijo.
+        ArrayList<Integer> childGeneticElements = child.getGeneticElements();
+        int geneticElementsSize = childGeneticElements.size();
+
+        for (int i=0; i<geneticElementsSize; i++) {
+            if (childGeneticElements.get(i) >= childIndex) {
+                child.deleteGeneticElement(i);
+            }
+        }
+
+        // Llegados a esta altura, tenemos dos índices a partir de los cuales se puede.
+        // Copiar elementos a partir del índice seleccionado en el padre 2 al hijo a partir del índice crossIndex.
+        int maxCrossElements = Math.min((parent2.getIndividual()).size() - p2Index, (child.getIndividual()).size() - childIndex);
+        int childCurrentIndex = childIndex;
+
+        for (int i=p2Index; i<maxCrossElements; i++) {
+
+            LevelElement currentChildElement = child.getElement(childCurrentIndex), currentP2Element = parent2.getElement(i);
+
+            currentChildElement.setElementType(currentP2Element.getElementType());
+            currentChildElement.setParam1(currentP2Element.getParam1());
+            currentChildElement.setParam2(currentP2Element.getParam2());
+            currentChildElement.setParam3(currentP2Element.getParam3());
+
+            // Si el elemento insertado es una colina, se inserta su índice en geneticElements.
+            if (currentChildElement.getElementType() == HILL){
+                child.addGeneticElement(childCurrentIndex);
             }
 
+            childCurrentIndex++;
         }
 
         return child;
     }
 
+
+    private int getCrossIndex(Individual individual, int minOffset, int maxOffset) {
+        int halfIndividual = (individual.getIndividual()).size();
+        int min = halfIndividual - minOffset, max = halfIndividual + maxOffset;
+        return min + levelSeedRandom.nextInt(max-min);
+
+    }
+
     // Mutacion: Tomara aleatoriamente miembros de la poblacion y realizara pequenas modificaciones en ellos.
+    // SE VA A QUEDAR COMO ESTÁ.
     private void mutation () {
 
         for (int i=0; i<mutationNumLevels; i++) {
@@ -178,6 +244,8 @@ public class GeneticLevelGeneratorImproved {
     /*
     TODO: NUEVO MÉTODO DE REEMPLAZAMIENTO
         - Estudiar bien los resultados y añadir o eliminar exploración/explotación.
+        -> Con el método de cruce utilizado se añade bastante diversidad, además de la mutación, establecer un reemplazamiento basado
+        en la explotación.
      */
 
     // Reemplazamiento: Del hijo obtenido se reemplaza el peor nivel de la poblacion -> Nivel con mayor fitness (se distancia mas de lo que buscamos).
@@ -320,8 +388,6 @@ public class GeneticLevelGeneratorImproved {
         return phenotype.get(0);
     }
 
-
-    //******************** ARREGLAR PROBABILIDADES **************************//
 
     /* Nivel de dificultad fácil:
         - Longitudes de elementos aumentadas (PARAM1).

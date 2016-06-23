@@ -35,6 +35,8 @@ public class Individual {
         geneticElements.add(elem);
     }
 
+    void deleteGeneticElement (int position) { geneticElements.remove(position); }
+
     LevelElement getElement (int position) {
         return individual.get(position);
     }
