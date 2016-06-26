@@ -6,8 +6,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
-
-public class LevelGenerator
+/*
+public class LevelGeneratorOLD
 {
     public static final int TYPE_OVERGROUND = 0;
     public static final int TYPE_UNDERGROUND = 1;
@@ -22,7 +22,7 @@ public class LevelGenerator
         return levelGenerator.createLevel(seed, difficulty, type);
     }
 
-    // Implementaciï¿½n ORIGINAL.
+    // Implementaci?n ORIGINAL.
     private int width;
     private int height;
     Level level = new Level(width, height);
@@ -45,12 +45,12 @@ public class LevelGenerator
         this.height = height;
     }
 
-    // Funciï¿½n de generaciï¿½n de nivel ORIGINAL.
+    // Funci?n de generaci?n de nivel ORIGINAL.
     private Level createLevel(long seed, int difficulty, int type)
     {
-        // Se fijan el tipo, dificultad y posibilidades iniciales segï¿½n ï¿½sta ï¿½ltima.
+        // Se fijan el tipo, dificultad y posibilidades iniciales seg?n ?sta ?ltima.
         this.type = type;
-        this.difficulty = GeneticLevelGeneratorImproved.initialDifficulty;
+        this.difficulty = difficulty;
 
         // Se reserva memoria para el mapa (array de bytes).
         lastSeed = seed;
@@ -58,20 +58,14 @@ public class LevelGenerator
         random = new Random(seed);
 
         int length = 0;
-        length += buildStraight(0, 7, level.width); //TODO: Revisar plataforma inicial.
+        length += buildStraight(0, level.width, true);
 
-        // Nivel genÃ©tico.
-//        GeneticLevelGenerator geneticLevel = new GeneticLevelGenerator(height, width);
-//
-//        Individual generatedLevel = geneticLevel.createLevelGen(seed);
+        // Nivel genético.
+        GeneticLevelGenerator geneticLevel = new GeneticLevelGenerator(height, width);
 
-        // Nivel genÃ©tico.
-        GeneticLevelGeneratorImproved geneticLevel = new GeneticLevelGeneratorImproved(height, width);
+        Individual generatedLevel = geneticLevel.createLevelGen(seed);
 
-        Individual generatedLevel = geneticLevel.createLevelGenImproved(seed);
-
-
-        // GeneraciÃ³n de elementos del nivel.
+        // Generación de elementos del nivel.
         for (LevelElement element : generatedLevel.getIndividual()) {
             length += buildZoneGen(element, level.width - length);
         }
@@ -122,41 +116,75 @@ public class LevelGenerator
     private int buildZoneGen (LevelElement element, int maxLength)
     {
         switch (element.getElementType()) {
-            case GeneticLevelGeneratorImproved.GAP:
-                return buildJump(element.getX(), element.getParam1(), element.getY(), maxLength);
-            case GeneticLevelGeneratorImproved.PLATFORM:
-                return buildStraight(element.getX(), element.getParam1(), maxLength);
-            case GeneticLevelGeneratorImproved.HILL:
-                return buildHillStraight(element.getX(), element.getParam1(), element.getY(), maxLength, element.getParam2(), element.getParam3());
-            case GeneticLevelGeneratorImproved.CANNON:
-                return buildCannons(element.getX(), element.getParam1(), element.getY(), maxLength);
-            case GeneticLevelGeneratorImproved.TUBE:
+            case GeneticLevelGenerator.GAP:
+                return buildJump(element.getX(), maxLength);
+            case GeneticLevelGenerator.PLATFORM:
+                return buildStraight(element.getX(), maxLength, false);
+            case GeneticLevelGenerator.HILL:
+                return buildHillStraight(element.getX(), maxLength, element.getParam2(), element.getParam3());
+            case GeneticLevelGenerator.CANNON:
+                return buildCannons(element.getX(), maxLength);
+            case GeneticLevelGenerator.TUBE:
                 return buildTubes(element.getX(), maxLength);
         }
+
         return 0;
     }
 
-   // Se dibujan en el mapa partes del nivel. Cada mï¿½todo devuelve la longitud de el bloque elegido.
-    private int buildJump(int xo, int length, int elementHeight, int maxLength)
+
+//    // Zona para crear partes del nivel.
+//    private int buildZone(int x, int maxLength)
+//    {
+//
+//        // Se selecciona un componente aleatoriamente.
+//        int t = random.nextInt(totalOdds);
+//        int type = 0;
+//        for (int i = 0; i < odds.length; i++)
+//        {
+//            if (odds[i] <= t)
+//            {
+//                type = i;
+//            }
+//        }
+//
+//        switch (type)
+//        {
+//            case ODDS_STRAIGHT:
+//                return buildStraight(x, maxLength, false);
+//            case ODDS_HILL_STRAIGHT:
+//                return buildHillStraight(x, maxLength);
+//            case ODDS_TUBES:
+//                return buildTubes(x, maxLength);
+//            case ODDS_JUMP:
+//                return buildJump(x, maxLength);
+//            case ODDS_CANNONS:
+//                return buildCannons(x, maxLength);
+//        }
+//        return 0;
+//    }
+
+
+    // Se dibujan en el mapa partes del nivel. Cada m?todo devuelve la longitud de el bloque elegido.
+    private int buildJump(int xo, int maxLength)
     {
-        /*int js = random.nextInt(4) + 2;
+        int js = random.nextInt(4) + 2;
         int jl = random.nextInt(2) + 2;
-        //int length = js * 2 + jl;
+        int length = js * 2 + jl;
 
-        //boolean hasStairs = random.nextInt(3) == 0;
+        boolean hasStairs = random.nextInt(3) == 0;
 
-        int floor = elementHeight;
+        int floor = height - 1 - random.nextInt(4);
         for (int x = xo; x < xo + length; x++)
         {
-            //if (x < xo + js || x > xo + length - js - 1)
-            //{
+            if (x < xo + js || x > xo + length - js - 1)
+            {
                 for (int y = 0; y < height; y++)
                 {
-                    //if (y >= floor)
-                    //{
-                        //level.setBlock(x, y, (byte) (1 + 9 * 16));
-                   // }
-                    /*else if (hasStairs)
+                    if (y >= floor)
+                    {
+                        level.setBlock(x, y, (byte) (1 + 9 * 16));
+                    }
+                    else if (hasStairs)
                     {
                         if (x < xo + js)
                         {
@@ -172,20 +200,20 @@ public class LevelGenerator
                                 level.setBlock(x, y, (byte) (9 + 0 * 16));
                             }
                         }
-                    }*/
-                //}
-          //  }
-        //}
+                    }
+                }
+            }
+        }
 
         return length;
     }
 
-    private int buildCannons(int xo, int length, int elementHeight, int maxLength)
+    private int buildCannons(int xo, int maxLength)
     {
-        //int length = random.nextInt(10) + 2;
+        int length = random.nextInt(10) + 2;
         if (length > maxLength) length = maxLength;
 
-        int floor = elementHeight;
+        int floor = height - 1 - random.nextInt(4);
         int xCannon = xo + 1 + random.nextInt(4);
         for (int x = xo; x < xo + length; x++)
         {
@@ -226,12 +254,12 @@ public class LevelGenerator
         return length;
     }
 
-    private int buildHillStraight(int xo, int length, int elementHeight, int maxLength, int geneticType, int numberOfEnemies)
+    private int buildHillStraight(int xo, int maxLength, int geneticType, int numberOfEnemies)
     {
-        //int length = random.nextInt(10) + 10;
+        int length = random.nextInt(10) + 10;
         if (length > maxLength) length = maxLength;
 
-        int floor = elementHeight;
+        int floor = height - 1 - random.nextInt(4);
         for (int x = xo; x < xo + length; x++)
         {
             for (int y = 0; y < height; y++)
@@ -260,7 +288,7 @@ public class LevelGenerator
             }
             else
             {
-                int l = random.nextInt(2) + 2;
+                int l = random.nextInt(5) + 3;
                 int xxo = random.nextInt(length - l - 2) + xo + 1;
 
                 if (occupied[xxo - xo] || occupied[xxo - xo + l] || occupied[xxo - xo - 1] || occupied[xxo - xo + l + 1])
@@ -271,10 +299,7 @@ public class LevelGenerator
                 {
                     occupied[xxo - xo] = true;
                     occupied[xxo - xo + l] = true;
-                    if (geneticType == Enemy.ENEMY_SPIKY)
-                        addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfEnemies);
-                    else
-                        addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfEnemies);
+                    addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfEnemies);
                     if (random.nextInt(4) == 0)
                     {
                         decorate(xxo - 1, xxo + l + 1, h);
@@ -328,13 +353,13 @@ public class LevelGenerator
         }
     }
 
-    // ImplementaciÃ³n genÃ©tica de addEnemyLine: Admite el tipo y el nÃºmero de enemigos.
+    // Implementación genética de addEnemyLine: Admite el tipo y el número de enemigos.
     private void addEnemyLine(int x0, int x1, int y, int geneticType, int numberOfEnemies)
     {
         int positionOffset = (int) Math.floor((x1 - x0)/numberOfEnemies);
 
         for (int x = 0; x < numberOfEnemies; x++) {
-            level.setSpriteTemplate(x0 + positionOffset, y, new SpriteTemplate(geneticType, false));
+            level.setSpriteTemplate(x0 + positionOffset, y, new SpriteTemplate(geneticType, random.nextInt(35) < difficulty));
         }
     }
 
@@ -387,9 +412,10 @@ public class LevelGenerator
         return length;
     }
 
-    private int buildStraight(int xo, int elementLength, int maxLength)
+    private int buildStraight(int xo, int maxLength, boolean safe)
     {
-        int length = elementLength;//random.nextInt(10) + 2;
+        int length = random.nextInt(10) + 2;
+        if (safe) length = 10 + random.nextInt(5);
         if (length > maxLength) length = maxLength;
 
         int floor = height-6; //- 1 - random.nextInt(4);
@@ -404,10 +430,12 @@ public class LevelGenerator
             }
         }
 
-        // Â¿Decorate?
-        if (length > 7)
+        if (!safe)
         {
-            decorate(xo, xo + length, floor);
+            if (length > 5)
+            {
+                decorate(xo, xo + length, floor);
+            }
         }
 
         return length;
@@ -480,10 +508,10 @@ public class LevelGenerator
 
         int length = x1 - x0 - 2;
 
-        /*        if (length > 5 && rocks)
+                if (length > 5 && rocks)
          {
-         decorate(x0, x1, floor - 4);
-         }*/
+            decorate(x0, x1, floor - 4);
+         }
     }
 
     private void fixWalls()
@@ -636,3 +664,4 @@ public class LevelGenerator
         }
     }
 }
+*/

@@ -73,7 +73,7 @@ public class Individual {
         individual.set(position, elem);
     }
 
-    int getStructuralDifficulty() {
+    float getStructuralDifficulty() {
 
         int accumulate = 0, totalElements = 0;
 
@@ -86,8 +86,10 @@ public class Individual {
             else
                 break;
         }
+        System.out.println(accumulate);
+        System.out.println((float) accumulate/totalElements);
 
-        return accumulate/totalElements;
+        return ((float) accumulate/totalElements);
     }
 }
 
