@@ -24,18 +24,9 @@ public class GeneticLevelGeneratorImproved {
     public static final int HILL=3;
     public static final int GAP=4;
     public static final int TUBE=5;
-    private static final int CANNON_HILL=6;
-    private static final int TUBE_HILL=7;
-    private static final int COIN=8;
-    private static final int BLOCK_COIN=9;
-    private static final int BLOCK_POWERUP=10;
-    private static final int ROCK_COIN=11;
-    private static final int ROCK_EMPTY=12;
-    private static final int KOOPA=13;
-    private static final int GOOMPA=14;
 
     private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50;
-    public static final int initialDifficulty = 2;
+    public static final int initialDifficulty = 1;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
@@ -111,17 +102,19 @@ public class GeneticLevelGeneratorImproved {
             float structuralDifficulty = level.getStructuralDifficulty();
 
             if (structuralDifficulty >= 1 && structuralDifficulty <= 1.5)
-                structuralDifficulty *= 3;
-            else if (structuralDifficulty > 1.5 && structuralDifficulty <= 2.5)
-                structuralDifficulty *= 7;
-            else
                 structuralDifficulty *= 10;
+            else if (structuralDifficulty > 1.5 && structuralDifficulty <= 2.5)
+                structuralDifficulty *= 20;
+            else
+                structuralDifficulty *= 40;
+
+            //System.out.println("DIFICULTAD BRUTA = " + accumulate + structuralDifficulty);
 
             fitnessValues[phenotype.indexOf(level)] = Math.abs(accumulate + structuralDifficulty - desiredDifficulty);                         // ?Cuanto se acerca la dificultad del nivel a lo que buscamos?
         }
     }
     /*
-    TEST: NUEVO MÉTODO DE CRUCE:
+    DONE: NUEVO MÉTODO DE CRUCE:
         - Juego entre exploración y explotación.
         - Otros métodos, BLX-alfa, CHC...
         - ¿Operador que vaya cambiando durante la ejecución?.
@@ -147,6 +140,8 @@ public class GeneticLevelGeneratorImproved {
          // El índice por donde empezar a buscar se selecciona como la mitad exacta del hijo, más/menos 1/6 de su longitud
         // máxima (5 en este caso).
         int offset = 5;
+
+        // Se selecciona un índice y se empieza a sustituir por el siguiente elemento, no justo por el seleccionado.
         int childIndex = getCrossIndex(child, offset, offset);
         int childElement = child.getElement(childIndex).getElementType();
 
@@ -186,14 +181,17 @@ public class GeneticLevelGeneratorImproved {
                             break;
                     }
 
-                    p2Index++;
-                } while (p2Index < parent2.getIndividual().size() && !elementSelected);
+                    if (!elementSelected)
+                        p2Index++;
 
-                offset++;
+                } while (p2Index < parent2.getIndividual().size() && !elementSelected);
 
                 // Se selecciona un índice nuevo cada vez que  se de una vuelta a este bucle. Se va ampliando
                 // si no se encuentra un buen punto. Se empieza en 5 y se va ampliando en cada iteración.
-                p2Index = getCrossIndex(parent2, offset, offset);
+                if (!elementSelected) {
+                    offset++;
+                    p2Index = getCrossIndex(parent2, offset, offset);
+                }
             }
         }
 
@@ -201,10 +199,18 @@ public class GeneticLevelGeneratorImproved {
         ArrayList<Integer> childGeneticElements = child.getGeneticElements();
         int childGeneticElementsSize = childGeneticElements.size();
 
-        for (int i=0; i<childGeneticElementsSize; i++) {
-            if (childGeneticElements.get(i) >= childIndex) {
-                child.deleteGeneticElement(i);
+        // Se empieza a sustituir por el siguiente elemento seleccionado, pues se sobreescribiría.
+        childIndex++;
+
+        int j=0;
+
+        while (j<childGeneticElementsSize) {
+            if (childGeneticElements.get(j) >= childIndex) {
+                child.deleteGeneticElement(j);
+                childGeneticElementsSize--;
             }
+            else
+                j++;
         }
 
         // Llegados a esta altura, tenemos dos índices a partir de los cuales se pueden combinar los dos individuos.
@@ -215,9 +221,11 @@ public class GeneticLevelGeneratorImproved {
         int childCurrentIndex = childIndex;
 
         // Se hace una copia de elementos desde el padre 2 al hijo.
-        for (int i=p2Index; i<maxCrossElements; i++) {
+        // Se copian tantos elementos como sea posible -> maxCrossElements.
+        for (int i=p2Index; i<p2Index+maxCrossElements; i++) {
 
             LevelElement currentChildElement = child.getElement(childCurrentIndex), currentP2Element = parent2.getElement(i);
+            LevelElement previousChildElement = child.getElement(childCurrentIndex-1);
 
             currentChildElement.setElementType(currentP2Element.getElementType());
             currentChildElement.setParam1(currentP2Element.getParam1());
@@ -228,6 +236,8 @@ public class GeneticLevelGeneratorImproved {
             if (currentChildElement.getElementType() == HILL){
                 child.addGeneticElement(childCurrentIndex);
             }
+
+            currentChildElement.setX(previousChildElement.getX()+currentChildElement.getParam1());
 
             childCurrentIndex++;
         }
@@ -255,11 +265,26 @@ public class GeneticLevelGeneratorImproved {
                 int random = levelSeedRandom.nextInt(100);
 
                 if (random < mutationProbability) {
-                    level.setElementParam(geneticElem, 2, levelSeedRandom.nextInt(5));                                  // Hacemos las mutaciones como en la inicializaci?n de la poblaci?n (5 y 4).
-                    level.setElementParam(geneticElem, 3, levelSeedRandom.nextInt(3)+1);
+
+                    // Intervalo en los que se van a mover los aleatorios generados en la mutación (0 - valor).
+                    int typesAllowed = 3, maxEnemies = 3;
+                    switch(initialDifficulty) {
+                        case 1:
+                            maxEnemies = 1;
+                            break;
+                        case 2:
+                            typesAllowed = 4;
+                            maxEnemies = 3;
+                            break;
+                        case 3:
+                            typesAllowed = 5;
+                            maxEnemies = 4;
+                            break;
+                    }
+                    level.setElementParam(geneticElem, 2, levelSeedRandom.nextInt(typesAllowed));
+                    level.setElementParam(geneticElem, 3, levelSeedRandom.nextInt(2) + maxEnemies);
                 }
             }
-
         }
     }
 
@@ -316,14 +341,14 @@ public class GeneticLevelGeneratorImproved {
         fitnessValues = new float [maxPopulation];
 
         // N?mero de iteraciones del proceso evolutivo. Debe ser menor que maxIterations.
-        int numIterations = 0;
+        int numIterations = 0, bestIteration = -1;
         int tournamentIterations = 0;
         int [] selectedParents = new int[2];
         Individual child = null;
         Object [] bestSolution = new Object[2];
 
         bestSolution[0] = new Float(9999);
-        bestSolution[1] = new Integer(0);
+        bestSolution[1] = new Float(0);
 
         // Inicializamos el generador con la semilla.
         levelSeedRandom.setSeed(seed);
@@ -373,6 +398,7 @@ public class GeneticLevelGeneratorImproved {
                 if (fitnessValues[i] < (float) bestSolution[0]) {
                     bestSolution[1] = i;
                     bestSolution[0] = fitnessValues[i];
+                    bestIteration = numIterations;
 
                     if (DEBUG) {
                         System.out.println("\n >> Mejor solución actualizada <<");
@@ -390,12 +416,12 @@ public class GeneticLevelGeneratorImproved {
 
             numIterations++;
             tournamentIterations = 0;
-        } while (numIterations < maxIterations);
+        } while ((numIterations < maxIterations) && ((float) bestSolution[0] != 0.0));
 
 
         if (DEBUG) {
             System.out.println("\n >> Valor fitness de la mejor solucion <<");
-            System.out.println("    - Nivel " + bestSolution[1] + " FITNESS = " + bestSolution[0]);
+            System.out.println("    - Nivel " + bestSolution[1] + " FITNESS = " + bestSolution[0] + " en la iteración " + bestIteration);
             System.out.println(" ** Fin valor fitness de la mejor solucion **");
         }
 
@@ -442,7 +468,7 @@ public class GeneticLevelGeneratorImproved {
                     individual.addGeneticElement(individualIndex);                                                      // Se añade un registro de qué elemento tiene enemigos.
 
                     float turtleEnemyProb = levelSeedRandom.nextFloat();
-                    int enemyType = levelSeedRandom.nextInt(4);
+                    int enemyType = levelSeedRandom.nextInt(3);
 
                     if (turtleEnemyProb <= 0.35)                                                                        // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
                         enemyType = Enemy.ENEMY_GREEN_KOOPA;
@@ -463,7 +489,7 @@ public class GeneticLevelGeneratorImproved {
                 gapGenerated = (element.getElementType() == GAP);
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width - 10)
+                if (accumulativeWidth >= width )
                     break;
             }
         }

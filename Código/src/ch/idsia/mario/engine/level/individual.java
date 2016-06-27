@@ -86,8 +86,6 @@ public class Individual {
             else
                 break;
         }
-        System.out.println(accumulate);
-        System.out.println((float) accumulate/totalElements);
 
         return ((float) accumulate/totalElements);
     }

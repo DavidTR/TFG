@@ -189,11 +189,13 @@ public class LevelGenerator
         int xCannon = xo + 1 + random.nextInt(4);
         for (int x = xo; x < xo + length; x++)
         {
-            if (x > xCannon)
+
+            if (x > xCannon && GeneticLevelGeneratorImproved.initialDifficulty > 2)
             {
                 xCannon += 2 + random.nextInt(4);
             }
-            if (xCannon == xo + length - 1) xCannon += 10;
+            if (xCannon == xo + length - 1 && GeneticLevelGeneratorImproved.initialDifficulty > 2) xCannon += 10;
+
             int cannonHeight = floor - random.nextInt(4) - 1;
 
             for (int y = 0; y < height; y++)
