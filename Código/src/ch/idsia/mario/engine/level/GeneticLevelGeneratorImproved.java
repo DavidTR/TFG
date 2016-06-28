@@ -19,14 +19,14 @@ public class GeneticLevelGeneratorImproved {
     // Poblaci?n: 50 individuos.
     private int maxPopulation = 50;                                  // Poblaci?n o n?mero de individuos.
     private int maxIterations = 500;                                 // N?mero m?ximo de iteraciones del proceso evolutivo.
-    public static final int PLATFORM=1;                                          // Se usa en initializePopulation.
+    public static final int PLATFORM=1;                              // Se usa en initializePopulation.
     public static final int CANNON=2;
     public static final int HILL=3;
     public static final int GAP=4;
     public static final int TUBE=5;
 
-    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50;
-    public static final int initialDifficulty = 1;
+    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 200;
+    public static final int initialDifficulty = 3;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
@@ -94,7 +94,18 @@ public class GeneticLevelGeneratorImproved {
             for (Integer geneticElem: level.getGeneticElements()) {
 
                 LevelElement elem = level.getElement(geneticElem);
-                accumulate += (elem.getParam2() + 1)*elem.getParam3();                                                  // Producto del tipo de enemigo por el n?mero de enemigos de este tipo en cada elemento gen?tico (por ahora Hills).
+
+                // Este parche ha de hacerse porque SPIKY es el enemigo más difícil del juego, pero
+                // si cambiamos de orden los índices que los representan (FLOWER = 3 y SPIKY = 4),
+                // el juego no renderiza bien el modelo de los enemigos -> Utiliza constantes :(.
+                int enemyDifficulty = elem.getParam2();
+
+                if (elem.getParam2() == Enemy.ENEMY_SPIKY)
+                    enemyDifficulty = 4;
+                else if (elem.getParam2() == Enemy.ENEMY_FLOWER)
+                    enemyDifficulty = 3;
+
+                accumulate += (enemyDifficulty + 1)*elem.getParam3();                                                   // Producto del tipo de enemigo por el n?mero de enemigos de este tipo en cada elemento gen?tico (por ahora Hills).
             }
 
             // La dificultad estructural suma más conforme m´s grande sea, ya que es una media.
@@ -274,11 +285,11 @@ public class GeneticLevelGeneratorImproved {
                             break;
                         case 2:
                             typesAllowed = 4;
-                            maxEnemies = 3;
+                            maxEnemies = 2;
                             break;
                         case 3:
                             typesAllowed = 5;
-                            maxEnemies = 4;
+                            maxEnemies = 3;
                             break;
                     }
                     level.setElementParam(geneticElem, 2, levelSeedRandom.nextInt(typesAllowed));
@@ -489,7 +500,7 @@ public class GeneticLevelGeneratorImproved {
                 gapGenerated = (element.getElementType() == GAP);
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width )
+                if (accumulativeWidth >= width -10)
                     break;
             }
         }
@@ -535,18 +546,18 @@ public class GeneticLevelGeneratorImproved {
 
                     if (enemyProb <= 0.15)
                         enemyType = Enemy.ENEMY_SPIKY;                                                                  // Se incluye el spiky con muy baja probabilidad
-                    else if (enemyProb <= 0.35)                                                                         // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
+                    else if (enemyProb > 0.15 && enemyProb <= 0.35)                                                     // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
                         enemyType = Enemy.ENEMY_GREEN_KOOPA;
 
                     element.setParam2(enemyType);                                                                       // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
-                    element.setParam3(levelSeedRandom.nextInt(2) + 3);                                                  // A?adimos el numero de enemigos, entre 1 y 3. Habrá más enemigos.
+                    element.setParam3(levelSeedRandom.nextInt(2) + 2);                                                  // A?adimos el numero de enemigos, entre 1 y 3. Habrá más enemigos.
                 } else                                                                                                  // Plataforma -> 30%
                     element.setElementType(PLATFORM);
 
 
                 // Resto de parámetros (X, Y), común para todos.
                 element.setX(accumulativeWidth);                                                                        // Posición horizontal inicial del bloque estructural
-                element.setY(levelSeedRandom.nextInt(2) + 11);                                                          // Posición vertical inicial del bloque estructural. Varía un poco más.
+                element.setY(levelSeedRandom.nextInt(3) + 10);                                                          // Posición vertical inicial del bloque estructural. Varía un poco más.
                 accumulativeWidth += element.getParam1();
 
                 individualIndex++;
@@ -602,13 +613,15 @@ public class GeneticLevelGeneratorImproved {
                         enemyType = Enemy.ENEMY_SPIKY;                                                                  // Se incluye el spiky con probabilidad más alta.
 
                     element.setParam2(enemyType);                                                                       // A?adimos el tipo del enemigo, entre 0 y 4 segun Enemy.java.
-                    element.setParam3(levelSeedRandom.nextInt(2) + 4);                                                  // A?adimos el numero de enemigos, entre 4 y 5. Habrá más enemigos.
-                } else {                                                                                                // Plataforma
+
+                    // Sólo cambia lo del spiky, de lo contrario sería muy jodido para el jugador.
+                    element.setParam3(levelSeedRandom.nextInt(2) + 2);                                                  // A?adimos el numero de enemigos, entre 4 y 5. Habrá más enemigos.
+                } else {                                                                                                // Plataforma -> 20%
                     element.setElementType(PLATFORM);
                 }
 
                 element.setX(accumulativeWidth);                                                                        // Posición horizontal inicial del bloque estructural
-                element.setY(levelSeedRandom.nextInt(3) + 8);                                                           // Posición vertical inicial del bloque estructural. Varía un poco más.
+                element.setY(levelSeedRandom.nextInt(4) + 10);                                                          // Posición vertical inicial del bloque estructural. Varía un poco más.
                 accumulativeWidth += element.getParam1();
 
                 individualIndex++;

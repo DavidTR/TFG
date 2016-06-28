@@ -233,6 +233,10 @@ public class LevelGenerator
         //int length = random.nextInt(10) + 10;
         if (length > maxLength) length = maxLength;
 
+        // Se selecciona un número aleatorio de enemigos para colocarlo en una posición de la colina, el
+        // resto se dibujará más adelante.
+        int randomEnemyNumber = random.nextInt(numberOfEnemies-1) + 1;
+
         int floor = elementHeight;
         for (int x = xo; x < xo + length; x++)
         {
@@ -245,7 +249,7 @@ public class LevelGenerator
             }
         }
 
-        addEnemyLine(xo + 1, xo + length - 1, floor - 1, geneticType, numberOfEnemies);
+        addEnemyLine(xo + 1, xo + length - 1, floor - 1, geneticType, randomEnemyNumber);
 
         int h = floor;
 
@@ -273,10 +277,8 @@ public class LevelGenerator
                 {
                     occupied[xxo - xo] = true;
                     occupied[xxo - xo + l] = true;
-                    if (geneticType == Enemy.ENEMY_SPIKY)
-                        addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfEnemies);
-                    else
-                        addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfEnemies);
+
+                    addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfEnemies - randomEnemyNumber);
                     if (random.nextInt(4) == 0)
                     {
                         decorate(xxo - 1, xxo + l + 1, h);
@@ -336,7 +338,7 @@ public class LevelGenerator
         int positionOffset = (int) Math.floor((x1 - x0)/numberOfEnemies);
 
         for (int x = 0; x < numberOfEnemies; x++) {
-            level.setSpriteTemplate(x0 + positionOffset, y, new SpriteTemplate(geneticType, false));
+            level.setSpriteTemplate(x0 + positionOffset + x, y, new SpriteTemplate(geneticType, false));
         }
     }
 
