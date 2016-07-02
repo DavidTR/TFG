@@ -25,8 +25,8 @@ public class GeneticLevelGeneratorImproved {
     public static final int GAP=4;
     public static final int TUBE=5;
 
-    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 200;
-    public static final int initialDifficulty = 3;
+    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 100;
+    public static final int initialDifficulty = 2;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
@@ -299,11 +299,8 @@ public class GeneticLevelGeneratorImproved {
         }
     }
 
-    /*
-        -> Se queda como está, ya que es elitista y el cruce es exploratorio.
-     */
-
-    // Reemplazamiento: Del hijo obtenido se reemplaza el peor nivel de la poblacion -> Nivel con mayor fitness (se distancia mas de lo que buscamos).
+    // Reemplazamiento: Del hijo obtenido se reemplaza el peor nivel de la poblacion ->
+    // Nivel con mayor fitness (se distancia mas de lo que buscamos).
     private void populationReplacement (Individual child, float [] fitnessValues) {
 
         // Obtenemos el indice del peor nivel de la poblacion.
@@ -351,7 +348,7 @@ public class GeneticLevelGeneratorImproved {
         // Array de valores fitness. Al declararlo as?, fitness values tendr? una direcci?n de memoria, haciendo que el paso de par?metros sea por referencia.
         fitnessValues = new float [maxPopulation];
 
-        // N?mero de iteraciones del proceso evolutivo. Debe ser menor que maxIterations.
+        // N?mero de iteraciones del proceso evolutivo.
         int numIterations = 0, bestIteration = -1;
         int tournamentIterations = 0;
         int [] selectedParents = new int[2];
@@ -364,7 +361,7 @@ public class GeneticLevelGeneratorImproved {
         // Inicializamos el generador con la semilla.
         levelSeedRandom.setSeed(seed);
 
-        // 1. Inicializaci?n de la poblaci?n: Aleatoriamente.
+        // 1. Inicializaci?n de la poblaci?n.
         initializePopulation();
 
         // 2. Evaluaci?n inicial de la poblaci?n.
@@ -436,10 +433,8 @@ public class GeneticLevelGeneratorImproved {
             System.out.println(" ** Fin valor fitness de la mejor solucion **");
         }
 
-
         return phenotype.get((int) bestSolution[1]);
     }
-
 
     /* Nivel de dificultad fácil:
         - Longitudes de elementos aumentadas (PARAM1).
@@ -485,7 +480,7 @@ public class GeneticLevelGeneratorImproved {
                         enemyType = Enemy.ENEMY_GREEN_KOOPA;
 
                     element.setParam2(enemyType);                                                                       // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
-                    element.setParam3(levelSeedRandom.nextInt(2) + 1);                                                  // A?adimos el numero de enemigos, entre 1 y 2.
+                    element.setParam3(levelSeedRandom.nextInt(2) + 1);                                                  // A?adimos el numero de enemigos, entre 2 y 3.
 
                 } else                                                                                                  // Plataforma -> 35%
                     element.setElementType(PLATFORM);
@@ -500,7 +495,7 @@ public class GeneticLevelGeneratorImproved {
                 gapGenerated = (element.getElementType() == GAP);
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width -10)
+                if (accumulativeWidth >= width - 20)
                     break;
             }
         }
@@ -544,13 +539,13 @@ public class GeneticLevelGeneratorImproved {
                     float enemyProb = levelSeedRandom.nextFloat();
                     int enemyType = levelSeedRandom.nextInt(4);
 
-                    if (enemyProb <= 0.15)
+                    if (enemyProb <= 0.10)
                         enemyType = Enemy.ENEMY_SPIKY;                                                                  // Se incluye el spiky con muy baja probabilidad
-                    else if (enemyProb > 0.15 && enemyProb <= 0.35)                                                     // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
+                    else if (enemyProb > 0.10 && enemyProb <= 0.35)                                                     // El KOOPA verde (más fácil que el rojo) tiene más posibilidades de aparecer.
                         enemyType = Enemy.ENEMY_GREEN_KOOPA;
 
                     element.setParam2(enemyType);                                                                       // A?adimos el tipo del enemigo, entre 0 y 3 segun Enemy.java. NO SE INCLUYE SPINY
-                    element.setParam3(levelSeedRandom.nextInt(2) + 2);                                                  // A?adimos el numero de enemigos, entre 1 y 3. Habrá más enemigos.
+                    element.setParam3(levelSeedRandom.nextInt(2) + 2);                                                  // A?adimos el numero de enemigos, entre 2 y 3. Habrá más enemigos.
                 } else                                                                                                  // Plataforma -> 30%
                     element.setElementType(PLATFORM);
 
@@ -565,7 +560,7 @@ public class GeneticLevelGeneratorImproved {
                 gapGenerated = (element.getElementType() == GAP);
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width - 10)
+                if (accumulativeWidth >= width - 20)
                     break;
             }
         }
@@ -629,7 +624,7 @@ public class GeneticLevelGeneratorImproved {
                 gapGenerated = (element.getElementType() == GAP);
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width - 10)
+                if (accumulativeWidth >= width - 20)
                     break;
             }
         }

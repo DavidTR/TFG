@@ -235,7 +235,7 @@ public class LevelGenerator
 
         // Se selecciona un número aleatorio de enemigos para colocarlo en una posición de la colina, el
         // resto se dibujará más adelante.
-        int randomEnemyNumber = random.nextInt(numberOfEnemies-1) + 1;
+        int randomEnemyNumber = numberOfEnemies > 1 ? random.nextInt(numberOfEnemies-1) + 1 : numberOfEnemies;
 
         int floor = elementHeight;
         for (int x = xo; x < xo + length; x++)
@@ -278,7 +278,9 @@ public class LevelGenerator
                     occupied[xxo - xo] = true;
                     occupied[xxo - xo + l] = true;
 
-                    addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfEnemies - randomEnemyNumber);
+                    if (numberOfEnemies > 1)
+                        addEnemyLine(xxo, xxo + l, h - 1, geneticType, numberOfEnemies - randomEnemyNumber);
+
                     if (random.nextInt(4) == 0)
                     {
                         decorate(xxo - 1, xxo + l + 1, h);
