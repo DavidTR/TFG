@@ -81,6 +81,13 @@ public class Individual {
 
             if (element.getElementType() != -1) {
                 accumulate += element.getElementType();
+
+                if (element.getElementType() == GeneticLevelGeneratorImproved.GAP)
+                    if (element.getParam1() < 4)
+                        accumulate += element.getParam1();
+                    else
+                        accumulate += element.getParam1()*2;
+
                 totalElements++;
             }
             else

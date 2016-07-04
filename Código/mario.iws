@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="18c7a3a9-1b9b-4beb-b827-f1b57693b9d1" name="Default" comment="CompetitionScore">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/LevelGenerator.class" afterPath="$PROJECT_DIR$/classes/ch/idsia/mario/engine/level/LevelGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.~lock.Memoria_final.odt#" afterPath="$PROJECT_DIR$/../.~lock.Memoria_final.odt#" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mario.iws" afterPath="$PROJECT_DIR$/mario.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java" afterPath="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java" />
     </list>
     <ignored path="mario.iws" />
@@ -90,7 +87,43 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="272" column="23" selection-start-line="272" selection-start-column="23" selection-end-line="272" selection-end-column="23" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1157#1158#0" expanded="false" />
+                <element signature="e#1201#1202#0" expanded="false" />
+                <element signature="e#2755#2756#0" expanded="false" />
+                <element signature="e#2786#2787#0" expanded="false" />
+                <element signature="e#9903#9904#0" expanded="false" />
+                <element signature="e#9933#9934#0" expanded="false" />
+                <element signature="e#9979#9980#0" expanded="false" />
+                <element signature="e#10010#10011#0" expanded="false" />
+                <element signature="e#11876#11877#0" expanded="false" />
+                <element signature="e#11931#11932#0" expanded="false" />
+                <element signature="e#11966#11967#0" expanded="false" />
+                <element signature="e#12026#12027#0" expanded="false" />
+                <element signature="e#12062#12063#0" expanded="false" />
+                <element signature="e#12119#12120#0" expanded="false" />
+                <element signature="e#12155#12156#0" expanded="false" />
+                <element signature="e#12212#12213#0" expanded="false" />
+                <element signature="e#12859#12860#0" expanded="false" />
+                <element signature="e#12900#12901#0" expanded="false" />
+                <element signature="e#12937#12938#0" expanded="false" />
+                <element signature="e#12975#12976#0" expanded="false" />
+                <element signature="e#13400#13401#0" expanded="false" />
+                <element signature="e#13456#13457#0" expanded="false" />
+                <element signature="e#13501#13502#0" expanded="false" />
+                <element signature="e#13543#13544#0" expanded="false" />
+                <element signature="e#13598#13599#0" expanded="false" />
+                <element signature="e#13648#13649#0" expanded="false" />
+                <element signature="e#13699#13700#0" expanded="false" />
+                <element signature="e#13745#13746#0" expanded="false" />
+                <element signature="e#13790#13791#0" expanded="false" />
+                <element signature="e#13852#13853#0" expanded="false" />
+                <element signature="e#14063#14064#0" expanded="false" />
+                <element signature="e#14101#14102#0" expanded="false" />
+                <element signature="e#14145#14146#0" expanded="false" />
+                <element signature="e#14189#14190#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -157,15 +190,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GeneticLevelGeneratorImproved.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GeneticLevelGeneratorImproved.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="91" selection-start-line="27" selection-start-column="91" selection-end-line="27" selection-end-column="91" />
+            <state vertical-scroll-proportion="-20.685982">
+              <caret line="27" column="94" selection-start-line="27" selection-start-column="94" selection-end-line="27" selection-end-column="94" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#initializePopulation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
-                <element signature="method#evaluate#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
                 <element signature="method#mutation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
                 <element signature="method#populationReplacement#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
               </folding>
@@ -173,14 +205,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Individual.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Individual.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Individual.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.548048">
-              <caret line="81" column="49" selection-start-line="81" selection-start-column="49" selection-end-line="81" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
               <folding>
-                <element signature="e#1299#1300#0" expanded="true" />
-                <element signature="e#1346#1347#0" expanded="true" />
                 <element signature="method#setElementParam#0;class#Individual#0" expanded="false" />
               </folding>
             </state>
@@ -239,9 +269,9 @@
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelElement.java" />
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGenerator.java" />
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGeneratorOLD.java" />
-        <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Individual.java" />
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/sprites/Enemy.java" />
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java" />
+        <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Individual.java" />
         <option value="$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java" />
       </list>
     </option>
@@ -582,9 +612,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -715,6 +742,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1134,7 +1164,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.49754903" order="7" side_tool="false" content_ui="tabs" />
@@ -1151,7 +1181,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19969743" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36954087" sideWeight="0.49511003" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36954087" sideWeight="0.49511003" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1217,7 +1247,7 @@
           <option name="timeStamp" value="175" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="200" />
+      <option name="time" value="202" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1516,7 +1546,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1536,16 +1565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-          <folding>
-            <element signature="method#buildJump#0;class#LevelGenerator#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/LevelScene.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1558,7 +1577,43 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="272" column="23" selection-start-line="272" selection-start-column="23" selection-end-line="272" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1157#1158#0" expanded="false" />
+            <element signature="e#1201#1202#0" expanded="false" />
+            <element signature="e#2755#2756#0" expanded="false" />
+            <element signature="e#2786#2787#0" expanded="false" />
+            <element signature="e#9903#9904#0" expanded="false" />
+            <element signature="e#9933#9934#0" expanded="false" />
+            <element signature="e#9979#9980#0" expanded="false" />
+            <element signature="e#10010#10011#0" expanded="false" />
+            <element signature="e#11876#11877#0" expanded="false" />
+            <element signature="e#11931#11932#0" expanded="false" />
+            <element signature="e#11966#11967#0" expanded="false" />
+            <element signature="e#12026#12027#0" expanded="false" />
+            <element signature="e#12062#12063#0" expanded="false" />
+            <element signature="e#12119#12120#0" expanded="false" />
+            <element signature="e#12155#12156#0" expanded="false" />
+            <element signature="e#12212#12213#0" expanded="false" />
+            <element signature="e#12859#12860#0" expanded="false" />
+            <element signature="e#12900#12901#0" expanded="false" />
+            <element signature="e#12937#12938#0" expanded="false" />
+            <element signature="e#12975#12976#0" expanded="false" />
+            <element signature="e#13400#13401#0" expanded="false" />
+            <element signature="e#13456#13457#0" expanded="false" />
+            <element signature="e#13501#13502#0" expanded="false" />
+            <element signature="e#13543#13544#0" expanded="false" />
+            <element signature="e#13598#13599#0" expanded="false" />
+            <element signature="e#13648#13649#0" expanded="false" />
+            <element signature="e#13699#13700#0" expanded="false" />
+            <element signature="e#13745#13746#0" expanded="false" />
+            <element signature="e#13790#13791#0" expanded="false" />
+            <element signature="e#13852#13853#0" expanded="false" />
+            <element signature="e#14063#14064#0" expanded="false" />
+            <element signature="e#14101#14102#0" expanded="false" />
+            <element signature="e#14145#14146#0" expanded="false" />
+            <element signature="e#14189#14190#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1626,28 +1681,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java">
+    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/LevelGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="91" selection-start-line="27" selection-start-column="91" selection-end-line="27" selection-end-column="91" />
+          <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#initializePopulation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
-            <element signature="method#evaluate#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
-            <element signature="method#mutation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
-            <element signature="method#populationReplacement#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
+            <element signature="method#buildJump#0;class#LevelGenerator#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/Individual.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.548048">
-          <caret line="81" column="49" selection-start-line="81" selection-start-column="49" selection-end-line="81" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
-            <element signature="e#1299#1300#0" expanded="true" />
-            <element signature="e#1346#1347#0" expanded="true" />
             <element signature="method#setElementParam#0;class#Individual#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ch/idsia/mario/engine/level/GeneticLevelGeneratorImproved.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.685982">
+          <caret line="27" column="94" selection-start-line="27" selection-start-column="94" selection-end-line="27" selection-end-column="94" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initializePopulation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
+            <element signature="method#mutation#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
+            <element signature="method#populationReplacement#0;class#GeneticLevelGeneratorImproved#0" expanded="false" />
           </folding>
         </state>
       </provider>
