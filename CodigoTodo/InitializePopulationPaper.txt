@@ -1,0 +1,110 @@
+// Método de inicialización de la población del paper Shaker2012. Para el genético básico esto no sirve.
+
+ private void initializePopulation () {
+
+        int wg, h, w, wc, wbefore, wafter;
+
+        // Para cada elemento del fenotipo.
+        for (individual individuo : phenotype) {
+
+            int accumulativeWidth = 0;                                              // Contendrá el ancho del nivel según se vayan añadiendo elementos al mismo.
+                                                                                    // Se deja un poco de espacio extra para no salirnos del array del nivel.
+            boolean legalElement = true;                                            // Controla cuándo vamos a necesitar usar una plataforma explícitamente.
+
+            for (levelElement element : individuo.getIndividual()) {
+
+                // Para cada posible elemento, generamos aleatoriamente si el anterior elemento generado lo permite. Si no es así, generamos una plataforma directamente.
+                if (legalElement) {
+                    element.setElementType(levelSeedRandom.nextInt(12) + 1);           // levelElement -> Generamos un aleatorio entre 1 y 12.
+                    //element.setX(levelSeedRandom.nextInt(91) + 5);                     // x -> Generamos un aleatorio entre 5 y 95.
+                    element.setX(accumulativeWidth);                                   // Creo que es necesario garantizar la linealidad y continuidad del nivel.
+                    element.setY(levelSeedRandom.nextInt(3) + 3);                      // y -> Generamos un aleatorio entre 3 y 5.
+                }
+                else {
+                    element.setElementType(2);                                         // Generamos directamente plataforma.
+                    element.setX(accumulativeWidth);                                   // Asignamos x e y que sean seguras para que el nivel sea finalizable.
+                    element.setY(1);
+                }
+
+                // Rellenamos los cromosomas de cada individuo de la población de forma aleatoria.
+                // Diferenciamos casos según el tipo de elemento generado.
+                switch (element.getElementType()) {
+                    case 1:
+                        // gap.
+                        wg = levelSeedRandom.nextInt(3) + 1;                           // wg -> Generamos un aleatorio entre 1 y 3.
+                        wbefore = levelSeedRandom.nextInt(4) + 1;                      // wbefore -> Generamos un aleatorio entre 1 y 4.
+                        wafter = levelSeedRandom.nextInt(4) + 1;                       // wafter -> Generamos un aleatorio entre 1 y 4.
+
+                        // Rellenamos el cromosoma con los genes obtenidos.
+                        element.setParam1(wg);
+                        element.setParam2(wbefore);
+                        element.setParam3(wafter);
+
+                        legalElement = false;
+
+                        break;
+                    case 2:
+                    case 3:
+                        // platform y hill.
+                        w = levelSeedRandom.nextInt(8) + 1;                              // w -> Generamos un aleatorio entre 1 y 8.
+
+                        element.setParam1(w);
+
+                        legalElement = true;
+
+                        break;
+                    case 4:
+                    case 5:
+                    case 7:
+                    case 8:
+                        // cannon_hill, tube_hill, cannon y tube.
+                        // Todos estos elementos (ver gramática en el folio) tienen 5 parámetros (x, y, h ó wg, wbefore, wafter).
+                        // La gramática no especifica los valores que toman h, w, wg y demás, deberemos ir probando.
+                        h = levelSeedRandom.nextInt(5) + 1;                            // h -> Generamos un aleatorio entre 1 y 5.
+
+                        wbefore = levelSeedRandom.nextInt(4) + 1;                      // wbefore -> Generamos un aleatorio entre 1 y 4.
+                        wafter = levelSeedRandom.nextInt(4) + 1;                       // wafter -> Generamos un aleatorio entre 1 y 4.
+
+                        // Rellenamos el cromosoma con los genes obtenidos.
+                        element.setParam1(h);
+                        element.setParam2(wbefore);
+                        element.setParam3(wafter);
+
+                        legalElement = true;
+
+                        break;
+                    case 6:
+                        // coin.
+                        wc = levelSeedRandom.nextInt(4) + 1;                           // wc -> Generamos un aleatorio entre 1 y 4.
+
+                        element.setParam1(wc);
+
+                        legalElement = true;
+
+                        break;
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                        // Cajas: block_coin, block_powerup, rock_coin, rock_empty.
+                        // Como no llevan parámetros, lo único que necesitan ya se introduce en la primera comprobación.
+
+                        legalElement = true;
+
+                        break;
+
+
+
+                } // switch
+
+                accumulativeWidth += element.getX();
+
+                // Si ya hemos rellenado todo el nivel de elementos, buscamos hacer lo mismo con el siguiente -> Salimos al bucle exterior.
+                if (accumulativeWidth >= width-64)
+                    break;
+            } // for element
+        } // for individual
+
+        // --> ¿Incluir aquí la plataforma del final de nivel? <--
+        // Lo de los goompas y koopas creo que hay que añadirlos en las plataformas directamente. En la gramática aparece como un proceso separado.
+    }
