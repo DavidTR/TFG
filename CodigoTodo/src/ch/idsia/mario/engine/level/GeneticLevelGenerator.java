@@ -32,7 +32,7 @@ public class GeneticLevelGenerator {
     private static final int KOOPA=13;
     private static final int GOOMPA=14;
 
-    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50;
+    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 10;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
@@ -229,7 +229,7 @@ public class GeneticLevelGenerator {
         fitnessValues = new float [maxPopulation];
 
         // N?mero de iteraciones del proceso evolutivo. Debe ser menor que maxIterations.
-        int numIterations = 0;
+        int numIterations = 0,  bestIteration = -1;
         int tournamentIterations = 0;
         int [] selectedParents = new int[2];
         Individual child = null;
@@ -286,6 +286,7 @@ public class GeneticLevelGenerator {
                 if (fitnessValues[i] < (float) bestSolution[0]) {
                     bestSolution[1] = i;
                     bestSolution[0] = fitnessValues[i];
+                    bestIteration = numIterations;
 
                     if (DEBUG) {
                         System.out.println("\n >> Mejor solución actualizada <<");
@@ -303,12 +304,12 @@ public class GeneticLevelGenerator {
 
             numIterations++;
             tournamentIterations = 0;
-        } while (numIterations < maxIterations);
+        } while (numIterations < maxIterations && ((float) bestSolution[0] != 0.0));
 
 
         if (DEBUG) {
             System.out.println("\n >> Valor fitness de la mejor solucion <<");
-            System.out.println("    - Nivel " + bestSolution[1] + " FITNESS = " + bestSolution[0]);
+            System.out.println("    - Nivel " + bestSolution[1] + " FITNESS = " + bestSolution[0] + " en la iteración " + bestIteration);
             System.out.println(" ** Fin valor fitness de la mejor solucion **");
         }
 

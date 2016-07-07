@@ -25,7 +25,7 @@ public class GeneticLevelGeneratorSecondSolution {
     public static final int TUBE=5;
 
     private final int crossProbability = 30, mutationProbability = 10;
-    public static final int initialDifficulty = 1, desiredDifficulty = 10;
+    public static final int initialDifficulty = 3, desiredDifficulty = 200;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
