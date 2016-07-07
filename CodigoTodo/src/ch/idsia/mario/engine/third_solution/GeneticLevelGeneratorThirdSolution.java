@@ -26,7 +26,7 @@ public class GeneticLevelGeneratorThirdSolution {
     public static final int GAP=4;
     public static final int TUBE=5;
 
-    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 150;
+    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 15;
     public static final int initialDifficulty = 1;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
@@ -502,7 +502,6 @@ public class GeneticLevelGeneratorThirdSolution {
                 while (!insertedElement) {
 
                     float levelElement = levelSeedRandom.nextFloat();
-                    //float levelElement = (float) 0.25;
 
                     // Anchura básica
                     element.setParam1(levelSeedRandom.nextInt(2) + 10);                                                 // Ancho del elemento.
@@ -590,7 +589,7 @@ public class GeneticLevelGeneratorThirdSolution {
                 }
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width - 20)
+                if (accumulativeWidth >= width - 60)
                     break;
             }
         }
@@ -716,7 +715,7 @@ public class GeneticLevelGeneratorThirdSolution {
                 }
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width - 20)
+                if (accumulativeWidth >= width - 60)
                     break;
             }
         }

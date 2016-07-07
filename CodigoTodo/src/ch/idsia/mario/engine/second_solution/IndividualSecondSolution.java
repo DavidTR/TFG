@@ -23,7 +23,7 @@ public class IndividualSecondSolution {
         this.individual = new ArrayList<LevelElementSecondSolution>(ind.getIndividual());
     }
 
-    public ArrayList<LevelElementSecondSolution> getIndividual () {
+    ArrayList<LevelElementSecondSolution> getIndividual () {
         return individual;
     }
 

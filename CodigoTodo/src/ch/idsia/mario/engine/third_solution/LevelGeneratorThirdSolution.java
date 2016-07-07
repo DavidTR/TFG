@@ -80,7 +80,7 @@ public class LevelGeneratorThirdSolution
             length += buildZoneGen(element, level.width - length);
         }
 
-        level.width = geneticLevel.getLevelWidth();
+        //level.width = geneticLevel.getLevelWidth()+100;
 
         int floor = height - 1 - random.nextInt(4);
 

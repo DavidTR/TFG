@@ -24,8 +24,8 @@ public class GeneticLevelGeneratorSecondSolution {
     public static final int GAP=4;
     public static final int TUBE=5;
 
-    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 100;
-    public static final int initialDifficulty = 2;
+    private final int crossProbability = 30, mutationProbability = 10;
+    public static final int initialDifficulty = 1, desiredDifficulty = 10;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
@@ -494,7 +494,7 @@ public class GeneticLevelGeneratorSecondSolution {
                 gapGenerated = (element.getElementType() == GAP);
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width - 20)
+                if (accumulativeWidth >= width - 60)
                     break;
             }
         }
