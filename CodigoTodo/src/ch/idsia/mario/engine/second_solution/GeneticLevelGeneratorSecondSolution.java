@@ -97,14 +97,14 @@ public class GeneticLevelGeneratorSecondSolution {
                 // Este parche ha de hacerse porque SPIKY es el enemigo más difícil del juego, pero
                 // si cambiamos de orden los índices que los representan (FLOWER = 3 y SPIKY = 4),
                 // el juego no renderiza bien el modelo de los enemigos -> Utiliza constantes :(.
-                int enemyDifficulty = elem.getParam2();
+                int enemyType = elem.getParam2();
 
-                if (elem.getParam2() == Enemy.ENEMY_SPIKY)
-                    enemyDifficulty = 4;
-                else if (elem.getParam2() == Enemy.ENEMY_FLOWER)
-                    enemyDifficulty = 3;
+                if (enemyType == Enemy.ENEMY_SPIKY)
+                    enemyType = 4;
+                else if (enemyType == Enemy.ENEMY_FLOWER)
+                    enemyType = 3;
 
-                accumulate += (enemyDifficulty + 1)*elem.getParam3();                                                   // Producto del tipo de enemigo por el n?mero de enemigos de este tipo en cada elemento gen?tico (por ahora Hills).
+                accumulate += (enemyType + 1)*elem.getParam3();                                                   // Producto del tipo de enemigo por el n?mero de enemigos de este tipo en cada elemento gen?tico (por ahora Hills).
             }
 
             // La dificultad estructural suma más conforme m´s grande sea, ya que es una media.
@@ -200,7 +200,7 @@ public class GeneticLevelGeneratorSecondSolution {
                 // si no se encuentra un buen punto. Se empieza en 5 y se va ampliando en cada iteración.
                 if (!elementSelected) {
                     offset++;
-                    p2Index = getCrossIndex(parent2, offset, offset);
+                    p2Index = getCrossIndex(parent2, offset, 0);
                 }
             }
         }
@@ -247,7 +247,8 @@ public class GeneticLevelGeneratorSecondSolution {
                 child.addGeneticElement(childCurrentIndex);
             }
 
-            currentChildElement.setX(previousChildElement.getX()+currentChildElement.getParam1());
+            //currentChildElement.setX(previousChildElement.getX()+currentChildElement.getParam1());
+            currentChildElement.setX(previousChildElement.getX()+previousChildElement.getParam1());
 
             childCurrentIndex++;
         }

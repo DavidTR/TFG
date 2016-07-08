@@ -1,5 +1,7 @@
 package ch.idsia.mario.engine.level;
 
+import ch.idsia.mario.engine.sprites.Enemy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -114,7 +116,14 @@ public class GeneticLevelGenerator {
             for (Integer geneticElem: level.getGeneticElements()) {
 
                 LevelElement elem = level.getElement(geneticElem);
-                accumulate += (elem.getParam2() + 1)*elem.getParam3();                                                  // Producto del tipo de enemigo por el n�mero de enemigos de este tipo en cada elemento gen�tico (por ahora Hills).
+                int enemyType = elem.getParam2();
+
+                if (enemyType == Enemy.ENEMY_SPIKY)
+                    enemyType = 4;
+                else if (enemyType == Enemy.ENEMY_FLOWER)
+                    enemyType = 3;
+
+                accumulate += (enemyType + 1)*elem.getParam3();                                                         // Producto del tipo de enemigo por el n�mero de enemigos de este tipo en cada elemento gen�tico (por ahora Hills).
             }
 
             fitnessValues[phenotype.indexOf(level)] = Math.abs(accumulate - desiredDifficulty);                         // �Cuanto se acerca la dificultad del nivel a lo que buscamos?

@@ -26,7 +26,7 @@ public class GeneticLevelGeneratorThirdSolution {
     public static final int GAP=4;
     public static final int TUBE=5;
 
-    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 15;
+    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50;
     public static final int initialDifficulty = 1;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
@@ -99,14 +99,15 @@ public class GeneticLevelGeneratorThirdSolution {
                 // Este parche ha de hacerse porque SPIKY es el enemigo más difícil del juego, pero
                 // si cambiamos de orden los índices que los representan (FLOWER = 3 y SPIKY = 4),
                 // el juego no renderiza bien el modelo de los enemigos -> Utiliza constantes :(.
-                int enemyDifficulty = elem.getParam2();
+                int enemyType = elem.getParam2();
 
-                if (elem.getParam2() == Enemy.ENEMY_SPIKY)
-                    enemyDifficulty = 4;
-                else if (elem.getParam2() == Enemy.ENEMY_FLOWER)
-                    enemyDifficulty = 3;
+                if (enemyType == Enemy.ENEMY_SPIKY)
+                    enemyType = 4;
+                else if (enemyType == Enemy.ENEMY_FLOWER)
+                    enemyType = 3;
 
-                accumulate += (enemyDifficulty + 1)*elem.getParam3();                                                   // Producto del tipo de enemigo por el n?mero de enemigos de este tipo en cada elemento gen?tico (por ahora Hills).
+                accumulate += (enemyType + 1)*elem.getParam3();                                                         // Producto del tipo de enemigo por el n?mero de enemigos de este tipo en cada elemento gen?tico (por ahora Hills).
+
             }
 
             // La dificultad estructural suma más conforme m´s grande sea, ya que es una media.
@@ -283,7 +284,8 @@ public class GeneticLevelGeneratorThirdSolution {
                 child.addGeneticElement(childCurrentIndex);
             }
 
-            currentChildElement.setX(previousChildElement.getX()+currentChildElement.getParam1());
+            //currentChildElement.setX(previousChildElement.getX()+currentChildElement.getParam1());
+            currentChildElement.setX(previousChildElement.getX()+previousChildElement.getParam1());
 
             childCurrentIndex++;
         }
@@ -479,9 +481,6 @@ public class GeneticLevelGeneratorThirdSolution {
     */
     private void initializePopulationEasy() {
 
-        // La anchura del nivel se reduce.
-        width -= width/3;
-
         // Comprobar que no se genern más de dos elementos estructurales seguidos.
         // El array cuenta el número de elementos seguidos de cada tipo generados.
         // Se comprueba que no se superen 2 elementos seguidos.
@@ -589,7 +588,7 @@ public class GeneticLevelGeneratorThirdSolution {
                 }
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width - 60)
+                if (accumulativeWidth >= width - 80)
                     break;
             }
         }
@@ -604,9 +603,6 @@ public class GeneticLevelGeneratorThirdSolution {
     - Menor variación vertical del nivel.
     */
     private void initializePopulationMedium() {
-
-        // La anchura del nivel se reduce (un poco menos).
-        width -= width/3;
 
         // Comprobar que no se genern más de dos elementos estructurales seguidos.
         // El array cuenta el número de elementos seguidos de cada tipo generados.
@@ -732,9 +728,6 @@ public class GeneticLevelGeneratorThirdSolution {
     */
     private void initializePopulationHard() {
 
-        // La anchura del nivel se reduce.
-        width -= width/3;
-
         // Comprobar que no se genern más de dos elementos estructurales seguidos.
         // El array cuenta el número de elementos seguidos de cada tipo generados.
         // Se comprueba que no se superen 2 elementos seguidos.
@@ -837,7 +830,7 @@ public class GeneticLevelGeneratorThirdSolution {
                 }
 
                 // Un nivel tendra 30 elementos o menos si la longitud del nivel supera el maximo impuesto (width).
-                if (accumulativeWidth >= width - 20)
+                if (accumulativeWidth >= width - 60)
                     break;
             }
         }
