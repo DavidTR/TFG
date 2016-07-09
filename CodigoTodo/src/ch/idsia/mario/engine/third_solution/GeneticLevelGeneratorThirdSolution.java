@@ -13,7 +13,7 @@ import ch.idsia.mario.engine.sprites.Enemy;
 public class GeneticLevelGeneratorThirdSolution {
 
     // Variable que define si se estan haciendo pruebas o no. Se hace public para que sea lo mas parecido a una variable global.
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     // Implementaci?n GEN?TICA.s
 
