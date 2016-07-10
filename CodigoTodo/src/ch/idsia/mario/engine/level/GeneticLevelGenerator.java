@@ -34,7 +34,7 @@ public class GeneticLevelGenerator {
     private static final int KOOPA=13;
     private static final int GOOMPA=14;
 
-    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 10;
+    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 100;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 

@@ -11,7 +11,7 @@ import ch.idsia.mario.engine.second_solution.LevelElementSecondSolution;
 public class GeneticLevelGeneratorSecondSolution {
 
     // Variable que define si se estan haciendo pruebas o no. Se hace public para que sea lo mas parecido a una variable global.
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     // Implementaci?n GEN?TICA.s
 
@@ -344,6 +344,8 @@ public class GeneticLevelGeneratorSecondSolution {
 
     // Funci?n de generaci?n de nivel GEN?TICO.
     public IndividualSecondSolution createLevelGenSecondSolution (long seed) {
+        // Evaluacion del tiempo de ejecucion.
+        long lStartTime = System.nanoTime();
 
         // Array de valores fitness. Al declararlo as?, fitness values tendr? una direcci?n de memoria, haciendo que el paso de par?metros sea por referencia.
         fitnessValues = new float [maxPopulation];
@@ -425,6 +427,12 @@ public class GeneticLevelGeneratorSecondSolution {
             numIterations++;
             tournamentIterations = 0;
         } while ((numIterations < maxIterations) && ((float) bestSolution[0] != 0.0));
+        long lEndTime = System.nanoTime();
+        long executionTime =  (lEndTime-lStartTime)/1000000;
+
+        System.out.println("Tiempo de ejecucion: " + executionTime);
+
+        System.out.println("    - Nivel " + bestSolution[1] + " FITNESS = " + bestSolution[0] + " en la iteracion " + bestIteration);
 
 
         if (DEBUG) {

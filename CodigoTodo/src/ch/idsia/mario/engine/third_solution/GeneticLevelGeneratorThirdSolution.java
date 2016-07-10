@@ -26,8 +26,8 @@ public class GeneticLevelGeneratorThirdSolution {
     public static final int GAP=4;
     public static final int TUBE=5;
 
-    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 50;
-    public static final int initialDifficulty = 1;
+    private final int crossProbability = 30, mutationProbability = 10, desiredDifficulty = 225;
+    public static final int initialDifficulty = 3;
     private final int mutationNumLevels = (int) (0.1 * maxPopulation);
     private float [] fitnessValues;
 
@@ -376,7 +376,8 @@ public class GeneticLevelGeneratorThirdSolution {
         }
 
     }
-
+    // Evaluacion del tiempo de ejecucion.
+    long lStartTime = System.nanoTime();
     // Funci?n de generaci?n de nivel GEN?TICO.
     IndividualThirdSolution createLevelGenThirdSolution (long seed) {
 
@@ -460,6 +461,13 @@ public class GeneticLevelGeneratorThirdSolution {
             numIterations++;
             tournamentIterations = 0;
         } while ((numIterations < maxIterations) && ((float) bestSolution[0] != 0.0));
+        long lEndTime = System.nanoTime();
+        long executionTime =  (lEndTime-lStartTime)/1000000;
+
+        System.out.println("Tiempo de ejecucion: " + executionTime);
+
+        System.out.println("    - Nivel " + bestSolution[1] + " FITNESS = " + bestSolution[0] + " en la iteracion " + bestIteration);
+
 
 
         if (DEBUG) {
