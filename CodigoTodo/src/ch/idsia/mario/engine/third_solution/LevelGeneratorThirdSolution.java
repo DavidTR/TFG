@@ -82,14 +82,13 @@ public class LevelGeneratorThirdSolution
 
         //level.width = geneticLevel.getLevelWidth()+100;
 
-        //int floor = height - 1 - random.nextInt(4);
-        int floor = 2;
+        int floor = height - 1 - random.nextInt(4);
 
-        level.xExit = length;
+        level.xExit = length + 8;
         level.yExit = floor;
-/*
+
         // Cierra el nivel con un muro
-        for (int x = length; x < level.width; x++)
+        for (int x = length + 12; x < level.width; x++)
         {
             for (int y = 0; y < height; y++)
             {
@@ -120,7 +119,7 @@ public class LevelGeneratorThirdSolution
                 }
             }
         }
-*/
+
         fixWalls();
 
         return level;
