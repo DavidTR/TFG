@@ -73,7 +73,7 @@ public class Individual {
         individual.set(position, elem);
     }
 
-    int getStructuralDifficulty() {
+    float getStructuralDifficulty() {
 
         int accumulate = 0, totalElements = 0;
 
@@ -81,13 +81,20 @@ public class Individual {
 
             if (element.getElementType() != -1) {
                 accumulate += element.getElementType();
+
+                if (element.getElementType() == GeneticLevelGeneratorImproved.GAP)
+                    if (element.getParam1() < 4)
+                        accumulate += element.getParam1();
+                    else
+                        accumulate += element.getParam1()*2;
+
                 totalElements++;
             }
             else
                 break;
         }
 
-        return accumulate/totalElements;
+        return ((float) accumulate/totalElements);
     }
 }
 
