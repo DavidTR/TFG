@@ -24,7 +24,7 @@ public class LevelGeneratorSecondSolution
         return levelGenerator.createLevel(seed, difficulty, type);
     }
 
-    // Implementaci�n ORIGINAL.
+    // Implementacion ORIGINAL.
     private int width;
     private int height;
     Level level = new Level(width, height);
@@ -47,10 +47,9 @@ public class LevelGeneratorSecondSolution
         this.height = height;
     }
 
-    // Funci�n de generaci�n de nivel ORIGINAL.
     private Level createLevel(long seed, int difficulty, int type)
     {
-        // Se fijan el tipo, dificultad y posibilidades iniciales seg�n �sta �ltima.
+        // Se fijan el tipo, dificultad y posibilidades iniciales segun esta ultima.
         this.type = type;
         this.difficulty = GeneticLevelGeneratorSecondSolution.initialDifficulty;
 
@@ -62,10 +61,6 @@ public class LevelGeneratorSecondSolution
         int length = 0;
         length += buildStraight(0, 7, level.width);
 
-        // Nivel genético.
-//        GeneticLevelGenerator geneticLevel = new GeneticLevelGenerator(height, width);
-//
-//        Individual generatedLevel = geneticLevel.createLevelGen(seed);
 
         // Nivel genético.
         GeneticLevelGeneratorSecondSolution geneticLevel = new GeneticLevelGeneratorSecondSolution(height, width);
@@ -137,53 +132,14 @@ public class LevelGeneratorSecondSolution
         return 0;
     }
 
-   // Se dibujan en el mapa partes del nivel. Cada m�todo devuelve la longitud de el bloque elegido.
+   // Se dibujan en el mapa partes del nivel. Cada metodo devuelve la longitud de el bloque elegido.
     private int buildJump(int xo, int length, int elementHeight, int maxLength)
     {
-        /*int js = random.nextInt(4) + 2;
-        int jl = random.nextInt(2) + 2;
-        //int length = js * 2 + jl;
-
-        //boolean hasStairs = random.nextInt(3) == 0;
-
-        int floor = elementHeight;
-        for (int x = xo; x < xo + length; x++)
-        {
-            //if (x < xo + js || x > xo + length - js - 1)
-            //{
-                for (int y = 0; y < height; y++)
-                {
-                    //if (y >= floor)
-                    //{
-                        //level.setBlock(x, y, (byte) (1 + 9 * 16));
-                   // }
-                    /*else if (hasStairs)
-                    {
-                        if (x < xo + js)
-                        {
-                            if (y >= floor - (x - xo) + 1)
-                            {
-                                level.setBlock(x, y, (byte) (9 + 0 * 16));
-                            }
-                        }
-                        else
-                        {
-                            if (y >= floor - ((xo + length) - x) + 2)
-                            {
-                                level.setBlock(x, y, (byte) (9 + 0 * 16));
-                            }
-                        }
-                    }*/
-                //}
-          //  }
-        //}
-
         return length;
     }
 
     private int buildCannons(int xo, int length, int elementHeight, int maxLength)
     {
-        //int length = random.nextInt(10) + 2;
         if (length > maxLength) length = maxLength;
 
         int floor = elementHeight;

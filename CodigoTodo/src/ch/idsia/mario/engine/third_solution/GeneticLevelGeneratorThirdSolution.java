@@ -12,15 +12,14 @@ import ch.idsia.mario.engine.sprites.Enemy;
  */
 public class GeneticLevelGeneratorThirdSolution {
 
-    // Variable que define si se estan haciendo pruebas o no. Se hace public para que sea lo mas parecido a una variable global.
+    // Variable que define si se estan haciendo pruebas o no.
+    // Se hace public para que sea lo mas parecido a una variable global.
     public static final boolean DEBUG = false;
 
-    // Implementaci?n GEN?TICA.s
-
-    // Poblaci?n: 50 individuos.
-    private int maxPopulation = 50;                                  // Poblaci?n o n?mero de individuos.
-    private int maxIterations = 500;                                 // N?mero m?ximo de iteraciones del proceso evolutivo.
-    public static final int PLATFORM=1;                              // Se usa en initializePopulation.
+    // Poblacion: 50 individuos.
+    private int maxPopulation = 50;                                                                                     // Poblacion o numero de individuos.
+    private int maxIterations = 500;                                                                                    // Numero maximo de iteraciones del proceso evolutivo.
+    public static final int PLATFORM=1;                                                                                 // Se usa en initializePopulation.
     public static final int CANNON=2;
     public static final int HILL=3;
     public static final int GAP=4;
@@ -35,7 +34,6 @@ public class GeneticLevelGeneratorThirdSolution {
 
     private int height, width;
 
-    // Esto estaba antes en la clase como private, pero quiero probar a hacer vectores est?ticos, mucho m?s eficiente (creo). Reservamos espacio suficiente.
     // Fenotipo: Sera una coleccian de arrays (cromosomas) de arrays de flotantes (genes).
     private ArrayList<IndividualThirdSolution> phenotype = new ArrayList<IndividualThirdSolution>(maxPopulation);
 
@@ -44,12 +42,7 @@ public class GeneticLevelGeneratorThirdSolution {
         width = w;
     }
 
-    /*
-    TEST:  MÉTODO DE INICIALIZACIÓN
-        - Añadir algo más de variedad, elementos deseables en el nivel final a nivel estructural.
-     */
-
-    // Inicializacion de la poblacion: Aleatorio.
+    // Inicializacion de la poblacion.
     void initializePopulation () {
 
         // Rellenamos el fenotipo.
@@ -77,13 +70,7 @@ public class GeneticLevelGeneratorThirdSolution {
 
     }
 
-    /*
-    TEST: NUEVA FUNCIÓN DE EVALUACIÓN.
-        - Considerar los enemigos.
-        - Considerar obstáculos estructurales (huecos, colinas...)
-     */
-
-    // Evaluaci?n: Tomar? la poblaci?n en el momento en que se llama y devolver? el valor fitness de cada individuo.
+    // Evaluacion: Tomara la poblacion en el momento en que se llama y devolver? el valor fitness de cada individuo.
     private void evaluate (float[] fitnessValues) {
 
         // Valoramos la dificultad de cada enemigo y la cantidad de estos en el nivel. Se tienen en cuenta
@@ -123,17 +110,10 @@ public class GeneticLevelGeneratorThirdSolution {
 
             //System.out.println("DIFICULTAD BRUTA = " + accumulate + structuralDifficulty);
 
-            fitnessValues[phenotype.indexOf(level)] = Math.abs(accumulate + structuralDifficulty - desiredDifficulty);                         // ?Cuanto se acerca la dificultad del nivel a lo que buscamos?
+            fitnessValues[phenotype.indexOf(level)] = Math.abs(accumulate + structuralDifficulty - desiredDifficulty);
         }
     }
-    /*
-    DONE: NUEVO MÉTODO DE CRUCE:
-        - Juego entre exploración y explotación.
-        - Otros métodos, BLX-alfa, CHC...
-        - ¿Operador que vaya cambiando durante la ejecución?.
-        - Probar a generar dos hijos en vez de uno.
-        - Añadir elementos estructurales al cruce -> Problema: Asegurar que el nivel sea finalizable.
-     */
+
     // Cruce: Se reciben los dos padres y a partir de ellos se obtiene un hijo.
     private IndividualThirdSolution crossOperator (IndividualThirdSolution parent1, IndividualThirdSolution parent2) {
 
@@ -300,7 +280,6 @@ public class GeneticLevelGeneratorThirdSolution {
     }
 
     // Mutacion: Tomara aleatoriamente miembros de la poblacion y realizara pequenas modificaciones en ellos.
-    // SE VA A QUEDAR COMO ESTÁ.
     private void mutation () {
 
         for (int i=0; i<mutationNumLevels; i++) {
@@ -370,16 +349,18 @@ public class GeneticLevelGeneratorThirdSolution {
             System.out.println(" ** Fin valor fitness del hijo **");
         }
 
-        if (childFitness < fitnessValues[worstLevel]) {                                                                  // Reemplazamos el hijo por el peor nivel si lo mejora en fitness (su valor es menor).
+        if (childFitness < fitnessValues[worstLevel]) {                                                                 // Reemplazamos el hijo por el peor nivel si lo mejora en fitness (su valor es menor).
             phenotype.set(worstLevel, child);
             fitnessValues[worstLevel] = childFitness;
         }
 
     }
-    // Evaluacion del tiempo de ejecucion.
-    long lStartTime = System.nanoTime();
+
     // Funci?n de generaci?n de nivel GEN?TICO.
     IndividualThirdSolution createLevelGenThirdSolution (long seed) {
+
+        // Evaluacion del tiempo de ejecucion.
+        long lStartTime = System.nanoTime();
 
         // Array de valores fitness. Al declararlo as?, fitness values tendr? una direcci?n de memoria, haciendo que el paso de par?metros sea por referencia.
         fitnessValues = new float [maxPopulation];
@@ -409,7 +390,7 @@ public class GeneticLevelGeneratorThirdSolution {
         // 3. Bucle principal, donde se realiza el proceso evolutivo.
         do {
 
-            // 3.1. Selecci?n de padres: Torneo binario. Se elige el mejor de dos padres, se hace dos veces (binario).
+            // 3.1. Seleccion de padres: Torneo binario. Se elige el mejor de dos padres, se hace dos veces (binario).
             do {
                 int firstParent = levelSeedRandom.nextInt(50);
                 int secondParent = levelSeedRandom.nextInt(50);
@@ -422,19 +403,18 @@ public class GeneticLevelGeneratorThirdSolution {
             } while (tournamentIterations < 2);
 
             // 3.2. Cruce de los dos padres El hijo debe ser un nivel válido. Probabilidad de cruce: 100%.
-            //int crossProb = levelSeedRandom.nextInt(100);
             int crossProb = -1;
 
             if (crossProb < crossProbability)
                 child = crossOperator (phenotype.get(selectedParents[0]), phenotype.get(selectedParents[1]));
 
-            // 3.3 Mutaci?n.
+            // 3.3 Mutacion.
             mutation();
 
             // 3.4. Reemplazamiento. Decidir.
             populationReplacement(child, fitnessValues);
 
-            // 3.5. Evaluaci?n de la poblaci?n.
+            // 3.5. Evaluacion de la poblacion.
             evaluate (fitnessValues);
 
             // 3.6. Actualizar la mejor solucion.
@@ -461,6 +441,7 @@ public class GeneticLevelGeneratorThirdSolution {
             numIterations++;
             tournamentIterations = 0;
         } while ((numIterations < maxIterations) && ((float) bestSolution[0] != 0.0));
+
         long lEndTime = System.nanoTime();
         long executionTime =  (lEndTime-lStartTime)/1000000;
 
@@ -632,7 +613,6 @@ public class GeneticLevelGeneratorThirdSolution {
                 while (!insertedElement) {
 
                     float levelElement = levelSeedRandom.nextFloat();
-                    //float levelElement = (float) 0.5;
 
                     // Anchura básica
                     element.setParam1(levelSeedRandom.nextInt(2) + 8);                                                  // Ancho del elemento, un poco más corto.
@@ -756,7 +736,6 @@ public class GeneticLevelGeneratorThirdSolution {
                 while (!insertedElement) {
 
                     float levelElement = levelSeedRandom.nextFloat();
-                    //float levelElement = (float) 0.5;
 
                     element.setParam1(levelSeedRandom.nextInt(2) + 7);                                                  // Ancho del elemento, un poco más corto.
 
@@ -854,8 +833,5 @@ public class GeneticLevelGeneratorThirdSolution {
 
         System.out.println(" ** Fin valores fitness de la poblaci?n **");
     }
-
-    public int getLevelWidth() {
-        return width;
-    }
 }
+

@@ -2,6 +2,8 @@ package ch.idsia.mario.engine.second_solution;
 
 /**
  * Created by roka9 on 18/10/2015.
+ *
+ * Clase LevelElement: Codificacion de un elemento de un individuo.
  */
 public class LevelElementSecondSolution {
     private int elementType = -1;

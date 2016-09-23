@@ -21,7 +21,7 @@ public class LevelGenerator
         return levelGenerator.createLevel(seed, difficulty, type);
     }
 
-    // Implementaci�n ORIGINAL.
+    // Implementacion ORIGINAL.
     private int width;
     private int height;
     Level level = new Level(width, height);
@@ -44,10 +44,9 @@ public class LevelGenerator
         this.height = height;
     }
 
-    // Funci�n de generaci�n de nivel ORIGINAL.
     private Level createLevel(long seed, int difficulty, int type)
     {
-        // Se fijan el tipo, dificultad y posibilidades iniciales seg�n �sta �ltima.
+        // Se fijan el tipo, dificultad y posibilidades iniciales segun usta ultima.
         this.type = type;
         this.difficulty = difficulty;
 
@@ -164,7 +163,7 @@ public class LevelGenerator
     }
     */
 
-    // Se dibujan en el mapa partes del nivel. Cada m�todo devuelve la longitud de el bloque elegido.
+    // Se dibujan en el mapa partes del nivel. Cada metodo devuelve la longitud de el bloque elegido.
     private int buildJump(int xo, int maxLength)
     {
         int js = random.nextInt(4) + 2;

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 /**
  * Created by roka9 on 18/10/2015.
+ *
+ * Clase Individual: Codificacion de cada individuo.
  */
 public class IndividualThirdSolution {
     static private int maxElementsPerLevel = 30;                                                                        // Cromosomas.

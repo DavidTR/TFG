@@ -2,6 +2,8 @@ package ch.idsia.mario.engine.level;
 
 /**
  * Created by roka9 on 18/10/2015.
+ *
+ * Clase LevelElement: Codificacion de cada elemento de un individuo.
  */
 public class LevelElement {
     private int elementType = -1;

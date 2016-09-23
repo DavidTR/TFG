@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 /**
  * Created by roka9 on 18/10/2015.
+ *
+ * Clase Individual: Codificacion de cada individuo.
  */
 public class Individual {
-    static private int maxElementsPerLevel = 30;                           // Cromosomas.
+    static private int maxElementsPerLevel = 30;
 
     private ArrayList<LevelElement> individual = new ArrayList<LevelElement>(maxElementsPerLevel);
 

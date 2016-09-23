@@ -10,15 +10,15 @@ import ch.idsia.mario.engine.second_solution.LevelElementSecondSolution;
  */
 public class GeneticLevelGeneratorSecondSolution {
 
-    // Variable que define si se estan haciendo pruebas o no. Se hace public para que sea lo mas parecido a una variable global.
+    // Variable que define si se estan haciendo pruebas o no.
+    // Se hace public para que sea lo mas parecido a una variable global.
     public static final boolean DEBUG = false;
 
-    // Implementaci?n GEN?TICA.s
 
-    // Poblaci?n: 50 individuos.
-    private int maxPopulation = 50;                                  // Poblaci?n o n?mero de individuos.
-    private int maxIterations = 500;                                 // N?mero m?ximo de iteraciones del proceso evolutivo.
-    public static final int PLATFORM=1;                              // Se usa en initializePopulation.
+    // Poblacion: 50 individuos.
+    private int maxPopulation = 50;                                                                                     // Poblacion o numero de individuos.
+    private int maxIterations = 500;                                                                                    // N?mero maximo de iteraciones del proceso evolutivo.
+    public static final int PLATFORM=1;                                                                                 // Se usa en initializePopulation.
     public static final int CANNON=2;
     public static final int HILL=3;
     public static final int GAP=4;
@@ -33,7 +33,6 @@ public class GeneticLevelGeneratorSecondSolution {
 
     private int height, width;
 
-    // Esto estaba antes en la clase como private, pero quiero probar a hacer vectores est?ticos, mucho m?s eficiente (creo). Reservamos espacio suficiente.
     // Fenotipo: Sera una coleccian de arrays (cromosomas) de arrays de flotantes (genes).
     private ArrayList<IndividualSecondSolution> phenotype = new ArrayList<IndividualSecondSolution>(maxPopulation);
 
@@ -42,12 +41,7 @@ public class GeneticLevelGeneratorSecondSolution {
         width = w;
     }
 
-    /*
-    TEST:  MÉTODO DE INICIALIZACIÓN
-        - Añadir algo más de variedad, elementos deseables en el nivel final a nivel estructural.
-     */
-
-    // Inicializacion de la poblacion: Aleatorio.
+    // Inicializacion de la poblacion. Distinto segun el nivel de dificultad.
     void initializePopulation () {
 
         // Rellenamos el fenotipo.
@@ -75,13 +69,7 @@ public class GeneticLevelGeneratorSecondSolution {
 
     }
 
-    /*
-    TEST: NUEVA FUNCIÓN DE EVALUACIÓN.
-        - Considerar los enemigos.
-        - Considerar obstáculos estructurales (huecos, colinas...)
-     */
-
-    // Evaluaci?n: Tomar? la poblaci?n en el momento en que se llama y devolver? el valor fitness de cada individuo.
+    // Evaluacion: Tomara la poblacion en el momento en que se llama y devolvera el valor fitness de cada individuo.
     private void evaluate (float[] fitnessValues) {
 
         // Valoramos la dificultad de cada enemigo y la cantidad de estos en el nivel. Se tienen en cuenta
@@ -104,10 +92,10 @@ public class GeneticLevelGeneratorSecondSolution {
                 else if (enemyType == Enemy.ENEMY_FLOWER)
                     enemyType = 3;
 
-                accumulate += (enemyType + 1)*elem.getParam3();                                                   // Producto del tipo de enemigo por el n?mero de enemigos de este tipo en cada elemento gen?tico (por ahora Hills).
+                accumulate += (enemyType + 1)*elem.getParam3();                                                         // Producto del tipo de enemigo por el numero de enemigos de este tipo en cada elemento genetico.
             }
 
-            // La dificultad estructural suma más conforme m´s grande sea, ya que es una media.
+            // La dificultad estructural suma más conforme mas grande sea, ya que es una media.
             // Esto significa que un valor medio de 3 aporta más dificultad que uno de 1.
             float structuralDifficulty = level.getStructuralDifficulty();
 
@@ -118,19 +106,10 @@ public class GeneticLevelGeneratorSecondSolution {
             else
                 structuralDifficulty *= 40;
 
-            //System.out.println("DIFICULTAD BRUTA = " + accumulate + structuralDifficulty);
-
-            fitnessValues[phenotype.indexOf(level)] = Math.abs(accumulate + structuralDifficulty - desiredDifficulty);                         // ?Cuanto se acerca la dificultad del nivel a lo que buscamos?
+            fitnessValues[phenotype.indexOf(level)] = Math.abs(accumulate + structuralDifficulty - desiredDifficulty);
         }
     }
-    /*
-    DONE: NUEVO MÉTODO DE CRUCE:
-        - Juego entre exploración y explotación.
-        - Otros métodos, BLX-alfa, CHC...
-        - ¿Operador que vaya cambiando durante la ejecución?.
-        - Probar a generar dos hijos en vez de uno.
-        - Añadir elementos estructurales al cruce -> Problema: Asegurar que el nivel sea finalizable.
-     */
+
     // Cruce: Se reciben los dos padres y a partir de ellos se obtiene un hijo.
     private IndividualSecondSolution crossOperator (IndividualSecondSolution parent1, IndividualSecondSolution parent2) {
 
@@ -247,7 +226,6 @@ public class GeneticLevelGeneratorSecondSolution {
                 child.addGeneticElement(childCurrentIndex);
             }
 
-            //currentChildElement.setX(previousChildElement.getX()+currentChildElement.getParam1());
             currentChildElement.setX(previousChildElement.getX()+previousChildElement.getParam1());
 
             childCurrentIndex++;
@@ -265,7 +243,6 @@ public class GeneticLevelGeneratorSecondSolution {
     }
 
     // Mutacion: Tomara aleatoriamente miembros de la poblacion y realizara pequenas modificaciones en ellos.
-    // SE VA A QUEDAR COMO ESTÁ.
     private void mutation () {
 
         for (int i=0; i<mutationNumLevels; i++) {
@@ -342,15 +319,15 @@ public class GeneticLevelGeneratorSecondSolution {
 
     }
 
-    // Funci?n de generaci?n de nivel GEN?TICO.
     public IndividualSecondSolution createLevelGenSecondSolution (long seed) {
+
         // Evaluacion del tiempo de ejecucion.
         long lStartTime = System.nanoTime();
 
-        // Array de valores fitness. Al declararlo as?, fitness values tendr? una direcci?n de memoria, haciendo que el paso de par?metros sea por referencia.
+        // Array de valores fitness.
         fitnessValues = new float [maxPopulation];
 
-        // N?mero de iteraciones del proceso evolutivo.
+        // Numero de iteraciones del proceso evolutivo.
         int numIterations = 0, bestIteration = -1;
         int tournamentIterations = 0;
         int [] selectedParents = new int[2];
@@ -363,10 +340,10 @@ public class GeneticLevelGeneratorSecondSolution {
         // Inicializamos el generador con la semilla.
         levelSeedRandom.setSeed(seed);
 
-        // 1. Inicializaci?n de la poblaci?n.
+        // 1. Inicializacion de la poblacion.
         initializePopulation();
 
-        // 2. Evaluaci?n inicial de la poblaci?n.
+        // 2. Evaluacion inicial de la poblacion.
         evaluate(fitnessValues);
 
         if (DEBUG)
@@ -375,7 +352,7 @@ public class GeneticLevelGeneratorSecondSolution {
         // 3. Bucle principal, donde se realiza el proceso evolutivo.
         do {
 
-            // 3.1. Selecci?n de padres: Torneo binario. Se elige el mejor de dos padres, se hace dos veces (binario).
+            // 3.1. Seleccion de padres: Torneo binario. Se elige el mejor de dos padres, se hace dos veces (binario).
             do {
                 int firstParent = levelSeedRandom.nextInt(50);
                 int secondParent = levelSeedRandom.nextInt(50);
@@ -388,19 +365,18 @@ public class GeneticLevelGeneratorSecondSolution {
             } while (tournamentIterations < 2);
 
             // 3.2. Cruce de los dos padres El hijo debe ser un nivel válido. Probabilidad de cruce: 100%.
-            //int crossProb = levelSeedRandom.nextInt(100);
             int crossProb = -1;
 
             if (crossProb < crossProbability)
                 child = crossOperator (phenotype.get(selectedParents[0]), phenotype.get(selectedParents[1]));
 
-            // 3.3 Mutaci?n.
+            // 3.3 Mutacion.
             mutation();
 
             // 3.4. Reemplazamiento. Decidir.
             populationReplacement(child, fitnessValues);
 
-            // 3.5. Evaluaci?n de la poblaci?n.
+            // 3.5. Evaluacion de la poblaci?n.
             evaluate (fitnessValues);
 
             // 3.6. Actualizar la mejor solucion.
@@ -463,7 +439,6 @@ public class GeneticLevelGeneratorSecondSolution {
             for (LevelElementSecondSolution element : individual.getIndividual()) {
 
                 float levelElement = levelSeedRandom.nextFloat();
-                //float levelElement = (float) 0.25;
 
                 // Anchura básica
                 element.setParam1(levelSeedRandom.nextInt(2) + 10);                                                     // Ancho del elemento.
@@ -528,7 +503,6 @@ public class GeneticLevelGeneratorSecondSolution {
             for (LevelElementSecondSolution element : individual.getIndividual()) {
 
                 float levelElement = levelSeedRandom.nextFloat();
-                //float levelElement = (float) 0.5;
 
                 // Anchura básica
                 element.setParam1(levelSeedRandom.nextInt(2) + 8);                                                      // Ancho del elemento, un poco más corto.
@@ -594,7 +568,6 @@ public class GeneticLevelGeneratorSecondSolution {
             for (LevelElementSecondSolution element : individual.getIndividual()) {
 
                 float levelElement = levelSeedRandom.nextFloat();
-                //float levelElement = (float) 0.5;
 
                 element.setParam1(levelSeedRandom.nextInt(2) + 7);                                                      // Ancho del elemento, un poco más corto.
 
