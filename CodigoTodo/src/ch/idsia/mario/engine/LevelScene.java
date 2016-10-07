@@ -619,13 +619,13 @@ public class LevelScene extends Scene implements SpriteContext
 
 
         // SOLUCION INICIAL
-        level = LevelGenerator.createLevel(levelLength, 15, levelSeed, levelDifficulty, levelType);
+        //level = LevelGenerator.createLevel(levelLength, 15, levelSeed, levelDifficulty, levelType);
 
         // SEGUNDA SOLUCION
         //level = LevelGeneratorSecondSolution.createLevel(levelLength, 15, levelSeed, levelDifficulty, levelType);
 
         // TERCERA SOLUCION
-        //level = LevelGeneratorThirdSolution.createLevel(levelLength, 15, levelSeed, levelDifficulty, levelType);
+        level = LevelGeneratorThirdSolution.createLevel(levelLength, 15, levelSeed, levelDifficulty, levelType);
 
 
         paused = false;
